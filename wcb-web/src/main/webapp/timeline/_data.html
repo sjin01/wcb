@@ -1,0 +1,19 @@
+<ul>
+    <#list dataList as timeline>
+        <li class="cls">
+        <#--<#if flag==1> highlight </#if>-->
+            <p class="date"><#if timeline.date??>${timeline.date}<#else>&nbsp;</#if></p>
+
+            <p class="intro"><#if timeline.txt??>${timeline.txt}<#else>&nbsp;</#if></p>
+
+            <p class="version"><#if timeline.version??>${timeline.version}<#else>&nbsp;</#if></p>
+
+            <div class="more">
+                <#list timeline.moreTxt as mTxt>
+                    <p>${mTxt}</p>
+                </#list>
+            </div>
+        </li>
+
+    </#list>
+</ul>

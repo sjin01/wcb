@@ -1,0 +1,123 @@
+<#if func??>
+<div class="row">
+    <div class="col-xs-8 mt20">
+    <#--<label>
+        编辑
+        <input name="switch-field-1" class="ace ace-switch ace-switch-3" type="checkbox">
+        <span class="lbl middle"></span>
+    </label>-->
+        <div class="fr ml10">
+        <#--<button class="btn btn-danger btn-minier btn-app">
+            删除
+        </button>-->
+            <button class="btn btn-xs btn-danger btn-minier" onclick="deletefunc();">
+                <i class="ace-icon fa fa-trash-o bigger-110"></i>
+                删除
+            <#--<i class="ace-icon fa fa-arrow-right icon-on-right"></i>-->
+            </button>
+        </div>
+        <label class="fr">
+            <small class="blue">
+                <b>编辑</b>
+            </small>
+
+            <input id="id-check-horizontal" type="checkbox" class="ace ace-switch ace-switch-3"
+                   onclick="$('#editDiv,#infoDiv').toggle();">
+            <span class="lbl middle"></span>
+        </label>
+
+    </div>
+</div>
+
+<div id="infoDiv">
+    <dl class="dl-horizontal dl-pt20">
+        <dt>菜单名</dt>
+        <dd>${(func.name)!}</dd>
+
+        <dt>菜单路径</dt>
+        <dd>${(func.path)!}</dd>
+
+        <#if (func.pid)?? && (func.pid)==0>
+            <dt>Ace图标</dt>
+            <dd><#if (func.pic)??><i class="fa ${(func.pic)!}"></i><#else><i class="fa fa-cog"></i>（默认）</#if> </dd>
+        </#if>
+
+        <dt>排序</dt>
+        <dd>${(func.sort)!}</dd>
+
+        <dt>类型</dt>
+        <dd><#if (func.type)?? && func.type==1>菜单<#elseif (func.type)?? && func.type==2>功能</#if></dd>
+
+        <dt>有效菜单</dt>
+        <dd><#if sonCount?? && sonCount==0>是<#else >否</#if> <span class="grey ml10">注解：下面有子菜单的数据，路径不会生效</span></dd>
+    </dl>
+</div>
+
+<div id="editDiv" style="display: none;">
+    <form action="" method="post" class="form-horizontal" id="func_form">
+
+        <#include "_form.html" />
+
+        <div class="alert alert-warning" id="func_form_alert" style="display: none;">
+        <#--<button type="button" class="close" data-dismiss="alert">
+            <i class="ace-icon fa fa-times"></i>
+        </button>-->
+            <strong>你有点宝吧！</strong>
+            <span id="func_form_errorStr"></span>
+            <br>
+        </div>
+
+        <div class="clearfix form-actions">
+            <div class="col-md-offset-3 col-md-9">
+                <button class="btn btn-info" type="button" onclick="update();">
+                    <i class="ace-icon fa fa-floppy-o bigger-110"></i>
+                    保存
+                </button>
+
+                &nbsp; &nbsp; &nbsp;
+                <button class="btn" type="reset">
+                    <i class="ace-icon fa fa-undo bigger-110"></i>
+                    重置
+                </button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<#--<#else>-->
+</#if>
+
+<script type="text/javascript">
+
+    $(function (){
+    });
+
+    function update(){
+        $.ajax({
+            url:"${base}/manage/func/update" ,
+            type:'POST',
+            data: $("#func_form").serialize() ,
+            dataType:'json',
+            success:function( result ){
+                if(result.code == 200){
+                    // 成功
+                    location.href = '${base}/manage/func';
+                }else{
+                    // 失败
+                    $('#func_form_errorStr').html(result);
+                    $('#func_form_alert').show();
+                }
+            }
+        });
+    }
+
+    function deletefunc(){
+        /*if(!tree.selectedItems() || !tree.selectedItems()[0].id){
+            myConfirm("乡里别！从左边选择一砸要删的先咯！");
+            return false;
+        }*/
+        myConfirm("你确定要删除噶咋栏目不咯？不想删就么删咯！冒得人强迫你嘞！删噶就还不得原哒啦~",function (){
+            location.href='${base}/manage/func/delete?id='+tree.selectedItems()[0].id;
+        } , "你随我" ,"算哒咯");
+    }
+</script>

@@ -1,0 +1,58 @@
+<#include "/manage/common/_layout.html"/>
+<@layout>
+<div class="page-header">
+    <h1>
+        分析
+        <small>
+            <i class="ace-icon fa fa-angle-double-right"></i>
+            The charm of big data !
+        </small>
+    </h1>
+</div>
+
+<div class="col-xs-12">
+
+    <div class="tabbable">
+        <ul class="nav nav-tabs padding-12 " id="myTab4">
+            <li class="active">
+                <a data-toggle="tab" href="#" data-url="${base}/manage/ssq/analyze/overview?period=${period!}">概要统计</a>
+            </li>
+            <#--<li class="">
+                <a data-toggle="tab" href="#" data-url="${base}/manage/ssq/analyze/analyzePrev?period=${period!}">上期分析</a>
+            </li>-->
+            <li class="">
+                <a data-toggle="tab" href="#" data-url="${base}/manage/ssq/analyze/analyzeCurrent?period=${period!}">规则杀球</a>
+            </li>
+        </ul>
+
+        <div class="tab-content no-border">
+            <div id="analyze0" class="tab-pane active">
+
+            </div>
+
+            <div id="analyze1" class="tab-pane">
+
+            </div>
+
+            <div id="analyze2" class="tab-pane">
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+</@layout>
+
+<script type="text/javascript">
+    $(function () {
+        /**
+         * init load first page   And  click a load page
+         */
+        $('#analyze0').load('${base}/manage/ssq/analyze/overview?period=${period!}');
+        $('#myTab4 a').click(function (){
+            var url = $(this).attr('data-url');
+            $('#analyze0').load(url);
+        })
+    })
+</script>

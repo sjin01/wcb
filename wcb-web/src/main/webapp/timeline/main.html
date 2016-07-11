@@ -1,0 +1,80 @@
+﻿<!DOCTYPE html>
+<!--[if IE 7]><html class="ie7" lang="zh"><![endif]-->
+<!--[if gt IE 7]><!-->
+<html lang="zh">
+<!--<![endif]-->
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>S.Jin 的成长记录</title>
+
+    <link href="${base}/css/timeline/style.css" rel="stylesheet" type="text/css"/>
+
+    <script type="text/javascript" src="${base}/js/jquery.min.js"></script>
+
+    <!-- BEGIN: css -->
+    <link href="${base}/plugin/designmd02/css/bootstrap.css" type="text/css" rel="stylesheet" />
+    <link href="${base}/plugin/designmd02/css/style.css" type="text/css" rel="stylesheet" />
+    <link href="${base}/plugin/designmd02/css/bootstrap-responsive.css" type="text/css" rel="stylesheet" />
+    <link href="${base}/plugin/designmd02/css/responsive.css" type="text/css" rel="stylesheet" />
+    <link href="${base}/plugin/designmd02/css/prettyPhoto.css" type="text/css" rel="stylesheet" />
+    <!-- END: css -->
+
+    <!-- BEGIN: js -->
+    <script type="text/javascript" src="${base}/plugin/designmd02/js/jquery.min.js"></script>
+    <script type="text/javascript" src="${base}/plugin/designmd02/js/google-code-prettify/prettify.js"></script>
+    <script type="text/javascript" src="${base}/plugin/designmd02/js/bootstrap.js"></script>
+    <script type="text/javascript" src="${base}/plugin/designmd02/js/superfish.js"></script>
+    <script type="text/javascript" src="${base}/plugin/designmd02/js/hoverIntent.js"></script>
+    <script type="text/javascript" src="${base}/plugin/designmd02/js/jquery.hoverdir.js"></script>
+    <script type="text/javascript" src="${base}/plugin/designmd02/js/jquery.flexslider.js"></script>
+    <script type="text/javascript" src="${base}/plugin/designmd02/js/jflickrfeed.min.js"></script>
+    <script type="text/javascript" src="${base}/plugin/designmd02/js/jquery.prettyPhoto.js"></script>
+    <script type="text/javascript" src="${base}/plugin/designmd02/js/jquery.elastislide.js"></script>
+    <script type="text/javascript" src="${base}/plugin/designmd02/js/jquery.tweet.js"></script>
+    <script type="text/javascript" src="${base}/plugin/designmd02/js/main.js"></script>
+    <!-- END: js -->
+
+</head>
+<body>
+<#include "/common/_header.html">
+
+<div class="content">
+    <div class="wrapper">
+        <div class="light"><i></i></div>
+        <hr class="line-left">
+        <hr class="line-right">
+        <div class="main">
+            <h1 class="title">S.Jin 的成长记录</h1>
+
+            <#list years as item>
+            <div class="year">
+                <h2><a href="#">${item.year}<i></i></a></h2>
+                <div class="list" id="timelinedata_div_${item_index}"></div>
+                <script>
+                    $('#timelinedata_div_'+'${item_index}').load('${base}/timeline/timelinedata' ,{'year' : '${item.year}'});
+                </script>
+            </div>
+
+            </#list>
+        </div>
+    </div>
+</div>
+
+<#include "/common/_footer_nav.html">
+
+<script>
+    $(".main .year .list").each(function (e, target) {
+        var $target=
+        $(target),
+            $ul = $target.find("ul");
+        $target.height($ul.outerHeight()),
+            $ul.css("position", "absolute");
+    });
+    $(".main .year>h2>a").click(function (e) {
+        e.preventDefault();
+        $(this).parents(".year").toggleClass("close");
+    });
+</script>
+</body>
+</html>

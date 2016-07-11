@@ -1,0 +1,13 @@
+
+.mt20{ margin-top: 20px;}
+.ml10{ margin-left: 10px;}
+.mr5{margin-right: 5px;}
+
+.pt20{ padding-top: 20px;}
+
+.fr{ float: right;}
+
+/* dl 下面的内容 padding-top 20px */
+.dl-pt20 dt,.dl-pt20 dd{padding-top: 20px;}
+
+.red {color: red}

@@ -1,0 +1,88 @@
+<fieldset class="solid">
+	<input type="hidden" name="user.id" value="${(user.id)!}" />
+
+    <div class="form-group">
+        <label class="col-sm-3 control-label no-padding-right"> 用户姓名 <span class="red">*</span> </label>
+        <div class="col-sm-9">
+            <input type="text" name="user.nickname" placeholder="姓名或者昵称" class="col-sm-5" value="${(user.nickname)!}" />
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-sm-3 control-label no-padding-right"> 用户名 <span class="red">*</span> </label>
+        <div class="col-sm-9">
+            <input type="text" name="user.username" placeholder="请输入登陆用户名" class="col-sm-5" value="${(user.username)!}" />
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-sm-3 control-label no-padding-right"> 密码 <span class="red">*</span> </label>
+        <div class="col-sm-9">
+            <input type="text" name="user.password" placeholder="请输入登陆密码" class="col-sm-5" value="${(user.password)!}" />
+        </div>
+    </div>
+
+    <div class="hr hr-dotted"></div>
+
+    <div class="form-group">
+        <label class="col-sm-3 control-label no-padding-right"> 电子邮箱 </label>
+        <div class="col-sm-9">
+            <input type="text" name="user.email" placeholder="" class="col-sm-5" value="${(user.email)!}" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-3 control-label no-padding-right"> 手机号码 </label>
+        <div class="col-sm-9">
+            <input type="text" name="user.phone" placeholder="" class="col-sm-5" value="${(user.phone)!}" />
+        </div>
+    </div>
+
+    <div class="hr hr-dotted"></div>
+
+    <div class="form-group">
+        <label class="col-sm-3 control-label no-padding-right"> 用户类型 </label>
+        <div class="col-sm-9">
+
+            <select name="user.usertype" id="" class="col-sm-5">
+                <option value="0" <#if (user.usertype)?? && user.usertype==0> selected="selected" </#if> >普通用户</option>
+                <option value="520" <#if (user.usertype)?? && user.usertype==520> selected="selected" </#if>>管理员</option>
+                <#if (user.usertype)?? && user.usertype==999>
+                    <option value="999" selected="selected" >超级管理员</option>
+                </#if>
+			</select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-3 control-label no-padding-right"> 状态 </label>
+        <div class="col-sm-9">
+            <select name="user.status" id="" class="col-sm-5">
+                <option value="1" <#if (user.status)?? && user.status==1> selected="selected" </#if>>正常</option>
+                <option value="2" <#if (user.status)?? && user.status==2> selected="selected" </#if>>冻结</option>
+            </select>
+        </div>
+    </div>
+
+    <#if errorMsg??>
+    <div class="alert alert-danger">
+        <strong style="margin-left: 25%;">
+            <i class="ace-icon fa fa-times"></i>
+        </strong>
+        ${errorMsg!}
+        <br>
+    </div>
+    </#if>
+
+    <div class="clearfix form-actions">
+        <div class="col-md-offset-3 col-md-9">
+            <button class="btn btn-info" type="submit" >
+                <i class="ace-icon fa fa-check bigger-110"></i>
+                提 交
+            </button>
+            &nbsp; &nbsp; &nbsp;
+            <button class="btn" type="reset">
+                <i class="ace-icon fa fa-undo bigger-110"></i>
+                重 置
+            </button>
+        </div>
+    </div>
+</fieldset>

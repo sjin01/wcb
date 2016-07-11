@@ -1,0 +1,163 @@
+<#macro layout>
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta charset="UTF-8">
+
+    <title>S.Jin Manager</title>
+
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+
+    <!-- ############################　basic css ############################　-->
+    <!-- bootstrap & fontawesome -->
+    <link rel="stylesheet" href="${base}/plugin/ace/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="${base}/plugin/ace/css/font-awesome.min.css" />
+
+    <!-- page specific plugin styles -->
+    <link rel="stylesheet" href="${base}/plugin/ace/css/jquery.gritter.css" />
+    <!-- text fonts -->
+    <link rel="stylesheet" href="${base}/plugin/ace/css/ace-fonts.css" />
+    <!-- ace styles -->
+    <link rel="stylesheet" href="${base}/plugin/ace/css/ace.min.css" id="main-ace-style" />
+    <!--[if lte IE 9]>
+        <link rel="stylesheet" href="${base}/plugin/ace/css/ace-part2.min.css" />
+    <![endif]-->
+    <link rel="stylesheet" href="${base}/plugin/ace/css/ace-skins.min.css" />
+    <link rel="stylesheet" href="${base}/plugin/ace/css/ace-rtl.min.css" />
+    <!--[if lte IE 9]>
+        <link rel="stylesheet" href="${base}/plugin/ace/css/ace-ie.min.css" />
+    <![endif]-->
+
+    <!-- ace settings handler -->
+    <script src="${base}/plugin/ace/js/ace-extra.min.js"></script>
+    <!-- HTML5shiv and Respond.js for IE8 to support HTML5 elements and media queries -->
+    <!--[if lte IE 8]>
+        <script src="${base}/plugin/ace/js/html5shiv.min.js"></script>
+        <script src="${base}/plugin/ace/js/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ############################　basic scripts ############################　-->
+
+    <!--[if !IE]> -->
+      <script type="text/javascript">
+          window.jQuery || document.write("<script src='${base}/plugin/ace/js/jquery.min.js'>"+"<"+"/script>");
+      </script>
+    <!-- <![endif]-->
+    <!--[if IE]>
+      <script type="text/javascript">
+        window.jQuery || document.write("<script src='${base}/plugin/ace/js/jquery1x.min.js'>"+"<"+"/script>");
+      </script>
+    <![endif]-->
+
+    <script type="text/javascript">
+        if('ontouchstart' in document.documentElement) document.write("<script src='${base}/plugin/ace/js/jquery.mobile.custom.min.js'>"+"<"+"/script>");
+    </script>
+
+    <script src="${base}/plugin/ace/js/bootstrap.min.js"></script>
+    <script src="${base}/plugin/ace/js/bootbox.min.js"></script>
+
+    <!-- dataTables -->
+    <script src="${base}/plugin/ace/js/jquery.dataTables.min.js"></script>
+    <script src="${base}/plugin/ace/js/jquery.dataTables.bootstrap.js"></script>
+    <script src="${base}/js/datatable/mydatatable.js"></script>
+
+    <!-- ace scripts -->
+    <script src="${base}/plugin/ace/js/ace-elements.min.js"></script>
+    <script src="${base}/plugin/ace/js/ace.min.js"></script>
+
+    <script src="${base}/plugin/ace/js/jquery.gritter.min.js"></script>
+
+    <!-- Jquery validate  -->
+    <script src="${base}/js/validate/jquery.validate.min.js"></script>
+    <script src="${base}/js/validate/messages_zh.js"></script>
+    <script src="${base}/js/validate/myValidate.js"></script>
+
+    <!-- Manage  -->
+    <link rel="stylesheet" href="${base}/css/manage.css" />
+    <script src="${base}/js/manage-base.js"></script>
+</head>
+
+<body class="no-skin">
+
+<#include "/manage/common/_head.html">
+
+<!-- /section:basics/navbar.layout -->
+<div class="main-container" id="main-container">
+    <#--<script type="text/javascript">
+        try{ace.settings.check('main-container' , 'fixed')}catch(e){}
+    </script>-->
+
+    <#--<#include "/manage/common/_nav.html">-->
+    <div id="sidebar" class="sidebar responsive"></div>
+
+
+
+    <!-- /section:basics/sidebar -->
+    <div class="main-content">
+
+        <#--<#include "/manage/common/_breadcrumbs.html">-->
+        <div class="breadcrumbs" id="breadcrumbs"></div>
+
+        <div class="page-content">
+
+            <#include "/manage/common/_settings.html">
+
+            <div class="page-content-area">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <#nested>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <div class="footer-inner">
+            <!-- #section:basics/footer -->
+            <div class="footer-content">
+                <span class="bigger-120">
+                    <span class="blue bolder">S.Jin Home</span>
+                    &copy; S.Jin - 2015~2025
+                </span>
+
+                <#--&nbsp; &nbsp;
+                <span class="action-buttons">
+                    <a href="#">
+                        <i class="ace-icon fa fa-twitter-square light-blue bigger-150"></i>
+                    </a>
+
+                    <a href="#">
+                        <i class="ace-icon fa fa-facebook-square text-primary bigger-150"></i>
+                    </a>
+
+                    <a href="#">
+                        <i class="ace-icon fa fa-rss-square orange bigger-150"></i>
+                    </a>
+                </span>-->
+            </div>
+
+            <!-- /section:basics/footer -->
+        </div>
+    </div>
+
+    <a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
+        <i class="ace-icon fa fa-angle-double-up icon-only bigger-110"></i>
+    </a>
+</div><!-- /.main-container -->
+
+</body>
+</html>
+
+<script type="text/javascript">
+
+    $(function (){
+        $('#breadcrumbs').load('${base}/manage/common/breadcrumbs?pathname='+window.location.pathname)
+        $('#sidebar').load('${base}/manage/common/nav?pathname='+window.location.pathname);
+
+    })
+</script>
+
+</#macro>

@@ -1,0 +1,87 @@
+<table id="" class="table table-hover">
+    <thead>
+    <tr>
+        <th class="center"  width="10%">
+            <label class="position-relative">
+                <input type="checkbox" class="ace">
+                <span class="lbl"></span>
+            </label>
+        </th>
+        <th width="10%">用户名</th>
+        <th width="10%">昵称</th>
+        <th width="10%">手机号码</th>
+    <#--<th>
+        <i class="ace-icon fa fa-clock-o bigger-110 hidden-480"></i>
+        Update
+    </th>-->
+        <th width="10%">来源</th>
+        <th width="10%">类型</th>
+        <th width="10%">状态</th>
+        <th width="10%"></th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <#list userpage.list as ss>
+    <tr>
+        <td class="center">
+            <label class="position-relative">
+                <input type="checkbox" class="ace item" value="${ss.id!}">
+                <span class="lbl"></span>
+            </label>
+        </td>
+        <td><a href="#">${ss.username!}</a></td>
+        <td>${ss.nickname!}</td>
+        <td>${ss.phone!}</td>
+        <td>
+          <#if (ss.registertype)?? && ss.registertype==0>管理员添加
+          <#elseif (ss.registertype)?? && ss.registertype==1>前台注册
+          </#if>
+        </td>
+        <td>
+          <#if (ss.usertype)?? && ss.usertype==0>普通用户
+          <#elseif (ss.usertype)?? && ss.usertype==520>管理员
+          <#elseif (ss.usertype)?? && ss.usertype==999>超级管理员
+          </#if>
+        </td>
+        <td>
+          <#if (ss.status)?? && ss.status==0>未激活
+          <#elseif (ss.status)?? && ss.status==1>正常
+          <#elseif (ss.status)?? && ss.status==2>冻结
+          </#if>
+        </td>
+        <td>
+            <button class="btn btn-xs btn-info" onclick="location.href='${base}/manage/user/edit/${ss.id!}'"
+                    data-rel="tooltip" data-original-title="编辑">
+                <i class="ace-icon fa fa-pencil bigger-120"></i>
+            </button>
+            <button class="btn btn-xs btn-danger" onclick="del(${ss.id!})"
+                    data-rel="tooltip" data-original-title="删除">
+                <i class="ace-icon fa fa-trash-o bigger-120"></i>
+            </button>
+
+            <#--<div class="action-buttons">
+                <a class="red" href="javascript:void(0);" onclick="del(${ss.id!})"  title=""
+                   data-rel="tooltip" data-original-title="删除">
+                    <i class="ace-icon fa fa-trash-o bigger-120"></i>
+                </a>
+            </div>-->
+        </td>
+    </tr>
+    </#list>
+
+    </tbody>
+</table>
+
+<#include "/common/_paginate-manage.html" />
+<@paginate currentPage = userpage.pageNumber totalPage = userpage.totalPage actionUrl = "${base}/manage/user?page=" />
+
+<script>
+    $('[data-rel=tooltip]').tooltip({container:'body'});
+
+    function del(id){
+        myConfirm("你确定删除？" ,function (){
+            location.href='${base}/manage/user/delete/' + id;
+        })
+    }
+</script>

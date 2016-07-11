@@ -1,0 +1,150 @@
+<#include "/manage/common/_layout.html"/>
+<@layout>
+<div class="page-header">
+    <h1>
+        用户组管理
+        <small>
+            <i class="ace-icon fa fa-angle-double-right"></i>
+            People with type things.  <#--人与类聚物以群分-->
+        </small>
+    </h1>
+</div>
+
+<div class="col-xs-12">
+
+    <div class="widget-box transparent ui-sortable-handle">
+
+        <div class="widget-header">
+            <h5 class="widget-title"> 用户组列表 </h5>
+
+            <div class="widget-toolbar">
+
+                <div class="action-buttons inline">
+                    <a href="javascript:void(0);" onclick="loadAdd();" data-rel="tooltip" data-original-title="添加用户组">
+                        <i class="fa fa-plus-circle"></i>
+                    </a>
+
+                    <a class="red" href="javascript:void(0);" onclick="deleteList();" title="" data-rel="tooltip" data-original-title="批量删除">
+                        <i class="ace-icon fa fa-trash-o"></i>
+                    </a>
+                </div>&nbsp;
+                <a href="javascript:void(0);" data-action="fullscreen" class="orange2" title="" data-rel="tooltip" data-original-title="全屏查看">
+                    <i class="ace-icon fa fa-expand"></i>
+                </a>&nbsp;
+                <a href="javascript:void(0);" data-action="collapse" title="" class="" data-rel="tooltip" data-original-title="收起">
+                    <i class="ace-icon fa fa-chevron-up"></i>
+                </a>
+            </div>
+        </div>
+        <div class="widget-body">
+            <div class="widget-main" id="table_div">
+                <table id="" class="table table-hover">
+                    <thead>
+                    <tr>
+                        <th class="center"  width="10%">
+                            <label class="position-relative">
+                                <input type="checkbox" class="ace">
+                                <span class="lbl"></span>
+                            </label>
+                        </th>
+                        <th width="20%">用户组</th>
+                        <th width="15%">状态</th>
+                        <th width="30%">操作</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                        <#list usergroupdata.list as ss>
+                        <tr>
+                            <td class="center">
+                                <label class="position-relative">
+                                    <input type="checkbox" class="ace item" value="${ss.id!}">
+                                    <span class="lbl"></span>
+                                </label>
+                            </td>
+                            <td><a href="#">${ss.name!}</a></td>
+                            <td>
+                                <#if ss.status==true>正常
+                                <#elseif ss.status==false>禁用
+                                </#if>
+                            </td>
+                            <td>
+                                <div class="action-buttons">
+                                    <a class="red" href="${base}/manage/usergroup/delete?id=${ss.id!}&cPage=${usergroupdata.pageNumber}"  title=""
+                                       data-rel="tooltip" data-original-title="删除">
+                                        <i class="ace-icon fa fa-trash-o bigger-120"></i>
+                                    </a>
+                                </div>
+                            </td>
+
+                        </tr>
+                        </#list>
+
+                    </tbody>
+                </table>
+
+                <#include "/common/_paginate-manage.html" />
+                <@paginate currentPage = usergroupdata.pageNumber totalPage = usergroupdata.totalPage actionUrl = "${base}/manage/usergroup?cPage=" />
+            </div>
+        </div>
+    </div>
+</div>
+
+</@layout>
+
+<script>
+    function deleteList(){
+        if( $('.item:checkbox').filter(":checked").length < 1 ){
+            myConfirm("至少选择一条记录！");
+            return false;
+        }
+
+        myConfirm("你确定哈把他删噶？" , function (){
+            var ids = '';
+            $('.item:checkbox').filter(":checked").each(function (){
+                ids += $(this).val() + ',';
+            })
+
+            $.ajax({
+                url:"${base}/manage/usergroup/deleteList" ,
+                type:'POST',
+                data: {'ids':ids } ,
+                dataType:'json',
+                success:function( result ){
+                    if(result.code == 200){
+                        location.href = '${base}/manage/usergroup?cPage=${usergroupdata.pageNumber}';
+                    }
+                }
+            });
+        })
+    }
+
+    function loadAdd(){
+        $.ajax({
+            url:"${base}/manage/usergroup/add" ,
+            type:'POST',
+            dataType:'HTML',
+            success:function( result ){
+                if(result){
+                    bootbox.confirm({
+                        title : '<span style="color:#6fb3e0;">添加用户组</span>',
+                        message: result,
+                        buttons: {
+                            confirm: {
+                                label: "保存",
+                                className: "btn-primary btn-xs"
+                            },
+                            cancel: {
+                                label: "取消",
+                                className: "btn-xs"
+                            }
+                        },
+                        callback: function(result) {
+                            if(result) $('#usergroupForm').submit();
+                        }
+                    });
+                }
+            }
+        });
+    }
+</script>

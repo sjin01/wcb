@@ -1,0 +1,95 @@
+<#macro paginate currentPage totalPage actionUrl urlParas="">
+	<#if (totalPage <= 0) || (currentPage > totalPage)><#return></#if>
+	<#local startPage = currentPage - 4>
+	<#if (startPage < 1)><#local startPage = 1></#if>
+	
+	<#local endPage = currentPage + 4>
+	<#if (endPage > totalPage)><#local endPage = totalPage></#if>
+
+<#if (totalPage >1) >
+<div class="row">
+    <div class="col-xs-6">
+        <div class="dataTables_info" id="sample-table-2_info" role="status" aria-live="polite">
+		<#--显示 1 到 10 共条记录#{}-->
+        </div>
+    </div>
+    <div class="col-xs-6">
+        <div class="dataTables_paginate paging_simple_numbers">
+            <ul class="pagination">
+				<#if (currentPage <= 8)>
+					<#local startPage = 1>
+				</#if>
+				<#if ((totalPage - currentPage) < 8)>
+					<#local endPage = totalPage>
+				</#if>
+
+				<#if (currentPage == 1)>
+                    <li class="paginate_button previous disabled" aria-controls="sample-table-2" tabindex="0"
+                        id=""><a href="javascript:void(0);">上页</a></li>
+				<#else>
+				<#--<a href="${actionUrl}#{currentPage - 1}${urlParas!}" class="prev_page">上页</a>-->
+                    <li class="paginate_button previous" aria-controls="sample-table-2" tabindex="0" id="">
+                        <a href="${actionUrl}#{currentPage - 1}${urlParas!}">上页</a></li>
+				</#if>
+
+				<#if (currentPage > 8)>
+                    <a href="${actionUrl}#{1}${urlParas!}">#{1}</a>
+                    <a href="${actionUrl}#{2}${urlParas!}">#{2}</a>
+                    <span class="gap">…</span>
+				</#if>
+
+				<#list startPage..endPage as i>
+					<#if currentPage == i>
+					<#--<span class="current">#{i}</span>-->
+                        <li class="paginate_button active" aria-controls="sample-table-2" tabindex="0"><a href="javascript:void(0);">#{i}</a></li>
+					<#else>
+                        <#--<a href="${actionUrl}#{i}${urlParas!}">#{i}</a>-->
+                        <li class="paginate_button " aria-controls="sample-table-2" tabindex="0"><a href="${actionUrl}#{i}${urlParas!}">#{i}</a></li>
+					</#if>
+				</#list>
+
+				<#if ((totalPage - currentPage) >= 8)>
+                    <span class="gap">…</span>
+                    <a href="${actionUrl}#{totalPage - 1}${urlParas!}">#{totalPage - 1}</a>
+                    <a href="${actionUrl}#{totalPage}${urlParas!}">#{totalPage}</a>
+				</#if>
+
+				<#if (currentPage == totalPage)>
+                    <li class="paginate_button next disabled" aria-controls="sample-table-2" tabindex="0" id="">
+                        <a href="javascript:void(0);">下页</a></li>
+				<#else>
+				<#--<a href="${actionUrl}#{currentPage + 1}${urlParas!}" class="next_page" rel="next">下页</a>-->
+                    <li class="paginate_button next disabled" aria-controls="sample-table-2" tabindex="0" id="">
+                        <a href="${actionUrl}#{currentPage + 1}${urlParas!}">下页</a></li>
+				</#if>
+            </ul>
+        </div>
+    </div>
+
+</div>
+</#if>
+
+</#macro>
+
+<#--
+ace datatable css
+<div class="row">
+    <div class="col-xs-6">
+        <div class="dataTables_info" id="sample-table-2_info" role="status" aria-live="polite">Showing 1 to 10 of 23
+            entries
+        </div>
+    </div>
+    <div class="col-xs-6">
+        <div class="dataTables_paginate paging_simple_numbers" id="sample-table-2_paginate">
+            <ul class="pagination">
+                <li class="paginate_button previous disabled" aria-controls="sample-table-2" tabindex="0"
+                    id="sample-table-2_previous"><a href="#">Previous</a></li>
+                <li class="paginate_button active" aria-controls="sample-table-2" tabindex="0"><a href="#">1</a></li>
+                <li class="paginate_button " aria-controls="sample-table-2" tabindex="0"><a href="#">2</a></li>
+                <li class="paginate_button " aria-controls="sample-table-2" tabindex="0"><a href="#">3</a></li>
+                <li class="paginate_button next" aria-controls="sample-table-2" tabindex="0" id="sample-table-2_next"><a
+                        href="#">Next</a></li>
+            </ul>
+        </div>
+    </div>
+</div>-->

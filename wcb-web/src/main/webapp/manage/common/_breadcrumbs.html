@@ -1,0 +1,21 @@
+<#--<div class="breadcrumbs" id="breadcrumbs">-->
+    <#--<script type="text/javascript">
+        try{ace.settings.check('breadcrumbs' , 'fixed')}catch(e){}
+    </script>-->
+
+    <ul class="breadcrumb">
+        <li>
+            <i class="ace-icon fa fa-home home-icon"></i>
+            <a href="${base}/manage/main">后台管理</a>
+        </li>
+        <#--<li class="active">后台管理</li>-->
+
+        <#if funcpid??>
+            <li> <span style="color: rgb(76, 143, 189);">${(funcp.name)!}</span> </li>
+        </#if>
+        <#if funccid??>
+            <li> <span style="color: rgb(76, 143, 189);">${(funcc.name)!}</span> </li>
+        </#if>
+
+    </ul><!-- /.breadcrumb -->
+<#--</div>-->

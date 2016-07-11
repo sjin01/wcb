@@ -1,0 +1,22 @@
+<#include "/manage/common/_layout.html" />
+<@layout>
+<div class="page-header">
+    <h1>
+        用户管理
+        <small>
+            <i class="ace-icon fa fa-angle-double-right"></i>
+            修改用户
+        </small>
+    </h1>
+</div>
+<div class="col-xs-12">
+    <form action="${base}/manage/user/update" method="post" class="form-horizontal" id="userForm">
+		<#include "_form.html" />
+    </form>
+</div>
+<#--<div class="form_box">
+	<form action="${base}/manage/user/update" method="post">
+		<#include "_form.html" />
+	</form>
+</div>-->
+</@layout>

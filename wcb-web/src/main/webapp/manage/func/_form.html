@@ -1,0 +1,26 @@
+<input type="hidden" name="func.id" value="${(func.id)!}"/>
+
+<dl class="dl-horizontal dl-pt20">
+    <dt>菜单名</dt>
+    <dd><input type="text" class="input-sm col-xs-5" name="func.name" value="${(func.name)!}"/></dd>
+
+    <dt>菜单路径</dt>
+    <dd><input type="text" class="input-sm col-xs-5" name="func.path" value="${(func.path)!}"/></dd>
+
+    <#if (func.pid)?? && (func.pid)==0>
+    <dt>Ace图标</dt>
+    <dd><input type="text" class="input-sm col-xs-5" name="func.pic" value="${(func.pic)!}"/></dd>
+    </#if>
+
+    <dt>排序</dt>
+    <dd><input type="text" class="input-sm col-xs-5" name="func.sort" value="${(func.sort)!}"/></dd>
+
+    <dt>类型</dt>
+    <dd>
+        <select class="col-xs-5" name="func.type" id="">
+            <option value="1" <#if (func.type)?? && func.type==1>selected="selected" </#if> >菜单</option>
+            <option value="2" <#if (func.type)?? && func.type==2>selected="selected" </#if> >功能</option>
+        </select>
+    </dd>
+
+</dl>
