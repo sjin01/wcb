@@ -25,6 +25,14 @@ public abstract class BaseSysRole<M extends BaseSysRole<M>> extends Model<M> imp
 		return get("name");
 	}
 
+	public void setStatus(Boolean status) {
+		set("status", status);
+	}
+
+	public Boolean getStatus() {
+		return get("status");
+	}
+
 	public void setSort(Integer sort) {
 		set("sort", sort);
 	}

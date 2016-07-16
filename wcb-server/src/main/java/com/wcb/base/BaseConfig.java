@@ -3,10 +3,8 @@ package com.wcb.base;
 import com.jfinal.config.*;
 import com.jfinal.plugin.activerecord.ActiveRecordPlugin;
 import com.jfinal.plugin.c3p0.C3p0Plugin;
-import com.wcb.model.doubleball.*;
 import com.wcb.model.manage.*;
-import com.wcb.model.timeline.Timeline;
-import com.wcb.model.timeline.TimelineMore;
+import com.wcb.model.basicdata.*;
 
 /**
  * Description: API引导式配置
@@ -58,15 +56,15 @@ public class BaseConfig extends JFinalConfig {
         arp.addMapping("t_sys_user_group", UserGroup.class);
         arp.addMapping("t_sys_user_role", UserRole.class);
 
-        arp.addMapping("t_timeline", Timeline.class);
-        arp.addMapping("t_timeline_more", TimelineMore.class);
-
-        arp.addMapping("t_doubleball_record", DoubleballRecord.class);
-//        arp.addMapping("t_doubleball_record_feature", DoubleballRecordFeature.class);
-
-        arp.addMapping("t_doubleball_conjecture", DoubleballConjecture.class);
-        arp.addMapping("t_doubleball_rule", DoubleballRule.class);
-//        arp.addMapping("t_doubleball_rule_analyze", DoubleballRuleAnalyze.class);
+        arp.addMapping("t_account", "id", Account.class);
+        arp.addMapping("t_account_equipment", "id", AccountEquipment.class);
+        arp.addMapping("t_community", "id", Community.class);
+        arp.addMapping("t_district", "id", District.class);
+        arp.addMapping("t_district_user", "id", DistrictUser.class);
+        arp.addMapping("t_equipment", "id", Equipment.class);
+        arp.addMapping("t_prov_city_area_street", "id", ProvCityAreaStreet.class);
+        arp.addMapping("t_record_pay", "id", RecordPay.class);
+        arp.addMapping("t_record_survey", "id", RecordSurvey.class);
     }
 
     /**
