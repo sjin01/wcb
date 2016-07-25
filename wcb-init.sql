@@ -57,7 +57,7 @@ create table t_account
    primary key (id)
 );
 
-alter table t_account comment 'ÒµÖ÷ÓÃ»§';
+alter table t_account comment 'ä¸šä¸»ç”¨æˆ·';
 
 /*==============================================================*/
 /* table: t_account_equipment                                   */
@@ -68,12 +68,12 @@ create table t_account_equipment
    accountid            int(11),
    equipmentid          int(11),
    createdate           datetime,
-   invaliddate          datetime comment '¾ÍÊÇ×÷·ÏÊ±¼ä',
-   status               tinyint(1) comment '1µ±Ç°ÆôÓÃ£»0×÷·Ï',
+   invaliddate          datetime comment 'å°±æ˜¯ä½œåºŸæ—¶é—´',
+   status               tinyint(1) comment '1å½“å‰å¯ç”¨ï¼›0ä½œåºŸ',
    primary key (id)
 );
 
-alter table t_account_equipment comment 'ÖĞ¼ä¹ØÏµ±í';
+alter table t_account_equipment comment 'ä¸­é—´å…³ç³»è¡¨';
 
 /*==============================================================*/
 /* table: t_community                                           */
@@ -89,7 +89,7 @@ create table t_community
    primary key (id)
 );
 
-alter table t_community comment 'Ğ¡Çø';
+alter table t_community comment 'å°åŒº';
 
 /*==============================================================*/
 /* table: t_district                                            */
@@ -97,12 +97,12 @@ alter table t_community comment 'Ğ¡Çø';
 create table t_district
 (
    id                   int(11) not null auto_increment,
-   name                 varchar(64) comment '±ÈÈç£ºÄ³Ä³Ğ¡Çø',
-   remark               varchar(512) comment '±ÈÈç£º12¶°',
+   name                 varchar(64) comment 'æ¯”å¦‚ï¼šæŸæŸå°åŒº',
+   remark               varchar(512) comment 'æ¯”å¦‚ï¼š12æ ‹',
    primary key (id)
 );
 
-alter table t_district comment '²Ù×÷Ô±¶ÔÓÃ»§Ó¦·Ö³ÉÆ¬ÇøÀ´¹ÜÀí ¿ÉÒÔÏëÏó³É:Ë®±íÓÃ»§×é';
+alter table t_district comment 'æ“ä½œå‘˜å¯¹ç”¨æˆ·åº”åˆ†æˆç‰‡åŒºæ¥ç®¡ç† å¯ä»¥æƒ³è±¡æˆ:æ°´è¡¨ç”¨æˆ·ç»„';
 
 /*==============================================================*/
 /* table: t_district_user                                       */
@@ -115,7 +115,7 @@ create table t_district_user
    primary key (id)
 );
 
-alter table t_district_user comment 'ÃèÊöÒ»¸öÆ¬Çø¹éÄÄĞ©²Ù×÷Ô±Î¬»¤; Ò»¸ö²Ù×÷Ô±ÄÜÎ¬»¤ÄÄĞ©Æ¬Çø';
+alter table t_district_user comment 'æè¿°ä¸€ä¸ªç‰‡åŒºå½’å“ªäº›æ“ä½œå‘˜ç»´æŠ¤; ä¸€ä¸ªæ“ä½œå‘˜èƒ½ç»´æŠ¤å“ªäº›ç‰‡åŒº';
 
 /*==============================================================*/
 /* table: t_equipment                                           */
@@ -125,7 +125,7 @@ create table t_equipment
    id                   int(11) not null auto_increment,
    name                 varchar(32),
    code                 varchar(64),
-   type                 tinyint(4) comment '1Ë®±í¡¢2µç±í',
+   type                 tinyint(4) comment '1æ°´è¡¨ã€2ç”µè¡¨',
    manufacturers        varchar(64),
    model                varchar(64),
    primary key (id)
@@ -139,10 +139,10 @@ create table t_record_pay
    id                   int(11) not null auto_increment,
    accountid            int(11),
    paydate              datetime,
-   money                int(11) comment 'µ¥Î»×ª»»³É·Ö£»Ö±½ÓÓÃÕûÊı´æ´¢',
-   surveyid             int(11) comment 'Õë¶ÔÄÄÌõ¶ÁÊıÀ´½É·ÑµÄ',
-   status               tinyint(1) comment '1½ÉÇå£»2Ç··Ñ£»3Ô¤´æ',
-   balance              int(11) comment 'Ç··Ñ»òÕßÔ¤´æµÄ½ğ¶î',
+   money                int(11) comment 'å•ä½è½¬æ¢æˆåˆ†ï¼›ç›´æ¥ç”¨æ•´æ•°å­˜å‚¨',
+   surveyid             int(11) comment 'é’ˆå¯¹å“ªæ¡è¯»æ•°æ¥ç¼´è´¹çš„',
+   status               tinyint(1) comment '1ç¼´æ¸…ï¼›2æ¬ è´¹ï¼›3é¢„å­˜',
+   balance              int(11) comment 'æ¬ è´¹æˆ–è€…é¢„å­˜çš„é‡‘é¢',
    primary key (id)
 );
 
@@ -153,11 +153,11 @@ create table t_record_survey
 (
    id                   int(11) not null auto_increment,
    accountid            int(11),
-   equipmentid          int(11) comment '¼ÇÂ¼ÕË»§Éè±¸Ê¹ÓÃÇé¿ö±íµ±Ç°µÄid',
-   type                 tinyint(4) comment '0¸ü»»Éè±¸×Ô¶¯Ğ´Èë£»1Æ½Ì¨Â¼Èë£»2ÒÆ¶¯¶ËÏÖ³¡¿±²â£»',
+   equipmentid          int(11) comment 'è®°å½•è´¦æˆ·è®¾å¤‡ä½¿ç”¨æƒ…å†µè¡¨å½“å‰çš„id',
+   type                 tinyint(4) comment '0æ›´æ¢è®¾å¤‡è‡ªåŠ¨å†™å…¥ï¼›1å¹³å°å½•å…¥ï¼›2ç§»åŠ¨ç«¯ç°åœºå‹˜æµ‹ï¼›',
    value                double,
    readdate             datetime,
-   createdate           datetime comment 'Ò»°ãÓÃ³ÌĞò×Ô¶¯Ğ´Èë',
+   createdate           datetime comment 'ä¸€èˆ¬ç”¨ç¨‹åºè‡ªåŠ¨å†™å…¥',
    primary key (id)
 );
 
@@ -171,11 +171,11 @@ create table t_sys_dict
    name                 varchar(64),
    type                 varchar(64),
    sort                 int(11),
-   status               tinyint(1) comment '0£º½ûÓÃ£»1£ºÕı³£',
+   status               tinyint(1) comment '0ï¼šç¦ç”¨ï¼›1ï¼šæ­£å¸¸',
    primary key (id)
 );
 
-alter table t_sys_dict comment 'ÅäÖÃÊı¾İ×Öµä';
+alter table t_sys_dict comment 'é…ç½®æ•°æ®å­—å…¸';
 
 /*==============================================================*/
 /* table: t_sys_func                                            */
@@ -185,10 +185,10 @@ create table t_sys_func
    id                   int(11) not null auto_increment,
    name                 varchar(32),
    sort                 int(11),
-   path                 varchar(512) comment '·ÃÎÊÂ·¾¶',
+   path                 varchar(512) comment 'è®¿é—®è·¯å¾„',
    pic                  varchar(512),
    pid                  int(11),
-   type                 tinyint(4) comment '1£º²Ëµ¥£»2£º¹¦ÄÜ',
+   type                 tinyint(4) comment '1ï¼šèœå•ï¼›2ï¼šåŠŸèƒ½',
    primary key (id)
 );
 
@@ -199,7 +199,7 @@ create table t_sys_role
 (
    id                   int(11) not null auto_increment,
    name                 varchar(32),
-   status               tinyint(1) comment '1Õı³££» 0½ûÓÃ',
+   status               tinyint(1) comment '1æ­£å¸¸ï¼› 0ç¦ç”¨',
    sort                 int(11),
    primary key (id)
 );
@@ -221,20 +221,20 @@ create table t_sys_role_func
 create table t_sys_user
 (
    id                   int(11) not null auto_increment,
-   username             varchar(64) comment 'ÓÃ»§Ãû-µÇÂ½Ãû',
-   password             varchar(64) comment 'µÇÂ½ÃÜÂë',
-   nickname             varchar(64) comment 'êÇ³Æ',
-   email                varchar(512) comment 'µç×ÓÓÊÏä',
-   phone                varchar(64) comment 'ÊÖ»úºÅÂë',
-   status               tinyint(1) comment '×´Ì¬£º0Î´¼¤»î£»1Õı³££»2¶³½á',
+   username             varchar(64) comment 'ç”¨æˆ·å-ç™»é™†å',
+   password             varchar(64) comment 'ç™»é™†å¯†ç ',
+   nickname             varchar(64) comment 'æ˜µç§°',
+   email                varchar(512) comment 'ç”µå­é‚®ç®±',
+   phone                varchar(64) comment 'æ‰‹æœºå·ç ',
+   status               tinyint(1) comment 'çŠ¶æ€ï¼š0æœªæ¿€æ´»ï¼›1æ­£å¸¸ï¼›2å†»ç»“',
    registerdate         datetime,
-   registertype         tinyint(4) comment '×¢²á·½Ê½£º0¹ÜÀíÔ±Ìí¼Ó£»1Ç°Ì¨×¢²á',
-   usertype             tinyint(4) comment '1£ºÆÕÍ¨ÓÃ»§£»0£º¹ÜÀíÔ±',
+   registertype         tinyint(4) comment 'æ³¨å†Œæ–¹å¼ï¼š0ç®¡ç†å‘˜æ·»åŠ ï¼›1å‰å°æ³¨å†Œ',
+   usertype             tinyint(4) comment '1ï¼šæ™®é€šç”¨æˆ·ï¼›0ï¼šç®¡ç†å‘˜',
    groupid              int(11),
    primary key (id)
 );
 
-alter table t_sys_user comment 'ÓÃ»§Ö÷±í';
+alter table t_sys_user comment 'ç”¨æˆ·ä¸»è¡¨';
 
 /*==============================================================*/
 /* table: t_sys_user_group                                      */
@@ -242,8 +242,8 @@ alter table t_sys_user comment 'ÓÃ»§Ö÷±í';
 create table t_sys_user_group
 (
    id                   int(11) not null auto_increment,
-   name                 varchar(64) comment 'ÓÃ»§×éÃû',
-   status               tinyint(1) comment '1Õı³££»0½ûÓÃ',
+   name                 varchar(64) comment 'ç”¨æˆ·ç»„å',
+   status               tinyint(1) comment '1æ­£å¸¸ï¼›0ç¦ç”¨',
    sort                 int(11),
    primary key (id)
 );
@@ -258,4 +258,3 @@ create table t_sys_user_role
    roleid               int(11),
    primary key (id)
 );
-
