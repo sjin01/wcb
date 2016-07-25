@@ -33,7 +33,7 @@ public class User extends BaseSysUser<User> {
      */
     public Page<User> paginate(int pageNumber, int pageSize) {
         return paginate(pageNumber, pageSize, "select * " , " from t_sys_user " +
-                " where usertype != 999 " +
+                "" +
                 " order by registerdate desc ,id desc");
     }
 

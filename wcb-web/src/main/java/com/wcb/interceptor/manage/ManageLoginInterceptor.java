@@ -31,15 +31,15 @@ public class ManageLoginInterceptor implements Interceptor {
             controller.redirect("/manage/login");
             return ;
         }else{
-            // 不是 管理员， 无法进去后台管理
-            Integer userType = user.get("usertype");
-            if( !user.get("usertype").equals(UserTypeEnum.SUPERADMIN.getCode())
-                    && !user.get("usertype").equals(UserTypeEnum.ADMIN.getCode()) ){
-                System.out.println("你不是管理员");
-                controller.setSessionAttr(SysConstant.SESSIONKEY_MANAGE_ERROR ,"你不是管理员");
-                controller.redirect("/manage/login");
-                return ;
-            }
+//            // 不是 管理员， 无法进去后台管理
+//            Integer userType = user.get("usertype");
+//            if( !user.get("usertype").equals(UserTypeEnum.SUPERADMIN.getCode())
+//                    && !user.get("usertype").equals(UserTypeEnum.ADMIN.getCode()) ){
+//                System.out.println("你不是管理员");
+//                controller.setSessionAttr(SysConstant.SESSIONKEY_MANAGE_ERROR ,"你不是管理员");
+//                controller.redirect("/manage/login");
+//                return ;
+//            }
         }
 
         invocation.invoke();

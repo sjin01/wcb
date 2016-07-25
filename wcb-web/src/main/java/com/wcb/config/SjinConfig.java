@@ -5,9 +5,6 @@ import com.jfinal.core.JFinal;
 import com.jfinal.render.FreeMarkerRender;
 import com.jfinal.render.ViewType;
 import com.wcb.base.BaseConfig;
-import com.wcb.controllers.manage.ssq.AnalyzeController;
-import com.wcb.controllers.manage.ssq.SsqController;
-import com.wcb.controllers.timeline.TimelineController;
 import com.wcb.controllers.index.IndexController;
 import com.wcb.controllers.manage.*;
 import freemarker.template.TemplateModelException;
@@ -40,7 +37,6 @@ public class SjinConfig extends BaseConfig {
         super.configRoute(routes);
         // 前台
         routes.add("/", IndexController.class);
-        routes.add("/timeline", TimelineController.class);
 
         // 后台 manage
         routes.add("/manage/login", LoginController.class);
@@ -51,9 +47,6 @@ public class SjinConfig extends BaseConfig {
         routes.add("/manage/usergroup" ,UserGroupController.class);
         routes.add("/manage/func", FuncController.class);
         routes.add("/manage/dict", DictController.class);
-        routes.add("/manage/ssq/record", SsqController.class);
-        routes.add("/manage/ssq/analyze", AnalyzeController.class);
-
     }
 
     /**

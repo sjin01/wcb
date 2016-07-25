@@ -23,19 +23,14 @@ public class LoginValidator extends Validator {
         String username = controller.getPara("username");
         String password = controller.getPara("password");
         if(username.length() > 20) addError("errorMsg" , "用户名太长");
-        if(password.length() < 2 ) addError("errorMsg" , "用户名太短");
+        if(username.length() < 2 ) addError("errorMsg" , "用户名太短");
 
         User loginUser = User.dao.login(username,password);
 
         if(loginUser == null){
             addError("errorMsg" , "用户名或密码错误！");
         }else{
-            if( loginUser.get("usertype").equals(UserTypeEnum.SUPERADMIN.getCode())
-                    || loginUser.get("usertype").equals(UserTypeEnum.ADMIN.getCode()) ){
-                controller.setSessionAttr(SysConstant.SESSIONKEY_LOGIN_USER, loginUser);
-            }else{
-                addError("errorMsg" , "你不是管理员");
-            }
+            controller.setSessionAttr(SysConstant.SESSIONKEY_LOGIN_USER, loginUser);
         }
     }
 
