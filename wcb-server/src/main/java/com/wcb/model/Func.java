@@ -16,7 +16,7 @@ public class Func extends BaseFunc<Func> {
 	 * 所有 sql 写在 Model 或 Service 中，不要写在 Controller 中，养成好习惯，有利于大型项目的开发与维护
 	 */
 	public Page<Func> paginate(int pageNumber, int pageSize) {
-		return paginate(pageNumber, pageSize, "select * " , " from t_sys_func order by sort asc");
+		return paginate(pageNumber, pageSize, "select * ", " from t_sys_func order by sort asc");
 	}
 
 	/**
@@ -39,6 +39,20 @@ public class Func extends BaseFunc<Func> {
 			for(Record item : list){
 				List<Record> listSon = getFuncByPid(item.getInt("id") , 1);
 				item.set("sonList" , listSon);
+			}
+		}
+		return list;
+	}
+	/**
+	 * ** 递归获取 菜单
+	 * @return
+	 */
+	public List<Record> getNav (int pid) {
+		List<Record> list = getFuncByPid(pid , 1);
+		if(list!=null && !list.isEmpty()){
+			for(Record item : list){
+				List<Record> listSon = getNav(item.getInt("id"));
+				item.set("sonList", listSon);
 			}
 		}
 		return list;

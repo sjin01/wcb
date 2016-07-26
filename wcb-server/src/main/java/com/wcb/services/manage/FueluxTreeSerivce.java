@@ -16,7 +16,7 @@ public interface FueluxTreeSerivce {
     /**
      * 供外部条用
      */
-    public static final FueluxTreeSerivce serivce = new FueluxTreeSerivceImpl();
+    FueluxTreeSerivce serivce = new FueluxTreeSerivceImpl();
 
     /**
      * 功能菜单 树结构 数据
