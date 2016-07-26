@@ -12,7 +12,6 @@
 
     <!--子工程-->
     <modules>
-        <module>wcb-common</module>
         <module>wcb-server</module>
         <module>wcb-web</module>
     </modules>

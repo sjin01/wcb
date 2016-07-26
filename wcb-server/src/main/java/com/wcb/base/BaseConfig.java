@@ -1,10 +1,10 @@
 package com.wcb.base;
 
 import com.jfinal.config.*;
+import com.jfinal.kit.PropKit;
 import com.jfinal.plugin.activerecord.ActiveRecordPlugin;
 import com.jfinal.plugin.c3p0.C3p0Plugin;
-import com.wcb.model.manage.*;
-import com.wcb.model.basicdata.*;
+import com.wcb.model._MappingKit;
 
 /**
  * Description: API引导式配置
@@ -20,6 +20,7 @@ public class BaseConfig extends JFinalConfig {
     public void configConstant(Constants constants) {
         // 加载少量必要配置，随后可用getProperty(...)获取值
         loadPropertyFile("jdbc.properties");
+
         constants.setDevMode( getPropertyToBoolean("devMode", false));
 
         //后面两个参数根据自己情况添加默认语言国家
@@ -47,24 +48,8 @@ public class BaseConfig extends JFinalConfig {
         ActiveRecordPlugin arp = new ActiveRecordPlugin(c3p0Plugin);
         plugins.add(arp);
 
-        // 映射 DB table 表到 model
-        arp.addMapping("t_sys_dict", Dict.class);
-        arp.addMapping("t_sys_func", Func.class);
-        arp.addMapping("t_sys_role", Role.class);
-        arp.addMapping("t_sys_role_func", RoleFunc.class);
-        arp.addMapping("t_sys_user", User.class);
-        arp.addMapping("t_sys_user_group", UserGroup.class);
-        arp.addMapping("t_sys_user_role", UserRole.class);
-
-        arp.addMapping("t_account", "id", Account.class);
-        arp.addMapping("t_account_equipment", "id", AccountEquipment.class);
-        arp.addMapping("t_community", "id", Community.class);
-        arp.addMapping("t_district", "id", District.class);
-        arp.addMapping("t_district_user", "id", DistrictUser.class);
-        arp.addMapping("t_equipment", "id", Equipment.class);
-        arp.addMapping("t_prov_city_area_street", "id", ProvCityAreaStreet.class);
-        arp.addMapping("t_record_pay", "id", RecordPay.class);
-        arp.addMapping("t_record_survey", "id", RecordSurvey.class);
+        // 所有配置在 MappingKit 中搞定
+        _MappingKit.mapping(arp);
     }
 
     /**

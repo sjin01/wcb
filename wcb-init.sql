@@ -54,6 +54,8 @@ create table t_account
    peoplenumber         int(11),
    card                 varchar(512),
    distid               int(11),
+   signinDate           datetime,
+   status               tinyint(4),
    primary key (id)
 );
 

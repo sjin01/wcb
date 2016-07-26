@@ -13,13 +13,6 @@
 
     <dependencies>
 
-        <!-- 工程依赖 -->
-        <dependency>
-            <groupId>com.sjin</groupId>
-            <artifactId>wcb-common</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
