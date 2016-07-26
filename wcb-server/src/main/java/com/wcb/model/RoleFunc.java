@@ -1,5 +1,6 @@
 package com.wcb.model;
 
+import com.jfinal.plugin.activerecord.Page;
 import com.wcb.model.base.BaseRoleFunc;
 
 /**
@@ -8,4 +9,7 @@ import com.wcb.model.base.BaseRoleFunc;
 @SuppressWarnings("serial")
 public class RoleFunc extends BaseRoleFunc<RoleFunc> {
 	public static final RoleFunc dao = new RoleFunc();
+	public Page<RoleFunc> paginate(int pageNumber, int pageSize) {
+		return paginate(pageNumber, pageSize, "select * " , " from t_sys_role_func ");
+	}
 }

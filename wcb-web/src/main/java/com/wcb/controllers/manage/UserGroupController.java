@@ -5,7 +5,7 @@ import com.mysql.jdbc.StringUtils;
 import com.wcb.base.BaseController;
 import com.wcb.constant.SysConstant;
 import com.wcb.interceptor.manage.ManageLoginInterceptor;
-import com.wcb.model.manage.UserGroup;
+import com.wcb.model.UserGroup;
 
 /**
  * Description:  用户组 管理

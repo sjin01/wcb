@@ -2,7 +2,7 @@ package com.wcb.controllers.manage;
 
 import com.jfinal.core.Controller;
 import com.wcb.constant.SysConstant;
-import com.wcb.model.manage.Dict;
+import com.wcb.model.Dict;
 import org.apache.commons.lang.StringUtils;
 
 /**

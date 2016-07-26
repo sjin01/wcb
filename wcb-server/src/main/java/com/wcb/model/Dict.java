@@ -1,5 +1,6 @@
 package com.wcb.model;
 
+import com.jfinal.plugin.activerecord.Page;
 import com.wcb.model.base.BaseDict;
 
 /**
@@ -8,4 +9,8 @@ import com.wcb.model.base.BaseDict;
 @SuppressWarnings("serial")
 public class Dict extends BaseDict<Dict> {
 	public static final Dict dao = new Dict();
+
+	public Page<Dict> paginate(int pageNumber, int pageSize) {
+		return paginate(pageNumber, pageSize, "select * " , " from t_sys_dict order by sort asc");
+	}
 }

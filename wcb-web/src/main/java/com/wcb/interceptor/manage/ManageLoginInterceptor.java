@@ -5,7 +5,7 @@ import com.jfinal.aop.Invocation;
 import com.jfinal.core.Controller;
 import com.wcb.constant.SysConstant;
 import com.wcb.enums.UserTypeEnum;
-import com.wcb.model.manage.User;
+import com.wcb.model.User;
 
 
 /**

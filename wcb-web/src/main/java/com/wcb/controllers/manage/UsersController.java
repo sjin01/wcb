@@ -5,7 +5,7 @@ import com.mysql.jdbc.StringUtils;
 import com.wcb.base.BaseController;
 import com.wcb.constant.SysConstant;
 import com.wcb.interceptor.manage.ManageLoginInterceptor;
-import com.wcb.model.manage.User;
+import com.wcb.model.User;
 import com.wcb.validators.manage.UserValidator;
 
 import java.util.Date;

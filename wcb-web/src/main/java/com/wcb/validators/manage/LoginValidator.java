@@ -4,7 +4,7 @@ import com.jfinal.core.Controller;
 import com.jfinal.validate.Validator;
 import com.wcb.constant.SysConstant;
 import com.wcb.enums.UserTypeEnum;
-import com.wcb.model.manage.User;
+import com.wcb.model.User;
 
 /**
  * Description: 登陆 验证器

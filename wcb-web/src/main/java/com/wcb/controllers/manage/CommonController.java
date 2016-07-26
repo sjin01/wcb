@@ -3,7 +3,7 @@ package com.wcb.controllers.manage;
 import com.jfinal.aop.Before;
 import com.jfinal.core.Controller;
 import com.wcb.interceptor.manage.NodeInterceptor;
-import com.wcb.model.manage.Func;
+import com.wcb.model.Func;
 
 /**
  * Description:

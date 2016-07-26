@@ -4,7 +4,7 @@ import com.jfinal.aop.Before;
 import com.jfinal.plugin.activerecord.Record;
 import com.wcb.base.BaseController;
 import com.wcb.interceptor.manage.ManageLoginInterceptor;
-import com.wcb.model.manage.Func;
+import com.wcb.model.Func;
 import com.wcb.services.manage.FueluxTreeSerivce;
 import com.wcb.validators.manage.FuncValidator;
 

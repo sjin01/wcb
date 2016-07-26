@@ -4,7 +4,7 @@ import com.jfinal.aop.Interceptor;
 import com.jfinal.aop.Invocation;
 import com.jfinal.core.Controller;
 import com.jfinal.core.JFinal;
-import com.wcb.model.manage.Func;
+import com.wcb.model.Func;
 
 /**
  * Description:   后台：获取当前节点的 拦截器

@@ -3,7 +3,7 @@ package com.wcb.validators.manage;
 import com.jfinal.core.Controller;
 import com.jfinal.validate.Validator;
 import com.mysql.jdbc.StringUtils;
-import com.wcb.model.manage.User;
+import com.wcb.model.User;
 
 /**
  * Description: 后台验证 用户表   验证器
