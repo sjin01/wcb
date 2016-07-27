@@ -17,7 +17,7 @@ import javax.servlet.ServletContext;
  *
  * @author: guanshj QQ: 928990049
  */
-public class SjinConfig extends BaseConfig {
+public class WcbConfig extends BaseConfig {
 
     /**
      * 配置常量

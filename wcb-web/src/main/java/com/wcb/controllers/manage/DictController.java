@@ -1,7 +1,9 @@
 package com.wcb.controllers.manage;
 
+import com.jfinal.aop.Before;
 import com.jfinal.core.Controller;
 import com.wcb.constant.SysConstant;
+import com.wcb.interceptor.manage.ManageLoginInterceptor;
 import com.wcb.model.Dict;
 import org.apache.commons.lang.StringUtils;
 
@@ -11,6 +13,7 @@ import org.apache.commons.lang.StringUtils;
  *
  * @author: guanshj QQ: 928990049
  */
+@Before(ManageLoginInterceptor.class)
 public class DictController extends Controller {
 
     public void index (){
