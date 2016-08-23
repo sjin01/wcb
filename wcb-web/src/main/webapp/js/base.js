@@ -54,7 +54,7 @@ requirejs.config({
 	shim:{
         'bs':{deps:['jquery', 'css!/plugin/ace/css/bootstrap.min.css', 'css!/plugin/ace/css/font-awesome.min.css']},
         'ace':{deps:['jquery', 'css!/plugin/ace/css/ace-fonts.css', 'css!/plugin/ace/css/ace.min.css']},
-        'ace-elements':{deps:['jquery']},
+        'ace-elements':{deps:['jquery', 'css!/plugin/ace/css/jquery.gritter.css', 'css!/plugin/ace/css/ace-skins.min.css', 'css!/plugin/ace/css/ace-rtl.min.css']},
         'jquery-ui':{deps:['jquery']},
         'jquery-ui-custom':{deps:['jquery']},
         'jquery-ui-touch-punch':{deps:['jquery']},
