@@ -26,7 +26,7 @@
                         <i class="fa fa-plus-circle"></i>
                     </a>
 
-                    <a class="red" href="javascript:void(0);" onclick="deleteList();" title="" data-rel="tooltip" data-original-title="批量删除">
+                    <a class="red" href="javascript:void(0);" id="del-btn" title="" data-rel="tooltip" data-original-title="批量删除">
                         <i class="ace-icon fa fa-trash-o"></i>
                     </a>
                 </div>&nbsp;
@@ -57,72 +57,42 @@
 </div>-->
 
 </@layout>
+
 <script>
+    require(['base', 'wcb-manage-util'], function (Base, ManageUtil) {
+        (function (){
+            if(${page!}) $("#table_div").load("${base}/manage/user/list?page=${page}");
+        })();
 
-    /*function test(){
-        var ids = '';
-        $('.item:checkbox').filter(":checked").each(function (){
-            ids += $(this).val() + ',';
-        })
-        console.log(ids);
-    }*/
-    $(function (){
-        if(${page!}) $("#table_div").load("${base}/manage/user/list?page=${page}");
-    })
+        $('#del-btn').on('click', function (){
+            deleteList();
+        });
+        var deleteList = function (){
+            if( $('.item:checkbox').filter(":checked").length < 1 ){
+                ManageUtil.myConfirm("至少选择一条记录！" );
+                return false;
+            }
 
-    function deleteList(){
-        if( $('.item:checkbox').filter(":checked").length < 1 ){
-            myConfirm("至少选择一条记录！" );
-            return false;
-        }
-
-        myConfirm("你确定哈把他删噶？" ,function (){
-            var ids = '';
-            $('.item:checkbox').filter(":checked").each(function (){
-                ids += $(this).val() + ',';
-            })
-            $.ajax({
-                url:"${base}/manage/user/deleteList" ,
-                type:'POST',
-                data: {'ids':ids } ,
-                dataType:'json',
-                success:function( result ){
-                    if(result.code == 200){
-                        $("#table_div").load("${base}/manage/user/list?page=${page}");
-                        myGritterSuccess('操作成功！');
-                    }
-                }
-            });
-        })
-
-    }
-
-    /*var addUser_dialog;
-    function showAddUserDialog () {
-        $.ajax({
-            url:"$ base /manage/user/add" ,
-            type:'POST',
-            dataType:'HTML',
-            success:function( data ){
-                addUser_dialog = bootbox.dialog({
-                    message: data,
-                    buttons: {
-                        "button1": {
-                            "label": "取消",
-                            "className": "btn btn-xs",
-                            "callback": function () {
-                            }
-                        },
-                        "btn2":{
-                            "label": "确认",
-                            "className": "btn btn-xs btn-success",
-                            "callback": function () {
-
-                            }
+            ManageUtil.myConfirm("你确定哈把他删噶？" ,function (){
+                var ids = '';
+                $('.item:checkbox').filter(":checked").each(function (){
+                    ids += $(this).val() + ',';
+                });
+                $.ajax({
+                    url:"${base}/manage/user/deleteList" ,
+                    type:'POST',
+                    data: {'ids':ids } ,
+                    dataType:'json',
+                    success:function( result ){
+                        if(result.code == 200){
+                            $("#table_div").load("${base}/manage/user/list?page=${page}");
+                            myGritterSuccess('操作成功！');
                         }
                     }
-                })
-            }
-        });
-    }*/
+                });
+            })
+        };
+    });
+
+
 </script>

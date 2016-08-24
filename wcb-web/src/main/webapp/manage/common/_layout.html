@@ -12,71 +12,29 @@
 
     <!-- ############################　basic css ############################　-->
     <!-- bootstrap & fontawesome -->
-    <link rel="stylesheet" href="${base}/plugin/ace/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="${base}/plugin/ace/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="${base}/css/lib/reset.css" />
 
-    <!-- page specific plugin styles -->
-    <link rel="stylesheet" href="${base}/plugin/ace/css/jquery.gritter.css" />
-    <!-- text fonts -->
-    <link rel="stylesheet" href="${base}/plugin/ace/css/ace-fonts.css" />
-    <!-- ace styles -->
+    <link rel="stylesheet" href="${base}/plugin/ace/css/bootstrap.min.css" />
     <link rel="stylesheet" href="${base}/plugin/ace/css/ace.min.css" id="main-ace-style" />
+
     <!--[if lte IE 9]>
         <link rel="stylesheet" href="${base}/plugin/ace/css/ace-part2.min.css" />
     <![endif]-->
-    <link rel="stylesheet" href="${base}/plugin/ace/css/ace-skins.min.css" />
-    <link rel="stylesheet" href="${base}/plugin/ace/css/ace-rtl.min.css" />
     <!--[if lte IE 9]>
         <link rel="stylesheet" href="${base}/plugin/ace/css/ace-ie.min.css" />
     <![endif]-->
-
-    <!-- ace settings handler -->
-    <script src="${base}/plugin/ace/js/ace-extra.min.js"></script>
-    <!-- HTML5shiv and Respond.js for IE8 to support HTML5 elements and media queries -->
     <!--[if lte IE 8]>
         <script src="${base}/plugin/ace/js/html5shiv.min.js"></script>
         <script src="${base}/plugin/ace/js/respond.min.js"></script>
     <![endif]-->
 
     <!-- ############################　basic scripts ############################　-->
-
-    <!--[if !IE]> -->
-      <script type="text/javascript">
-          window.jQuery || document.write("<script src='${base}/plugin/ace/js/jquery.min.js'>"+"<"+"/script>");
-      </script>
-    <!-- <![endif]-->
-    <!--[if IE]>
-      <script type="text/javascript">
-        window.jQuery || document.write("<script src='${base}/plugin/ace/js/jquery1x.min.js'>"+"<"+"/script>");
-      </script>
-    <![endif]-->
-
-    <script type="text/javascript">
-        if('ontouchstart' in document.documentElement) document.write("<script src='${base}/plugin/ace/js/jquery.mobile.custom.min.js'>"+"<"+"/script>");
-    </script>
-
-    <script src="${base}/plugin/ace/js/bootstrap.min.js"></script>
-    <script src="${base}/plugin/ace/js/bootbox.min.js"></script>
-
-    <!-- dataTables -->
-    <script src="${base}/plugin/ace/js/jquery.dataTables.min.js"></script>
-    <script src="${base}/plugin/ace/js/jquery.dataTables.bootstrap.js"></script>
-    <script src="${base}/js/datatable/mydatatable.js"></script>
-
-    <!-- ace scripts -->
-    <script src="${base}/plugin/ace/js/ace-elements.min.js"></script>
-    <script src="${base}/plugin/ace/js/ace.min.js"></script>
-
-    <script src="${base}/plugin/ace/js/jquery.gritter.min.js"></script>
-
-    <!-- Jquery validate  -->
-    <script src="${base}/js/validate/jquery.validate.min.js"></script>
-    <script src="${base}/js/validate/messages_zh.js"></script>
-    <script src="${base}/js/validate/myValidate.js"></script>
+    <script src="${base}/js/lib/require.js"></script>
+    <script src="${base}/js/base.js"></script>
 
     <!-- Manage  -->
-    <link rel="stylesheet" href="${base}/css/manage.css" />
-    <script src="${base}/js/manage-base.js"></script>
+    <#--<link rel="stylesheet" href="${base}/css/manage.css" />-->
+    <#--<script src="${base}/js/wcb-manage-util.js"></script>-->
 </head>
 
 <body class="no-skin">
@@ -152,10 +110,10 @@
 </html>
 
 <script type="text/javascript">
-    $(function (){
+    require(['base'], function () {
         $('#breadcrumbs').load('${base}/manage/common/breadcrumbs?pathname='+window.location.pathname);
         $('#sidebar').load('${base}/manage/common/nav?pathname='+window.location.pathname);
-    })
+    });
 </script>
 
 </#macro>

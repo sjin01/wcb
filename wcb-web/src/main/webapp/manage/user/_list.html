@@ -45,9 +45,8 @@
           </#if>
         </td>
         <td>
-          <#if (ss.status)?? && ss.status==0>未激活
-          <#elseif (ss.status)?? && ss.status==1>正常
-          <#elseif (ss.status)?? && ss.status==2>冻结
+          <#if (ss.status)?? && ss.status==true>正常
+          <#elseif (ss.status)?? && ss.status==false>冻结
           </#if>
         </td>
         <td>
@@ -77,7 +76,9 @@
 <@paginate currentPage = userpage.pageNumber totalPage = userpage.totalPage actionUrl = "${base}/manage/user?page=" />
 
 <script>
-    $('[data-rel=tooltip]').tooltip({container:'body'});
+    require(['base'], function () {
+        $('[data-rel=tooltip]').tooltip({container:'body'});
+    });
 
     function del(id){
         myConfirm("你确定删除？" ,function (){

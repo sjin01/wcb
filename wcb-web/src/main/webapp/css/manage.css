@@ -11,3 +11,11 @@
 .dl-pt20 dt,.dl-pt20 dd{padding-top: 20px;}
 
 .red {color: red}
+
+button, button:active, button:hover{
+    outline: none!important;
+}
+
+.modal-header .close{
+    font-size: 24px;
+}

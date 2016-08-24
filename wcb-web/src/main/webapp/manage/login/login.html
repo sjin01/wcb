@@ -8,20 +8,15 @@
     <meta name="description" content="User login page"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
 
+    <link rel="stylesheet" href="${base}/plugin/ace/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="${base}/plugin/ace/css/ace.min.css" id="main-ace-style" />
+
     <!--[if lte IE 9]>
     <link rel="stylesheet" href="${base}/plugin/ace/css/ace-part2.min.css"/>
     <![endif]-->
-
-    <link rel="stylesheet" href="${base}/plugin/ace/css/ace-rtl.min.css"/>
-
     <!--[if lte IE 9]>
     <link rel="stylesheet" href="${base}/plugin/ace/css/ace-ie.min.css"/>
     <![endif]-->
-
-    <link rel="stylesheet" href="${base}/plugin/ace/css/ace.onpage-help.css"/>
-
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-
     <!--[if lt IE 9]>
     <script src="${base}/plugin/ace/js/html5shiv.js"></script>
     <script src="${base}/plugin/ace/js/respond.min.js"></script>
@@ -152,11 +147,7 @@
 <script src="${base}/js/base.js"></script>
 
 <script type="text/javascript">
-    require(['base', 'jquery-dataTables', 'jquery-dataTables-bootstrap'], function () {
-        console.log($('.bigger-110').html());
-
-
-
+    require(['base'], function () {
         $(function ($) {
             $(document).on('click', '.toolbar a[data-target]', function (e) {
                 e.preventDefault();
@@ -165,7 +156,6 @@
                 $(target).addClass('visible');//show target
             });
         });
-
 
         //you don't need this, just used for changing background
         $(function ($) {
@@ -204,66 +194,5 @@
         });
     });
 </script>
-
-
-<#--<!--[if !IE]> &ndash;&gt;
-<script type="text/javascript">
-    window.jQuery || document.write("<script src='${base}/plugin/ace/js/jquery.min.js'>" + "<" + "/script>");
-</script>
-<!-- <![endif]&ndash;&gt;
-
-<!--[if IE]>
-<script type="text/javascript">
-  window.jQuery || document.write("<script src='${base}/plugin/ace/js/jquery1x.min.js'>" + "<" + "/script>");
-</script>
-<![endif]&ndash;&gt;-->
-<#--<script type="text/javascript">
-    if ('ontouchstart' in document.documentElement) document.write("<script src='${base}/plugin/ace/js/jquery.mobile.custom.min.js'>" + "<" + "/script>");
-</script>-->
-
-
-
-<#--<script src="${base}/plugin/ace/js/bootstrap.min.js"></script>-->
-
-<#--<!-- page specific plugin scripts &ndash;&gt;
-<!--[if lte IE 8]>
-<script src="${base}/plugin/ace/js/excanvas.min.js"></script>
-<![endif]&ndash;&gt;
-
-<!-- ace scripts &ndash;&gt;
-<script src="${base}/plugin/ace/js/ace.min.js"></script>
-<script src="${base}/plugin/ace/js/ace-elements.min.js"></script>
-
-<script src="${base}/plugin/ace/js/jquery-ui.min.js"></script>
-<script src="${base}/plugin/ace/js/jquery-ui.custom.min.js"></script>
-<script src="${base}/plugin/ace/js/jquery.ui.touch-punch.min.js"></script>
-
-<script src="${base}/plugin/ace/js/chosen.jquery.min.js"></script>
-
-<script src="${base}/plugin/ace/js/fuelux/fuelux.spinner.min.js"></script>
-
-<script src="${base}/plugin/ace/js/date-time/bootstrap-datepicker.min.js"></script>
-<script src="${base}/plugin/ace/js/date-time/bootstrap-timepicker.min.js"></script>
-
-<script src="${base}/plugin/ace/js/date-time/moment.min.js"></script>
-<script src="${base}/plugin/ace/js/date-time/daterangepicker.min.js"></script>
-<script src="${base}/plugin/ace/js/date-time/bootstrap-datetimepicker.min.js"></script>
-
-<script src="${base}/plugin/ace/js/bootstrap-colorpicker.min.js"></script>
-
-<script src="${base}/plugin/ace/js/jquery.knob.min.js"></script>
-<script src="${base}/plugin/ace/js/jquery.autosize.min.js"></script>
-<script src="${base}/plugin/ace/js/jquery.inputlimiter.1.3.1.min.js"></script>
-<script src="${base}/plugin/ace/js/jquery.maskedinput.min.js"></script>
-<script src="${base}/plugin/ace/js/bootstrap-tag.min.js"></script>
-<script src="${base}/plugin/ace/js/typeahead.jquery.min.js"></script>
-
-<script src="${base}/plugin/ace/js/jquery.dataTables.min.js"></script>
-<script src="${base}/plugin/ace/js/jquery.dataTables.bootstrap.js"></script>
-
-<script src="${base}/plugin/ace/js/fuelux/data/fuelux.tree-sample-demo-data.js"></script>
-<script src="${base}/plugin/ace/js/fuelux/fuelux.tree.min.js"></script>
-
-<script src="${base}/plugin/ace/js/bootbox.min.js"></script>-->
 </body>
 </html>

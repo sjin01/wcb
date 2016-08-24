@@ -37,13 +37,17 @@ requirejs.config({
         'jquery-typeahead': '/plugin/ace/js/typeahead.jquery.min',
 
         // data tables
-        'jquery-dataTables': '/plugin/ace/js/jquery.dataTables.min',
-        'jquery-dataTables-bootstrap': '/plugin/ace/js/jquery.dataTables.bootstrap',
+        //'jquery-dataTables': '/plugin/ace/js/jquery.dataTables.min',
+        //'jquery-dataTables-bootstrap': '/plugin/ace/js/jquery.dataTables.bootstrap',
 
         'bs-fuelux-tree-sample-demo-data': '/plugin/ace/js/fuelux/data/fuelux.tree-sample-demo-data',
         'bs-fuelux-tree': '/plugin/ace/js/fuelux/fuelux.tree.min',
         'bs-bootbox': '/plugin/ace/js/bootbox.min',
 
+        // wcb components
+        'wcb-manage-util':'components/wcb-manage-util',
+
+        // 依赖load css file (一般组件用这个来做，整个页面的 css 还是不要这么做为好，页面容易乱弹)
         'cssMin':'css.min'
 	},
     map: {
@@ -54,7 +58,7 @@ requirejs.config({
 	shim:{
         'bs':{deps:['jquery', 'css!/plugin/ace/css/bootstrap.min.css', 'css!/plugin/ace/css/font-awesome.min.css']},
         'ace':{deps:['jquery', 'css!/plugin/ace/css/ace-fonts.css', 'css!/plugin/ace/css/ace.min.css']},
-        'ace-elements':{deps:['jquery', 'css!/plugin/ace/css/jquery.gritter.css', 'css!/plugin/ace/css/ace-skins.min.css', 'css!/plugin/ace/css/ace-rtl.min.css']},
+        'ace-elements':{deps:['jquery', 'ace', 'css!/plugin/ace/css/jquery.gritter.css', 'css!/plugin/ace/css/ace-skins.min.css', 'css!/plugin/ace/css/ace-rtl.min.css']},
         'jquery-ui':{deps:['jquery']},
         'jquery-ui-custom':{deps:['jquery']},
         'jquery-ui-touch-punch':{deps:['jquery']},
@@ -72,9 +76,9 @@ requirejs.config({
         'jquery-maskedinput':{deps:['jquery']},
         'bs-tag':{deps:['jquery']},
         'jquery-typeahead':{deps:['jquery']},
-        'jquery-dataTables':{deps:['jquery']},
-        'jquery-dataTables-bootstrap':{deps:['jquery', 'jquery-dataTables']},
-        'bs-fuelux-tree-sample-demo-data':{deps:['jquery']},
+        //'jquery-dataTables':{deps:['jquery'], exports: 'DataTable'},
+        //'jquery-dataTables-bootstrap':{deps:['jquery', 'jquery-dataTables']},
+        'bs-fuelux-tree-sample-demo-data':{deps:['jquery', 'ace']},
         'bs-fuelux-tree':{deps:['jquery']},
         'bs-bootbox':{deps:['jquery']}
 	}
@@ -83,6 +87,7 @@ requirejs.config({
 var bsAll = ['jquery', 'bs', 'ace', 'ace-elements', 'jquery-ui', 'jquery-ui-custom', 'jquery-ui-touch-punch',
     'jquery-chosen', 'bs-fuelux-spinner', 'bs-datepicker', 'bs-timepicker', 'bs-moment', 'bs-daterangepicker', 'bs-datetimepicker',
     'bs-colorpicker', 'jquery-knob', 'jquery-autosize', 'jquery-inputlimiter', 'jquery-maskedinput', 'bs-tag', 'jquery-typeahead',
-    'jquery-dataTables-bootstrap', 'bs-fuelux-tree-sample-demo-data', 'bs-fuelux-tree', 'bs-bootbox'];
+    'bs-fuelux-tree-sample-demo-data', 'bs-fuelux-tree', 'bs-bootbox',
+    'wcb-manage-util'];
 define("base", bsAll, function(){});
 
