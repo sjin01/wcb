@@ -47,6 +47,7 @@ requirejs.config({
 
         // wcb components
         'wcb-manage-util':'components/wcb-manage-util',
+        'func-tree':'components/func_fueluxtree',
 
         // 依赖load css file (一般组件用这个来做，整个页面的 css 还是不要这么做为好，页面容易乱弹)
         'cssMin':'css.min'

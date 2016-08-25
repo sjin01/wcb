@@ -57,7 +57,7 @@
         <div class="col-sm-9">
             <select name="user.status" id="" class="col-sm-5">
                 <option value="1" <#if (user.status)?? && user.status==true> selected="selected" </#if>>正常</option>
-                <option value="2" <#if (user.status)?? && user.status==false> selected="selected" </#if>>冻结</option>
+                <option value="0" <#if (user.status)?? && user.status==false> selected="selected" </#if>>冻结</option>
             </select>
         </div>
     </div>

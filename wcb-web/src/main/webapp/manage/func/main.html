@@ -1,8 +1,8 @@
 <#include "/manage/common/_layout.html"/>
 <@layout>
 
-<script src="${base}/plugin/ace/js/fuelux/fuelux.tree.min.js"></script>
-<script src="${base}/js/func_fueluxtree.js"></script>
+<#--<script src="${base}/plugin/ace/js/fuelux/fuelux.tree.min.js"></script>-->
+<#--<script src="${base}/js/func_fueluxtree.js"></script>-->
 
 <div class="page-header">
     <h1>
@@ -64,7 +64,7 @@
                             <dt>父级菜单</dt>
                             <dd>
                                 <span id="func_pname">根节点</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                <button class="btn btn-minier btn-purple" type="button" onclick="backRoot();">
+                                <button class="btn btn-minier btn-purple" type="button" id="btn_backRoot">
                                     <i class="ace-icon fa fa-reply icon-only"></i> 根节点
                                 </button>
                             </dd>
@@ -83,7 +83,7 @@
 
                         <div class="clearfix form-actions">
                             <div class="col-md-offset-3 col-md-9">
-                                <button class="btn btn-info" type="button" onclick="save();">
+                                <button class="btn btn-info" type="button" id="btn_save">
                                     <i class="ace-icon fa fa-floppy-o bigger-110"></i>
                                     保存
                                 </button>
@@ -104,23 +104,25 @@
 
 </div>
 </@layout>
+
 <script type="text/javascript">
 
-    var tree ;
-    $(function () {
+    // 因为子页面要 获取这个 tree的数据； 定义到外面来
+    let tree;
 
+    require(['base', 'wcb-manage-util', 'func-tree'], function (Base, ManageUtil, FuncTree) {
         /**
-        * init org
-        * */
-        tree = initFuncTree( 'treeview' ,'${base}/manage/func/treeData' ,false, function (){
+         * init org
+         * */
+        tree = FuncTree.initFuncTree( 'treeview' ,'${base}/manage/func/treeData' ,false, function (){
 //            console.log(tree.selectedItems()[0].id);
 
             if(!tree.selectedItems()[0]){
                 $('#edit').html('<div class="alert alert-info">'+
-                    '<strong>请选择！</strong>'+
-                    '你总要告诉我你要搞么子噻！'+
-                    '<br>'+
-                '</div>');
+                        '<strong>请选择！</strong>'+
+                        '你总要告诉我你要搞么子噻！'+
+                        '<br>'+
+                        '</div>');
 
                 $('#func_pid').val(0);
                 $('#func_pname').html('根节点');
@@ -135,36 +137,40 @@
             $('#func_pid').val(tree.selectedItems()[0].id);
             $('#func_pname').html(tree.selectedItems()[0].name);
         });
-    })
 
-    function save(){
+        /**
+         * save Fn ...
+         */
+        $('#btn_save').on('click', function(){
 
-        /*if(!$('#func_pid').val()){
-            $('#func_form2_alert').show();
-            $('#func_form2_errorStr').html('');
-        }*/
+            /*if(!$('#func_pid').val()){
+                $('#func_form2_alert').show();
+                $('#func_form2_errorStr').html('');
+            }*/
 
-        $.ajax({
-            url:"${base}/manage/func/save" ,
-            type:'POST',
-            data: $("#func_form2").serialize() ,
-            dataType:'json',
-            success:function( result ){
-                if(result.code == 200){
-                    location.href = '${base}/manage/func';
-                    // 成功
-                }else{
-                    // 失败
-                    $('#func_form2_errorStr').html(result);
-                    $('#func_form2_alert').show();
+            $.ajax({
+                url:"${base}/manage/func/save" ,
+                type:'POST',
+                data: $("#func_form2").serialize() ,
+                dataType:'json',
+                success:function( result ){
+                    if(result.code == 200){
+                        location.href = '${base}/manage/func';
+                        // 成功
+                    }else{
+                        // 失败
+                        $('#func_form2_errorStr').html(result);
+                        $('#func_form2_alert').show();
+                    }
                 }
-            }
+            });
         });
-    }
 
-    function backRoot(){
-        $('#func_pid').val(0);
-        $('#func_pname').html('根节点');
-    }
+        // 找到根节点
+        $('#btn_backRoot').on('click', function (){
+            $('#func_pid').val(0);
+            $('#func_pname').html('根节点');
+        });
 
+    });
 </script>

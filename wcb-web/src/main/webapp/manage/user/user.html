@@ -67,17 +67,7 @@
             $("#table_div").load("${base}/manage/user/list?page=${page}");
         };
 
-        /**
-         * load data
-         */
-        (function (){
-            if(${page!}) loadData();
-        })();
-
-        $('#del-btn').on('click', function (){
-            deleteList();
-        });
-        var deleteList = function (){
+        let deleteList = function (){
             if( $('.item:checkbox').filter(":checked").length < 1 ){
                 ManageUtil.myConfirm("至少选择一条记录！" );
                 return false;
@@ -102,7 +92,17 @@
                 });
             })
         };
-    });
 
+        /**
+         * load data
+         */
+        (function (){
+            if(${page!}) loadData();
+        })();
+
+        $('#del-btn').on('click', function (){
+            deleteList();
+        });
+    });
 
 </script>
