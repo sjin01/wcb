@@ -18,8 +18,8 @@ define(['jquery', 'bs-bootbox', 'css!/css/manage.css'], function ($, BSBootBox) 
         });
 
         // tooltip 初始化
-        $('[data-rel=tooltip]').tooltip({container:'body'});
-        
+        // $('[data-rel=tooltip]').tooltip({container:'body'});
+
     })();
 
     function myConfirm (confirmStr , callback ,btnname1 ,btnname2){

@@ -10,6 +10,10 @@
     <meta name="description" content="" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
 
+    <#--favicon icon-->
+    <#--<link rel="shortcut icon" href="/favicon.ico"/>-->
+    <#--<link rel="bookmark" href="/favicon.ico"/>-->
+
     <!-- ############################　basic css ############################　-->
     <!-- bootstrap & fontawesome -->
     <link rel="stylesheet" href="${base}/css/lib/reset.css" />
@@ -113,6 +117,12 @@
     require(['base'], function () {
         $('#breadcrumbs').load('${base}/manage/common/breadcrumbs?pathname='+window.location.pathname);
         $('#sidebar').load('${base}/manage/common/nav?pathname='+window.location.pathname);
+
+        // init ace 全屏展示/ 展开收起等点击事件
+        ace.widget_boxes($);
+
+        // settings 盒子
+        ace.settings_box($);
     });
 </script>
 

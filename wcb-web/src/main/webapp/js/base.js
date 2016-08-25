@@ -11,6 +11,7 @@ requirejs.config({
 
         'ace': '/plugin/ace/js/ace.min',
         'ace-elements': '/plugin/ace/js/ace-elements.min',
+        'ace-extra':'/plugin/ace/js/ace-extra.min',
 
         'jquery-ui': '/plugin/ace/js/jquery-ui.min',
         'jquery-ui-custom': '/plugin/ace/js/jquery-ui.custom.min',
@@ -84,8 +85,9 @@ requirejs.config({
 	}
 });
 
-var bsAll = ['jquery', 'bs', 'ace', 'ace-elements', 'jquery-ui', 'jquery-ui-custom', 'jquery-ui-touch-punch',
-    'jquery-chosen', 'bs-fuelux-spinner', 'bs-datepicker', 'bs-timepicker', 'bs-moment', 'bs-daterangepicker', 'bs-datetimepicker',
+var bsAll = ['jquery', 'bs', 'ace', 'ace-elements', 'ace-extra',
+    'jquery-ui', 'jquery-ui-custom', 'jquery-ui-touch-punch', 'jquery-chosen',
+    'bs-fuelux-spinner', 'bs-datepicker', 'bs-timepicker', 'bs-moment', 'bs-daterangepicker', 'bs-datetimepicker',
     'bs-colorpicker', 'jquery-knob', 'jquery-autosize', 'jquery-inputlimiter', 'jquery-maskedinput', 'bs-tag', 'jquery-typeahead',
     'bs-fuelux-tree-sample-demo-data', 'bs-fuelux-tree', 'bs-bootbox',
     'wcb-manage-util'];
