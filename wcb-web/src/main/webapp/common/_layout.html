@@ -43,7 +43,7 @@
 
 <body class="no-skin">
 
-<#include "/manage/common/_head.html">
+<#include "/common/_head.html">
 
 <!-- /section:basics/navbar.layout -->
 <div class="main-container" id="main-container">
@@ -64,7 +64,7 @@
 
         <div class="page-content">
 
-            <#include "/manage/common/_settings.html">
+            <#include "/common/_settings.html">
 
             <div class="page-content-area">
                 <div class="row">
@@ -115,8 +115,8 @@
 
 <script type="text/javascript">
     require(['base'], function () {
-        $('#breadcrumbs').load('${base}/manage/common/breadcrumbs?pathname='+window.location.pathname);
-        $('#sidebar').load('${base}/manage/common/nav?pathname='+window.location.pathname);
+        $('#breadcrumbs').load('${base}/common/breadcrumbs?pathname='+window.location.pathname);
+        $('#sidebar').load('${base}/common/nav?pathname='+window.location.pathname);
 
         // init ace 全屏展示/ 展开收起等点击事件
         ace.widget_boxes($);

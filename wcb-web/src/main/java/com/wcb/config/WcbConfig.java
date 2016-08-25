@@ -37,12 +37,11 @@ public class WcbConfig extends BaseConfig {
         super.configRoute(routes);
         // 前台
         routes.add("/", IndexController.class);
+        routes.add("/common", CommonController.class);
 
         // 后台 manage
         routes.add("/manage/login", LoginController.class);
         routes.add("/manage/main", ManageIndexController.class);
-        routes.add("/manage/common", CommonController.class);
-
         routes.add("/manage/user", UsersController.class);
         routes.add("/manage/usergroup" ,UserGroupController.class);
         routes.add("/manage/func", FuncController.class);
