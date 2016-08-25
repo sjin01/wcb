@@ -17,5 +17,5 @@ button, button:active, button:hover{
 }
 
 .modal-header .close{
-    font-size: 24px;
+    font-size: 24px!important;
 }
