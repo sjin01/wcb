@@ -54,7 +54,7 @@
                     data-rel="tooltip" data-original-title="编辑">
                 <i class="ace-icon fa fa-pencil bigger-120"></i>
             </button>
-            <button class="btn btn-xs btn-danger" onclick="del(${ss.id!})"
+            <button class="btn btn-xs btn-danger row-del-btn" data-id="${ss.id!}"
                     data-rel="tooltip" data-original-title="删除">
                 <i class="ace-icon fa fa-trash-o bigger-120"></i>
             </button>
@@ -76,13 +76,17 @@
 <@paginate currentPage = userpage.pageNumber totalPage = userpage.totalPage actionUrl = "${base}/manage/user?page=" />
 
 <script>
-    require(['base'], function () {
-        $('[data-rel=tooltip]').tooltip({container:'body'});
+    require(['base', 'wcb-manage-util'], function (Base, ManageUtil) {
+        // $('[data-rel=tooltip]').tooltip({container:'body'});
+
+        // 绑定 每一行 删除 按钮的点击事件
+        $('.row-del-btn').on('click', function (){
+            var id = $(this).attr('data-id');
+            ManageUtil.myConfirm("你确定删除？" ,function (){
+                location.href='${base}/manage/user/delete/' + id;
+            })
+        })
     });
 
-    function del(id){
-        myConfirm("你确定删除？" ,function (){
-            location.href='${base}/manage/user/delete/' + id;
-        })
-    }
+
 </script>

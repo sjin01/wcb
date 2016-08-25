@@ -60,8 +60,18 @@
 
 <script>
     require(['base', 'wcb-manage-util'], function (Base, ManageUtil) {
+        /**
+         * load data page Fn
+         */
+        let loadData = function (){
+            $("#table_div").load("${base}/manage/user/list?page=${page}");
+        };
+
+        /**
+         * load data
+         */
         (function (){
-            if(${page!}) $("#table_div").load("${base}/manage/user/list?page=${page}");
+            if(${page!}) loadData();
         })();
 
         $('#del-btn').on('click', function (){
@@ -85,7 +95,7 @@
                     dataType:'json',
                     success:function( result ){
                         if(result.code == 200){
-                            $("#table_div").load("${base}/manage/user/list?page=${page}");
+                            loadData();
                             myGritterSuccess('操作成功！');
                         }
                     }

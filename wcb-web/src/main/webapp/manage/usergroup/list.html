@@ -20,11 +20,11 @@
             <div class="widget-toolbar">
 
                 <div class="action-buttons inline">
-                    <a href="javascript:void(0);" onclick="loadAdd();" data-rel="tooltip" data-original-title="添加用户组">
+                    <a href="javascript:void(0);" id="btn-loadAdd" data-rel="tooltip" data-original-title="添加用户组">
                         <i class="fa fa-plus-circle"></i>
                     </a>
 
-                    <a class="red" href="javascript:void(0);" onclick="deleteList();" title="" data-rel="tooltip" data-original-title="批量删除">
+                    <a class="red" href="javascript:void(0);" id="btn-deleteList" title="" data-rel="tooltip" data-original-title="批量删除">
                         <i class="ace-icon fa fa-trash-o"></i>
                     </a>
                 </div>&nbsp;
@@ -70,7 +70,7 @@
                             </td>
                             <td>
                                 <div class="action-buttons">
-                                    <a class="red" href="${base}/manage/usergroup/delete?id=${ss.id!}&cPage=${usergroupdata.pageNumber}"  title=""
+                                    <a class="red row-del-btn" href="javascript:void(0)" title="" data-id="${ss.id!}" data-cPage="${usergroupdata.pageNumber}"
                                        data-rel="tooltip" data-original-title="删除">
                                         <i class="ace-icon fa fa-trash-o bigger-120"></i>
                                     </a>
@@ -93,58 +93,84 @@
 </@layout>
 
 <script>
-    function deleteList(){
-        if( $('.item:checkbox').filter(":checked").length < 1 ){
-            myConfirm("至少选择一条记录！");
-            return false;
-        }
+    require(['base', 'wcb-manage-util'], function (Base, ManageUtil) {
 
-        myConfirm("你确定哈把他删噶？" , function (){
-            var ids = '';
-            $('.item:checkbox').filter(":checked").each(function (){
-                ids += $(this).val() + ',';
+        let deleteList = function (){
+            if( $('.item:checkbox').filter(":checked").length < 1 ){
+                ManageUtil.myConfirm("至少选择一条记录！");
+                return false;
+            }
+
+            ManageUtil.myConfirm("你确定哈把他删噶？" , function (){
+                var ids = '';
+                $('.item:checkbox').filter(":checked").each(function (){
+                    ids += $(this).val() + ',';
+                });
+
+                $.ajax({
+                    url:"${base}/manage/usergroup/deleteList" ,
+                    type:'POST',
+                    data: {'ids':ids } ,
+                    dataType:'json',
+                    success:function( result ){
+                        if(result.code == 200){
+                            location.href = '${base}/manage/usergroup?cPage=${usergroupdata.pageNumber}';
+                        }
+                    }
+                });
             })
+        };
 
+        let deleteOne = function (id, cPage){
+            ManageUtil.myConfirm("你确定删除？" ,function (){
+                location.href = '${base}/manage/usergroup/delete?id=' + id + '&cPage=' + cPage;
+            })
+        };
+
+        let loadAdd = function (){
             $.ajax({
-                url:"${base}/manage/usergroup/deleteList" ,
+                url:"${base}/manage/usergroup/add" ,
                 type:'POST',
-                data: {'ids':ids } ,
-                dataType:'json',
+                dataType:'HTML',
                 success:function( result ){
-                    if(result.code == 200){
-                        location.href = '${base}/manage/usergroup?cPage=${usergroupdata.pageNumber}';
+                    if(result){
+                        bootbox.confirm({
+                            title : '<span style="color:#6fb3e0;">添加用户组</span>',
+                            message: result,
+                            buttons: {
+                                confirm: {
+                                    label: "保存",
+                                    className: "btn-primary btn-xs"
+                                },
+                                cancel: {
+                                    label: "取消",
+                                    className: "btn-xs"
+                                }
+                            },
+                            callback: function(result) {
+                                if(result) $('#usergroupForm').submit();
+                            }
+                        });
                     }
                 }
             });
-        })
-    }
+        };
 
-    function loadAdd(){
-        $.ajax({
-            url:"${base}/manage/usergroup/add" ,
-            type:'POST',
-            dataType:'HTML',
-            success:function( result ){
-                if(result){
-                    bootbox.confirm({
-                        title : '<span style="color:#6fb3e0;">添加用户组</span>',
-                        message: result,
-                        buttons: {
-                            confirm: {
-                                label: "保存",
-                                className: "btn-primary btn-xs"
-                            },
-                            cancel: {
-                                label: "取消",
-                                className: "btn-xs"
-                            }
-                        },
-                        callback: function(result) {
-                            if(result) $('#usergroupForm').submit();
-                        }
-                    });
-                }
-            }
-        });
-    }
+        {
+            $('#btn-deleteList').on('click', function (){
+                deleteList();
+            });
+
+            $('#btn-loadAdd').on('click', function (){
+                loadAdd();
+            });
+
+            $('.row-del-btn').on('click', function (){
+                var id = $(this).attr('data-id');
+                var cPage = $(this).attr('data-cPage');
+                deleteOne(id, cPage);
+            });
+        }
+    });
+
 </script>
