@@ -10,95 +10,97 @@
         </small>
     </h1>
 </div>
-<div class="col-xs-12">
-    <div class="col-xs-3">
-        <div class="widget-box widget-color-blue2">
-            <div class="widget-header">
-                <h5 class="widget-title bigger lighter">
-                    <i class="ace-icon fa fa-table"></i>
-                    菜单树
-                </h5>
-            </div>
-            <div class="widget-body">
-                <div class="widget-main padding-8">
-                    <div id="treeview" class="tree"></div>
+
+<div class="row">
+    <div class="col-xs-12">
+        <div class="col-xs-3">
+            <div class="widget-box widget-color-blue2">
+                <div class="widget-header">
+                    <h5 class="widget-title bigger lighter">
+                        <i class="ace-icon fa fa-table"></i>
+                        菜单树
+                    </h5>
+                </div>
+                <div class="widget-body">
+                    <div class="widget-main padding-8">
+                        <div id="treeview" class="tree"></div>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
 
-    <div class="col-xs-9">
-        <div class="tabbable">
-            <ul class="nav nav-tabs padding-12 " id="myTab4">
-                <li class="active">
-                    <a data-toggle="tab" href="#edit">基本信息</a>
-                </li>
+        <div class="col-xs-9">
+            <div class="tabbable">
+                <ul class="nav nav-tabs padding-12 " id="myTab4">
+                    <li class="active">
+                        <a data-toggle="tab" href="#edit">基本信息</a>
+                    </li>
 
-                <li class="">
-                    <a data-toggle="tab" href="#add" id="tab_add">添加子节点</a>
-                </li>
-            </ul>
+                    <li class="">
+                        <a data-toggle="tab" href="#add" id="tab_add">添加子节点</a>
+                    </li>
+                </ul>
 
-            <div class="tab-content no-border">
-                <div id="edit" class="tab-pane active">
-                    <div class="alert alert-info">
-                    <#--<button type="button" class="close" data-dismiss="alert">
-                        <i class="ace-icon fa fa-times"></i>
-                    </button>-->
-                        <strong>请选择！</strong>
-                        你总要告诉我你要搞么子噻！
-                        <br>
+                <div class="tab-content no-border">
+                    <div id="edit" class="tab-pane active">
+                        <div class="alert alert-info">
+                        <#--<button type="button" class="close" data-dismiss="alert">
+                            <i class="ace-icon fa fa-times"></i>
+                        </button>-->
+                            <strong>请选择！</strong>
+                            你总要告诉我你要搞么子噻！
+                            <br>
+                        </div>
                     </div>
-                </div>
 
-                <div id="add" class="tab-pane">
-                    <form action="" method="post" class="form-horizontal" id="func_form2">
+                    <div id="add" class="tab-pane">
+                        <form action="" method="post" class="form-horizontal" id="func_form2">
 
-                        <input type="hidden" id="func_pid" name="func.pid" value="0"/>
+                            <input type="hidden" id="func_pid" name="func.pid" value="0"/>
 
-                        <dl class="dl-horizontal dl-pt20">
-                            <dt>父级菜单</dt>
-                            <dd>
-                                <span id="func_pname">根节点</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                <button class="btn btn-minier btn-purple" type="button" id="btn_backRoot">
-                                    <i class="ace-icon fa fa-reply icon-only"></i> 根节点
-                                </button>
-                            </dd>
-                        </dl>
+                            <dl class="dl-horizontal dl-pt20">
+                                <dt>父级菜单</dt>
+                                <dd>
+                                    <span id="func_pname">根节点</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    <button class="btn btn-minier btn-purple" type="button" id="btn_backRoot">
+                                        <i class="ace-icon fa fa-reply icon-only"></i> 根节点
+                                    </button>
+                                </dd>
+                            </dl>
 
-                        <#include "_form.html" />
+                            <#include "_form.html" />
 
-                        <div class="alert alert-warning" id="func_form2_alert" style="display: none;">
+                            <div class="alert alert-warning" id="func_form2_alert" style="display: none;">
                             <#--<button type="button" class="close" data-dismiss="alert">
                                 <i class="ace-icon fa fa-times"></i>
                             </button>-->
-                            <strong>你有点宝吧！</strong>
-                            <span id="func_form2_errorStr"></span>
-                            <br>
-                        </div>
-
-                        <div class="clearfix form-actions">
-                            <div class="col-md-offset-3 col-md-9">
-                                <button class="btn btn-info" type="button" id="btn_save">
-                                    <i class="ace-icon fa fa-floppy-o bigger-110"></i>
-                                    保存
-                                </button>
-
-                                &nbsp; &nbsp; &nbsp;
-                                <button class="btn" type="reset">
-                                    <i class="ace-icon fa fa-undo bigger-110"></i>
-                                    重置
-                                </button>
+                                <strong>你有点宝吧！</strong>
+                                <span id="func_form2_errorStr"></span>
+                                <br>
                             </div>
-                        </div>
-                    </form>
-                </div>
 
+                            <div class="clearfix form-actions">
+                                <div class="col-md-offset-3 col-md-9">
+                                    <button class="btn btn-info" type="button" id="btn_save">
+                                        <i class="ace-icon fa fa-floppy-o bigger-110"></i>
+                                        保存
+                                    </button>
+
+                                    &nbsp; &nbsp; &nbsp;
+                                    <button class="btn" type="reset">
+                                        <i class="ace-icon fa fa-undo bigger-110"></i>
+                                        重置
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
             </div>
         </div>
     </div>
-
 </div>
 </@layout>
 
@@ -111,14 +113,14 @@
         /**
          * init org
          * */
-        tree = FuncTree.initFuncTree( 'treeview' ,'${base}/manage/func/treeData' ,false, function (){
+        tree = FuncTree.initFuncTree('treeview', '${base}/manage/func/treeData', false, function () {
 //            console.log(tree.selectedItems()[0].id);
 
-            if(!tree.selectedItems()[0]){
-                $('#edit').html('<div class="alert alert-info">'+
-                        '<strong>请选择！</strong>'+
-                        '你总要告诉我你要搞么子噻！'+
-                        '<br>'+
+            if (!tree.selectedItems()[0]) {
+                $('#edit').html('<div class="alert alert-info">' +
+                        '<strong>请选择！</strong>' +
+                        '你总要告诉我你要搞么子噻！' +
+                        '<br>' +
                         '</div>');
 
                 $('#func_pid').val(0);
@@ -138,7 +140,7 @@
         /**
          * save Fn ...
          */
-        $('#btn_save').on('click', function(){
+        $('#btn_save').on('click', function () {
 
             /*if(!$('#func_pid').val()){
                 $('#func_form2_alert').show();
@@ -146,15 +148,15 @@
             }*/
 
             $.ajax({
-                url:"${base}/manage/func/save" ,
-                type:'POST',
-                data: $("#func_form2").serialize() ,
-                dataType:'json',
-                success:function( result ){
-                    if(result.code == 200){
+                url: "${base}/manage/func/save",
+                type: 'POST',
+                data: $("#func_form2").serialize(),
+                dataType: 'json',
+                success: function (result) {
+                    if (result.code == 200) {
                         location.href = '${base}/manage/func';
                         // 成功
-                    }else{
+                    } else {
                         // 失败
                         $('#func_form2_errorStr').html(result);
                         $('#func_form2_alert').show();
@@ -164,7 +166,7 @@
         });
 
         // 找到根节点
-        $('#btn_backRoot').on('click', function (){
+        $('#btn_backRoot').on('click', function () {
             $('#func_pid').val(0);
             $('#func_pname').html('根节点');
         });

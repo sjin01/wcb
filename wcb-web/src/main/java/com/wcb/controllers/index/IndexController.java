@@ -11,12 +11,15 @@ import com.wcb.interceptor.manage.ManageLoginInterceptor;
  *
  * @author: guanshj QQ: 928990049
  */
-@Before(ManageLoginInterceptor.class)
 public class IndexController extends Controller {
 
     public void index () {
 //        System.out.println(JFinal.me().getServletContext().getAttribute("base"));
 //        setAttr("userpage", User.dao.paginate(1, 10));
         redirect("/manage/main");
+    }
+
+    public void testComponent (){
+        render("test/component.html");
     }
 }

@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta charset="utf-8"/>
+    <title>测试组件</title>
+
+    <meta name="description" content="User login page"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
+
+    <link rel="stylesheet" href="${base}/plugin/ace/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="${base}/plugin/ace/css/ace.min.css" id="main-ace-style"/>
+
+    <!--[if lte IE 9]>
+    <link rel="stylesheet" href="${base}/plugin/ace/css/ace-part2.min.css"/>
+    <![endif]-->
+    <!--[if lte IE 9]>
+    <link rel="stylesheet" href="${base}/plugin/ace/css/ace-ie.min.css"/>
+    <![endif]-->
+    <!--[if lt IE 9]>
+    <script src="${base}/plugin/ace/js/html5shiv.js"></script>
+    <script src="${base}/plugin/ace/js/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+
+<body>
+<div class="main-content">
+    <div class="page-content">
+        <div class="page-content-area">
+            <div class="row">
+                <div class="col-xs-12">
+                    <form method="post" class="form-horizontal">
+                        <div class="form-group" style="margin-top: 200px">
+                            <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 联动切换版面选择器 组件 </label>
+
+                            <div class="col-sm-9">
+                                <input type="text" id="choice-ganged" placeholder="click me" class="col-xs-10 col-sm-5">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- basic scripts -->
+<script src="${base}/js/lib/require.js"></script>
+<script src="${base}/js/base.js"></script>
+
+<script type="text/javascript">
+    require(['base', 'sjin-choice-ganged'], function (Base, ChoiceGanged) {
+        var choice = new ChoiceGanged({
+            target : '#choice-ganged',
+            width: '25%',
+            tabs:[
+                // ** 配置tabs项的时候，请严格按照顺序来
+                {
+                    name:'省份',  // tab 显示的名字
+                    // 必须实现这个 获取数据的 函数  且  return 一个包含数组的对象， 对象中定义 id 和name 对应的属性名
+                    getItems : function (obj){
+                        return {
+                            showField: 'name', // 指定下面的数组中每一个对象中的哪个属性用来显示
+                            data: [{code: 1, name: '北京'}, {code: 2, name: '上海'}, {code: 3, name: '广州'}, {
+                                code: 4,
+                                name: '湖南'
+                            }, {code: 5, name: '香港'}]
+                        };
+                        /*
+                        $.ajax({
+                            url:'',
+                            data:'',
+                            success:function( resultData ){
+                                return {
+                                    showField: '', // 为空 默认 'name'
+                                    data:resultData
+                                }
+                            }
+                        })
+                         */
+                    },
+                    callback : function (obj){console.log(obj);console.log('随便你做些什么事儿');}
+                },
+                {
+                    name: '城市',
+                    getItems: function (obj) {
+                        var arr = [];
+                        if(obj.code ==1){
+                            arr = [{code: 1, name: '北京市'}, {code: 2, name: '县'}];
+                        }else if(obj.code == 2){
+                            arr = [{code: 1, name: '长沙市'}, {code: 2, name: '株洲市'}, {code: 2, name: '湘潭市'}, {code: 2, name: '衡阳市'}];
+                        }
+                        return {
+                            showField: 'name',
+                            data: arr
+                        };
+                    },
+                    callback : function (obj){
+                        console.log(obj);
+                        console.log('我要设置值了');
+                    }
+                },
+                {
+                    name: '区县',
+                    getItems: function (obj) {
+                        var arr = [];
+                        if (obj.code == 1) {
+                            arr = [{code: 1, name: '长沙县'}, {code: 2, name: '长沙县2'}];
+                        } else if (obj.code == 2) {
+                            arr = [{code: 1, name: '长沙县'}, {code: 2, name: '望城县'}, {code: 2, name: '宁乡县'}, {
+                                code: 2,
+                                name: '衡阳市'
+                            }];
+                        }
+
+                        /**
+                         * 用 return 的方式 要求 ajax 是同步的！
+                         * 用下面  setData的方式 可以是 异步的，  写到 ajax success Fn 中即可
+                         */
+                        choice.setCurData({
+                            showField: 'name',
+                            data: arr
+                        })
+
+
+                    },
+                    callback: function (obj) {
+                        console.log(obj);
+                        console.log('我要设置值了2');
+                        choice.close();
+                    }
+                }
+            ]
+        });
+    });
+</script>
+</body>
+</html>

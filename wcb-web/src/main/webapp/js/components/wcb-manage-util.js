@@ -4,7 +4,7 @@
  * 创建日期: 5/4  14:28
  * @author: sjin
  */
-define(['jquery', 'bs-bootbox', 'css!/css/manage.css'], function ($, BSBootBox) {
+define(['jquery', 'bs-bootbox', 'css!/css/components/manage.css'], function ($, BSBootBox) {
 
     (function (){
         // 委托 表头checkbox 全选
