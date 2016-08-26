@@ -1,0 +1,100 @@
+<#include "/common/_layout.html"/>
+<@layout>
+<div class="page-header">
+    <h1>
+        角色管理
+        <small>
+            <i class="ace-icon fa fa-angle-double-right"></i>
+            对系统中角色进行维护，并分配他们能操作的功能菜单权限。
+        </small>
+    </h1>
+</div>
+<div class="row">
+    <div class="col-xs-12">
+
+        <div class="widget-box transparent ui-sortable-handle">
+
+            <div class="widget-header">
+                <h5 class="widget-title"> 角色列表 </h5>
+
+                <div class="widget-toolbar">
+
+                    <div class="action-buttons inline">
+                        <a href="javascript:void(0);" id="btn-loadAdd" data-rel="tooltip" data-original-title="添加角色">
+                            <i class="fa fa-plus-circle"></i>
+                        </a>
+
+                        <a class="red" href="javascript:void(0);" id="btn-deleteList" title="" data-rel="tooltip" data-original-title="批量删除">
+                            <i class="ace-icon fa fa-trash-o"></i>
+                        </a>
+                    </div>&nbsp;
+                    <a href="javascript:void(0);" data-action="fullscreen" class="orange2" title="" data-rel="tooltip" data-original-title="全屏查看">
+                        <i class="ace-icon fa fa-expand"></i>
+                    </a>&nbsp;
+                    <a href="javascript:void(0);" data-action="collapse" title="" class="" data-rel="tooltip" data-original-title="收起">
+                        <i class="ace-icon fa fa-chevron-up"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="widget-body">
+                <div class="widget-main" id="table_div">
+                    <table id="" class="table table-hover">
+                        <thead>
+                        <tr>
+                            <th class="center"  width="10%">
+                                <label class="position-relative">
+                                    <input type="checkbox" class="ace">
+                                    <span class="lbl"></span>
+                                </label>
+                            </th>
+                            <th width="20%">角色名</th>
+                            <th width="15%">状态</th>
+                            <th width="30%">操作</th>
+                        </tr>
+                        </thead>
+
+                        <tbody>
+                          <#list roleData.list as ss>
+                          <tr>
+                              <td class="center">
+                                  <label class="position-relative">
+                                      <input type="checkbox" class="ace item" value="${ss.id!}">
+                                      <span class="lbl"></span>
+                                  </label>
+                              </td>
+                              <td><a href="#">${ss.name!}</a></td>
+                              <td>
+                                <#if ss.status==true>正常
+                                <#elseif ss.status==false>禁用
+                                </#if>
+                              </td>
+                              <td>
+                                  <div class="action-buttons">
+                                      <a class="red row-del-btn" href="javascript:void(0)" title="" data-id="${ss.id!}" data-cPage="${roleData.pageNumber}"
+                                         data-rel="tooltip" data-original-title="删除">
+                                          <i class="ace-icon fa fa-trash-o bigger-120"></i>
+                                      </a>
+                                  </div>
+                              </td>
+
+                          </tr>
+                          </#list>
+
+                        </tbody>
+                    </table>
+
+                  <#include "/common/_paginate-manage.html" />
+                  <@paginate currentPage = roleData.pageNumber totalPage = roleData.totalPage actionUrl = "${base}/manage/role?cPage=" />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</@layout>
+
+<script>
+    require(['base', 'wcb-manage-util', 'bs-bootbox'], function (Base, ManageUtil, bootbox) {
+
+    });
+
+</script>

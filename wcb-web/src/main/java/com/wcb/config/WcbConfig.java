@@ -45,9 +45,11 @@ public class WcbConfig extends BaseConfig {
         // 后台 manage
         routes.add("/manage/main", ManageIndexController.class);
         routes.add("/manage/user", UsersController.class);
-        routes.add("/manage/usergroup" ,UserGroupController.class);
+        routes.add("/manage/role", RoleCtrl.class);
         routes.add("/manage/func", FuncController.class);
+
         routes.add("/manage/dict", DictController.class);
+        routes.add("/manage/usergroup" ,UserGroupController.class);
     }
 
     /**
