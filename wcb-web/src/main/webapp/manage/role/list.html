@@ -95,6 +95,38 @@
 <script>
     require(['base', 'wcb-manage-util', 'bs-bootbox'], function (Base, ManageUtil, bootbox) {
 
+        let loadAdd = function (){
+            $.ajax({
+                url:"${base}/manage/role/add" ,
+                type:'POST',
+                dataType:'HTML',
+                success:function( result ){
+                    if(result){
+                        bootbox.confirm({
+                            title : '<span style="color:#6fb3e0;">添加角色</span>',
+                            message: result,
+                            buttons: {
+                                confirm: {
+                                    label: "保存",
+                                    className: "btn-primary btn-xs"
+                                },
+                                cancel: {
+                                    label: "取消",
+                                    className: "btn-xs"
+                                }
+                            },
+                            callback: function(result) {
+                                if(result) $('#roleForm').submit();
+                            }
+                        });
+                    }
+                }
+            });
+        };
+
+        $('#btn-loadAdd').on('click', function (){
+            loadAdd();
+        });
     });
 
 </script>

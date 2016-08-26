@@ -18,6 +18,10 @@ public class RoleCtrl extends Controller{
         render("list.html");
     }
 
+    public void add(){
+        render("_add.html");
+    }
+
     public void save(){
         Role role = getModel(Role.class);
         role.save();
