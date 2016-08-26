@@ -5,7 +5,9 @@ import com.jfinal.core.JFinal;
 import com.jfinal.render.FreeMarkerRender;
 import com.jfinal.render.ViewType;
 import com.wcb.base.BaseConfig;
+import com.wcb.controllers.common.CommonController;
 import com.wcb.controllers.index.IndexController;
+import com.wcb.controllers.login.LoginController;
 import com.wcb.controllers.manage.*;
 import freemarker.template.TemplateModelException;
 
@@ -38,9 +40,9 @@ public class WcbConfig extends BaseConfig {
         // 前台
         routes.add("/", IndexController.class);
         routes.add("/common", CommonController.class);
+        routes.add("/login", LoginController.class);
 
         // 后台 manage
-        routes.add("/manage/login", LoginController.class);
         routes.add("/manage/main", ManageIndexController.class);
         routes.add("/manage/user", UsersController.class);
         routes.add("/manage/usergroup" ,UserGroupController.class);

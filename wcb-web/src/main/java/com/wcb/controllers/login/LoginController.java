@@ -1,4 +1,4 @@
-package com.wcb.controllers.manage;
+package com.wcb.controllers.login;
 
 import com.jfinal.aop.Before;
 import com.jfinal.core.Controller;
@@ -9,8 +9,7 @@ import com.wcb.validators.manage.LoginValidator;
 /**
  * Description:  登陆页面控制器
  * 创建日期: 4/22  16:25
- *
- * @author: guanshj QQ: 928990049
+ * author: sJin
  */
 public class LoginController extends Controller{
 
@@ -23,14 +22,14 @@ public class LoginController extends Controller{
      * 用户登录
      */
     @Before(LoginValidator.class)
-    public void login (){
+    public void signIn (){
         redirect("/manage/main");  // 重定向到 后台管理 主页
     }
 
     /**
      * 用户 登出
      */
-    public void logout () {
+    public void signOut () {
         setSessionAttr(SysConstant.SESSIONKEY_LOGIN_USER, null);  // 清除Session登陆用户数据
         FreeMarkerRender.getConfiguration().setSharedVariable(SysConstant.SESSIONKEY_LOGIN_USER, null); // 清除Freemarker模板登陆用户数据
         redirect("/manage/main");

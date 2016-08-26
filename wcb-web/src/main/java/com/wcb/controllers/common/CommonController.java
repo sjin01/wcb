@@ -1,4 +1,4 @@
-package com.wcb.controllers.manage;
+package com.wcb.controllers.common;
 
 import com.jfinal.aop.Before;
 import com.jfinal.core.Controller;

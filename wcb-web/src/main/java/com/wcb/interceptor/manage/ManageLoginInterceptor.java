@@ -28,7 +28,7 @@ public class ManageLoginInterceptor implements Interceptor {
         if(user == null){
             // 用户未登陆
             controller.setSessionAttr(SysConstant.SESSIONKEY_MANAGE_ERROR ,"请登陆");
-            controller.redirect("/manage/login");
+            controller.redirect("/login");
             return ;
         }else{
 //            // 不是 管理员， 无法进去后台管理
