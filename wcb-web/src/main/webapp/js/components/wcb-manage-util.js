@@ -210,13 +210,27 @@ define(['jquery', 'bs-bootbox', 'css!/css/components/manage.css'], function ($, 
         } ,1000);
     }
 
+    function httpAjaxPost(url, Fn, dataType){
+        if(!url || !Fn) return false;
+        if(!dataType) dataType = 'JSON';
+        $.ajax({url: url, type: 'POST', dataType: dataType, success: Fn(result)});
+    }
+    function httpAjaxGet(url, Fn, dataType){
+        if(!url || !Fn) return false;
+        if(!dataType) dataType = 'JSON';
+        $.ajax({url: url, type: 'GET', dataType: dataType, success: Fn(result)});
+    }
+
     return {
         myConfirm:myConfirm,
         myConfirmTwo:myConfirmTwo,
         myGritterSuccess:myGritterSuccess,
         myGritterError:myGritterError,
         myFinishAndTurn:myFinishAndTurn,
-        myFinishAndTurnFn:myFinishAndTurnFn
+        myFinishAndTurnFn:myFinishAndTurnFn,
+
+        ajaxPost:httpAjaxPost,
+        ajaxGet:httpAjaxGet
     }
 });
 
