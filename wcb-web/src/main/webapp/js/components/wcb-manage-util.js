@@ -16,10 +16,6 @@ define(['jquery', 'bs-bootbox', 'css!/css/components/manage.css'], function ($, 
                     $(this).closest('tr').toggleClass('selected');
                 });
         });
-
-        // tooltip 初始化
-        // $('[data-rel=tooltip]').tooltip({container:'body'});
-
     })();
 
     function myConfirm (confirmStr , callback ,btnname1 ,btnname2){

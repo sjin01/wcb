@@ -94,6 +94,7 @@
 
 <script>
     require(['base', 'wcb-manage-util', 'bs-bootbox'], function (Base, ManageUtil, bootbox) {
+        $('[data-rel=tooltip]').tooltip({container:'body'});
 
         let loadAdd = function (){
             $.ajax({
