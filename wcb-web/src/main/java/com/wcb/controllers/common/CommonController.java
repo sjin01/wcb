@@ -1,7 +1,7 @@
 package com.wcb.controllers.common;
 
 import com.jfinal.aop.Before;
-import com.jfinal.core.Controller;
+import com.wcb.base.BaseController;
 import com.wcb.interceptor.manage.NodeInterceptor;
 import com.wcb.model.Func;
 
@@ -11,7 +11,7 @@ import com.wcb.model.Func;
  *
  * @author: guanshj QQ: 928990049
  */
-public class CommonController extends Controller{
+public class CommonController extends BaseController {
 
     @Before(NodeInterceptor.class)
     public void nav (){

@@ -4,10 +4,10 @@
 
 <div class="page-header">
     <h1>
-        用户管理
+        操作员管理
         <small>
             <i class="ace-icon fa fa-angle-double-right"></i>
-            Friend or foe ? <#--是敌是友-->
+            对系统操作的人员进行管理
         </small>
     </h1>
 </div>
@@ -75,7 +75,7 @@
                 return false;
             }
 
-            ManageUtil.myConfirm("你确定哈把他删噶？" ,function (){
+            ManageUtil.myConfirm("你确定删除所有选中项？" ,function (){
                 var ids = '';
                 $('.item:checkbox').filter(":checked").each(function (){
                     ids += $(this).val() + ',';

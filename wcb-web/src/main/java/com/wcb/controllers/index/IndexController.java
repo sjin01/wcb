@@ -1,8 +1,6 @@
 package com.wcb.controllers.index;
 
-import com.jfinal.aop.Before;
 import com.jfinal.core.Controller;
-import com.wcb.interceptor.manage.ManageLoginInterceptor;
 
 /**
  * Description: 网站首页

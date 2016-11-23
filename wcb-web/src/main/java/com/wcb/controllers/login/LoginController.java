@@ -1,8 +1,8 @@
 package com.wcb.controllers.login;
 
 import com.jfinal.aop.Before;
-import com.jfinal.core.Controller;
 import com.jfinal.render.FreeMarkerRender;
+import com.wcb.base.BaseController;
 import com.wcb.constant.SysConstant;
 import com.wcb.validators.manage.LoginValidator;
 
@@ -11,7 +11,7 @@ import com.wcb.validators.manage.LoginValidator;
  * 创建日期: 4/22  16:25
  * author: sJin
  */
-public class LoginController extends Controller{
+public class LoginController extends BaseController {
 
     public void index (){
         setAttr(SysConstant.SESSIONKEY_MANAGE_ERROR , getSessionAttr(SysConstant.SESSIONKEY_MANAGE_ERROR));

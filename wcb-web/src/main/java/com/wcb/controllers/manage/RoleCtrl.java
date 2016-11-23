@@ -1,7 +1,7 @@
 package com.wcb.controllers.manage;
 
-import com.jfinal.core.Controller;
 import com.mysql.jdbc.StringUtils;
+import com.wcb.base.BaseController;
 import com.wcb.constant.SysConstant;
 import com.wcb.model.Role;
 
@@ -10,7 +10,7 @@ import com.wcb.model.Role;
  * Author : sJin
  * Date : 2016/8/26
  */
-public class RoleCtrl extends Controller{
+public class RoleCtrl extends BaseController {
 
     public void index (){
         String cPage = getPara("cPage");

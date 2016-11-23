@@ -5,6 +5,8 @@ import com.jfinal.core.JFinal;
 import com.jfinal.render.FreeMarkerRender;
 import com.jfinal.render.ViewType;
 import com.wcb.base.BaseConfig;
+
+import com.wcb.controllers.basicdata.EquipmentController;
 import com.wcb.controllers.common.CommonController;
 import com.wcb.controllers.index.IndexController;
 import com.wcb.controllers.login.LoginController;
@@ -42,12 +44,16 @@ public class WcbConfig extends BaseConfig {
         routes.add("/common", CommonController.class);
         routes.add("/login", LoginController.class);
 
-        // 后台 manage
+        // 系统管理
         routes.add("/manage/main", ManageIndexController.class);
         routes.add("/manage/user", UsersController.class);
         routes.add("/manage/role", RoleCtrl.class);
         routes.add("/manage/func", FuncController.class);
 
+        // 基础数据
+        routes.add("/basicdata/equipment", EquipmentController.class);
+
+        // 暂时没用上的
         routes.add("/manage/dict", DictController.class);
         routes.add("/manage/usergroup" ,UserGroupController.class);
     }

@@ -114,9 +114,9 @@
                 myConfirm("乡里别！从左边选择一砸要删的先咯！");
                 return false;
             }*/
-            ManageUtil.myConfirm("你确定要删除噶咋栏目不咯？不想删就么删咯！冒得人强迫你嘞！删噶就还不得原哒啦~",function (){
+            ManageUtil.myConfirm("你确定要删除该节点？删除之后难以复原，请谨慎操作！",function (){
                 location.href='${base}/manage/func/delete?id='+tree.selectedItems()[0].id;
-            } , "你随我" ,"算哒咯");
+            });
         });
     });
 </script>

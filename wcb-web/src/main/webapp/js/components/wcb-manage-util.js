@@ -22,10 +22,10 @@ define(['jquery', 'bs-bootbox', 'css!/css/components/manage.css'], function ($, 
         if(!callback){
             callback = function (){};
         }
-        if(!btnname1){ btnname1 = '要得咯';}
-        if(!btnname2){ btnname2 = '等哈着';}
+        if(!btnname1){ btnname1 = '确定';}
+        if(!btnname2){ btnname2 = '取消';}
         BSBootBox.confirm({
-            title : '<span style="color:#6fb3e0;">操作提示</span>',
+            title : '操作提示',
             message: confirmStr,
             buttons: {
                 confirm: {
@@ -50,10 +50,10 @@ define(['jquery', 'bs-bootbox', 'css!/css/components/manage.css'], function ($, 
         if(!callmain){
             callmain = function (){};
         }
-        if(!btnname1){ btnname1 = '是滴嘞';}
-        if(!btnname2){ btnname2 = '算哒';}
+        if(!btnname1){ btnname1 = '确定';}
+        if(!btnname2){ btnname2 = '取消';}
         BSBootBox.confirm({
-            title : '<span style="color:#6fb3e0;">操作提示</span>',
+            title : '操作提示',
             message: confirmStr,
             buttons: {
                 confirm: {

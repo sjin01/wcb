@@ -1,8 +1,8 @@
 package com.wcb.controllers.manage;
 
 import com.jfinal.aop.Before;
-import com.jfinal.core.Controller;
 import com.jfinal.render.FreeMarkerRender;
+import com.wcb.base.BaseController;
 import com.wcb.constant.SysConstant;
 import com.wcb.interceptor.manage.ManageLoginInterceptor;
 import freemarker.template.TemplateModelException;
@@ -14,7 +14,7 @@ import freemarker.template.TemplateModelException;
  * @author: guanshj QQ: 928990049
  */
 @Before(ManageLoginInterceptor.class)
-public class ManageIndexController extends Controller {
+public class ManageIndexController extends BaseController {
 
     public void index () throws TemplateModelException {
 //        setAttr( SysConstant.SESSIONKEY_LOGIN_USER , getSessionAttr(SysConstant.SESSIONKEY_LOGIN_USER));

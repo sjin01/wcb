@@ -10,7 +10,7 @@
 /* dl 下面的内容 padding-top 20px */
 .dl-pt20 dt,.dl-pt20 dd{padding-top: 20px;}
 
-.red {color: red}
+
 
 button, button:active, button:hover{
     outline: none!important;
@@ -18,4 +18,14 @@ button, button:active, button:hover{
 
 .modal-header .close{
     font-size: 24px!important;
+}
+
+.modal-header .modal-title{
+    color:#6fb3e0;
+}
+
+.wcb-required:before{
+    content: '*';
+    color: #DD5A43;
+    vertical-align: middle;
 }
