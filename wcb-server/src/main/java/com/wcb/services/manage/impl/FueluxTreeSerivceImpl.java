@@ -24,8 +24,8 @@ public class FueluxTreeSerivceImpl implements FueluxTreeSerivce{
                 "f.id, f.name , f.sort, " +
                 "(select count(id) from t_sys_func where pid = f.id) as childcount " +
                 "FROM t_sys_func f " +
-                "where f.pid = " + pid + " and f.type =1 " +
-                "order by f.sort " +
+                "where f.pid = " + pid + //" and f.type =1 " +
+                " order by f.sort " +
                 ";");
         if(recordList == null || recordList.isEmpty()) return null;
 

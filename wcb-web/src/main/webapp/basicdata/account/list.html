@@ -1,0 +1,157 @@
+<#include "/common/_layout.html"/>
+<@layout>
+
+
+<div class="page-header">
+    <h1>
+        用户登记
+        <small>
+            <i class="ace-icon fa fa-angle-double-right"></i>
+            都有哪些用户在用水
+        </small>
+    </h1>
+</div>
+
+<div class="row">
+    <div class="col-xs-12">
+
+        <div class="widget-box transparent ui-sortable-handle">
+
+            <div class="widget-header">
+                <h5 class="widget-title"> 用户列表 </h5>
+
+                <div class="widget-toolbar">
+
+                    <div class="action-buttons inline">
+                        <a href="javascript:void(0);" id="btn-loadAdd" data-rel="tooltip" data-original-title="登记新用户">
+                            <i class="fa fa-plus-circle"></i>
+                        </a>
+                        <a class="red" href="javascript:void(0);" id="btn-deleteList" title="" data-rel="tooltip" data-original-title="批量删除">
+                            <i class="ace-icon fa fa-trash-o"></i>
+                        </a>
+                    </div>&nbsp;
+                    <a href="javascript:void(0);" data-action="fullscreen" class="orange2" title="" data-rel="tooltip" data-original-title="全屏查看">
+                        <i class="ace-icon fa fa-expand"></i>
+                    </a>&nbsp;
+                    <a href="javascript:void(0);" data-action="collapse" title="" class="" data-rel="tooltip" data-original-title="收起">
+                        <i class="ace-icon fa fa-chevron-up"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="widget-body">
+                <div class="widget-main" id="table_div">
+                    <table id="" class="table table-hover">
+                        <thead>
+                        <tr>
+                            <th class="center"  width="10%">
+                                <label class="position-relative">
+                                    <input type="checkbox" class="ace">
+                                    <span class="lbl"></span>
+                                </label>
+                            </th>
+                            <th width="20%">户主姓名</th>
+                            <th width="">街道</th>
+                            <th width="">地址</th>
+                            <th width="10%">操作</th>
+                        </tr>
+                        </thead>
+
+                        <tbody>
+                            <#list pageData.list as item>
+                            <tr>
+                                <td class="center">
+                                    <label class="position-relative">
+                                        <input type="checkbox" class="ace item" value="${item.id!}">
+                                        <span class="lbl"></span>
+                                    </label>
+                                </td>
+                                <td>${item.name!}</td>
+                                <td>${item.street!}</td>
+                                <td>${item.addr!}</td>
+
+                                <td>
+                                    <div class="action-buttons">
+                                        <a class="blue row-edit-btn" href="javascript:void(0)" title="" data-id="${item.id!}" data-cPage="${pageData.pageNumber}"
+                                           data-rel="tooltip" data-original-title="编辑">
+                                            <i class="ace-icon fa fa-pencil bigger-120"></i>
+                                        </a>
+
+                                        <a class="red row-del-btn" href="javascript:void(0)" title="" data-id="${item.id!}" data-cPage="${pageData.pageNumber}"
+                                           data-rel="tooltip" data-original-title="删除">
+                                            <i class="ace-icon fa fa-trash-o bigger-120"></i>
+                                        </a>
+                                    </div>
+                                </td>
+
+                            </tr>
+                            </#list>
+
+                        </tbody>
+                    </table>
+
+                    <#include "/common/_paginate-manage.html" />
+                    <@paginate currentPage = pageData.pageNumber totalPage = pageData.totalPage actionUrl = "${base}/basicdata/account?cPage=" />
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+</@layout>
+
+<script>
+    require(['base', 'wcb-manage-util', 'bs-bootbox'], function (Base, ManageUtil, bootbox) {
+        $('[data-rel=tooltip]').tooltip({container:'body'});
+
+        let loadForm = function (id){
+            location.href = '${base}/basicdata/account/add';
+        };
+
+        let deleteList = function (){
+            if( $('.item:checkbox').filter(":checked").length < 1 ){
+                ManageUtil.myConfirm("至少选择一条记录！");
+                return false;
+            }
+
+            ManageUtil.myConfirm("你确定哈把他删噶？" , function (){
+                var ids = '';
+                $('.item:checkbox').filter(":checked").each(function (){
+                    ids += $(this).val() + ',';
+                });
+
+                location.href = '${base}/basicdata/account/deleteList?ids=' + ids + '&cPage=' + '${pageData.pageNumber}';
+            })
+        };
+
+        let deleteOne = function (id, cPage){
+            ManageUtil.myConfirm("你确定删除？" ,function (){
+                location.href = '${base}/basicdata/account/delete?id=' + id + '&cPage=' + cPage;
+            })
+        };
+
+        // 批量删除
+        $('#btn-deleteList').on('click', function (){
+            deleteList();
+        });
+
+        // 行内点击一个 删除
+        $('.row-del-btn').on('click', function (){
+            var id = $(this).attr('data-id');
+            var cPage = $(this).attr('data-cPage');
+            deleteOne(id, cPage);
+        });
+
+        // 加载 add modal
+        $('#btn-loadAdd').on('click', function (){
+            loadForm();
+        });
+
+        // 行内点击一个 编辑
+        $('.row-edit-btn').on('click', function (){
+            var id = $(this).attr('data-id');
+            loadForm(id);
+        });
+
+    });
+</script>

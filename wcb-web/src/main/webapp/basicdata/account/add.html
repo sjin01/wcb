@@ -1,0 +1,27 @@
+<#include "/common/_layout.html"/>
+<@layout>
+
+
+<div class="page-header">
+    <h1>
+        登记新用户
+    </h1>
+</div>
+
+<div class="row">
+    <div class="col-xs-12">
+        <form action="${base}/basicdata/account/save" method="post" class="form-horizontal" id="accountForm">
+          <#include "_form.html" />
+        </form>
+    </div>
+</div>
+
+</@layout>
+
+<script>
+    require(['base', 'wcb-manage-util', 'bs-bootbox'], function (Base, ManageUtil, bootbox) {
+        $('[data-rel=tooltip]').tooltip({container:'body'});
+
+
+    });
+</script>

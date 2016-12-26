@@ -10,12 +10,16 @@
         </li>
         <#--<li class="active">后台管理</li>-->
 
-        <#if funcpid??>
+        <#--<#if funcpid??>
             <li> <span style="color: rgb(76, 143, 189);">${(funcp.name)!}</span> </li>
         </#if>
         <#if funccid??>
             <li> <span style="color: rgb(76, 143, 189);">${(funcc.name)!}</span> </li>
-        </#if>
+        </#if>-->
+
+        <#list nodeList as item>
+            <li><span style="color: rgb(76, 143, 189);">${(item.name)!}</span></li>
+        </#list>
 
     </ul><!-- /.breadcrumb -->
 <#--</div>-->

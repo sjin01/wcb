@@ -6,6 +6,7 @@ import com.jfinal.render.FreeMarkerRender;
 import com.jfinal.render.ViewType;
 import com.wcb.base.BaseConfig;
 
+import com.wcb.controllers.basicdata.AccountController;
 import com.wcb.controllers.basicdata.EquipmentController;
 import com.wcb.controllers.common.CommonController;
 import com.wcb.controllers.index.IndexController;
@@ -52,6 +53,7 @@ public class WcbConfig extends BaseConfig {
 
         // 基础数据
         routes.add("/basicdata/equipment", EquipmentController.class);
+        routes.add("/basicdata/account", AccountController.class);
 
         // 暂时没用上的
         routes.add("/manage/dict", DictController.class);
