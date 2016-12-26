@@ -42,6 +42,7 @@ create table t_account
    id                   int(11) not null auto_increment,
    code                 varchar(32),
    name                 varchar(32),
+   tel                  varchar(32),
    addr                 varchar(512),
    province             int(11),
    city                 int(11),
