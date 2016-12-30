@@ -35,3 +35,13 @@ button, button:active, button:hover{
     color: #DD5A43;
     vertical-align: middle;
 }
+
+.text-left{
+    text-align: left!important;
+}
+.text-right{
+    text-align: right!important;
+}
+.text-center{
+    text-align: center!important;
+}

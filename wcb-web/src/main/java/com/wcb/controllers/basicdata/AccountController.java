@@ -25,13 +25,13 @@ public class AccountController extends BaseController {
     }
     public void edit(){
         Integer id = getParaToInt("id");
-        setAttr("item", Account.dao.findById(id));
+        setAttr("account", Account.dao.findById(id));
         render("_edit.html");
     }
 
     public void save(){
-        Account item = getModel(Account.class);
-        item.save();
+        Account account = getModel(Account.class);
+        account.save();
         redirect("/basicdata/account");
     }
 }

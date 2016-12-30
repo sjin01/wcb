@@ -1,77 +1,110 @@
 <fieldset class="solid">
 
-    <input type="hidden" name="item.id" value="${(item.id)!}" />
+    <input type="hidden" name="account.id" value="${(account.id)!}" />
 
     <div class="form-group">
         <label class="col-sm-3 control-label no-padding-right wcb-required"> 户主姓名 </label>
         <div class="col-sm-9">
-            <input type="text" name="item.name" placeholder="请输入户主姓名" class="col-sm-5" value="${(item.name)!}" />
+            <div class="clearfix">
+                <input type="text" name="account.name" placeholder="请输入户主姓名" class="col-sm-5" value="${(account.name)!}" />
+            </div>
         </div>
     </div>
 
     <div class="form-group">
         <label class="col-sm-3 control-label no-padding-right wcb-required"> 联系电话 </label>
         <div class="col-sm-9">
-            <input type="text" name="item.tel" placeholder="请输入联系电话" class="col-sm-5" value="${(item.tel)!}" />
+            <div class="clearfix">
+                <input type="text" name="account.tel" placeholder="请输入联系电话" class="col-sm-5" value="${(account.tel)!}" />
+            </div>
         </div>
     </div>
 
     <div class="form-group">
         <label class="col-sm-3 control-label no-padding-right wcb-required"> 卡号 </label>
         <div class="col-sm-9">
-            <input type="text" name="item.card" placeholder="请输入卡号" class="col-sm-5" value="${(item.card)!}" />
+            <div class="clearfix">
+                <input type="text" name="account.card" placeholder="请输入卡号" class="col-sm-5" value="${(account.card)!}" />
+            </div>
         </div>
     </div>
 
     <div class="form-group">
         <label class="col-sm-3 control-label no-padding-right"> 设备 </label>
         <div class="col-sm-9">
-            <input type="text" name="item.equipmentId" placeholder="请选择设备" class="col-sm-5" value="${(item.equipmentId)!}" />
+            <div class="clearfix">
+                <input type="text" name="equipmentId" placeholder="请选择设备" class="col-sm-5" value="${(equipmentId)!}" />
+            </div>
         </div>
     </div>
 
     <div class="form-group">
-        <label class="col-sm-3 control-label no-padding-right"> 地区 </label>
+        <label class="col-sm-3 control-label no-padding-right wcb-required"> 地区 </label>
         <div class="col-sm-9">
-            <input type="hidden" id="hidden_province" name="item.province"/>
-            <input type="hidden" id="hidden_province_name" name=""/>
-            <input type="hidden" id="hidden_city" name="item.city"/>
-            <input type="hidden" id="hidden_city_name" name=""/>
-            <input type="hidden" id="hidden_area" name="item.area"/>
-            <input type="text" id="provCityAreaStreet-choice" name="" placeholder="请选择" class="col-sm-5" value="" readonly="readonly" />
+            <div class="clearfix">
+                <input type="hidden" id="hidden_province" name="account.province"/>
+                <input type="hidden" id="hidden_city" name="account.city"/>
+                <input type="hidden" id="hidden_area" name="account.area"/>
+                <input type="text" id="provCityAreaStreet-choice" name="" placeholder="请选择" class="col-sm-5" value="" readonly="readonly" />
+            </div>
         </div>
     </div>
 
     <div class="form-group">
-        <label class="col-sm-3 control-label no-padding-right"> 街道 </label>
+        <label class="col-sm-3 control-label no-padding-right wcb-required"> 街道 </label>
         <div class="col-sm-9">
-            <input type="text" name="item.street" placeholder="请选择街道" class="col-sm-5" value="${(item.street)!}" />
+            <div class="col-sm-5 no-padding clearfix">
+                <select name="account.street" id="select_street" class="col-sm-5 form-control">
+                    <option value="">请选择地区</option>
+                </select>
+            </div>
         </div>
     </div>
 
     <div class="form-group">
-        <label class="col-sm-3 control-label no-padding-right"> 详细地址 </label>
+        <label class="col-sm-3 control-label no-padding-right wcb-required"> 详细地址 </label>
         <div class="col-sm-9">
-            <input type="text" name="item.addr" placeholder="" class="col-sm-5" value="${(item.addr)!}" />
+            <div class="clearfix">
+                <input type="text" name="account.communityname" placeholder="" class="col-sm-3" value="${(account.communityname)!}" />
+                <label class="col-sm-1 control-label text-left">小区</label>
+                <input type="text" name="account.ridgepole" placeholder="" class="col-sm-2" value="${(account.ridgepole)!}" />
+                <label class="col-sm-1 control-label text-left">栋</label>
+                <input type="text" name="account.household" placeholder="" class="col-sm-2" value="${(account.household)!}" />
+                <label class="col-sm-1 control-label text-left">户</label>
+            </div>
         </div>
     </div>
 
     <div class="form-group">
-        <label class="col-sm-3 control-label no-padding-right"> 小区 </label>
+        <label class="col-sm-3 control-label no-padding-right"></label>
         <div class="col-sm-9">
-            <input type="text" name="item.communityName" placeholder="" class="col-sm-3" value="${(item.communityName)!}" />
-            <span class="col-sm-1">小区</span>
-            <input type="text" name="item.ridgepole" placeholder="" class="col-sm-2" value="${(item.ridgepole)!}" />
-            <span class="col-sm-1">栋</span>
-            <input type="text" name="item.household" placeholder="" class="col-sm-2" value="${(item.household)!}" />
-            <span class="col-sm-1">户</span>
+            <#--<input type="text" name="account.addr" placeholder="" class="col-sm-5" value="${(account.addr)!}" />-->
+            <div class="col-sm-5 no-padding clearfix">
+                <textarea class="form-control " name="account.addr" id="textarea_addr"></textarea>
+            </div>
         </div>
     </div>
 
     <div class="form-group">
         <label class="col-sm-3 control-label no-padding-right"> 备注 </label>
         <div class="col-sm-9">
-            <input type="text" name="item.note" placeholder="" class="col-sm-5" value="${(item.note)!}" />
+            <div class="clearfix">
+                <input type="text" name="account.note" placeholder="" class="col-sm-5" value="${(account.note)!}" />
+            </div>
+        </div>
+    </div>
+
+    <div class="clearfix form-actions">
+        <div class="col-md-offset-3 col-md-9">
+            <button class="btn btn-info" type="submit">
+                <i class="ace-icon fa fa-check bigger-110"></i>
+                保存
+            </button>
+            &nbsp; &nbsp; &nbsp;
+            <button class="btn" type="reset">
+                <i class="ace-icon fa fa-undo bigger-110"></i>
+                重置
+            </button>
         </div>
     </div>
 
@@ -82,22 +115,23 @@
 <script>
     require(['base', 'sjin-choice-ganged'], function (Base, ChoiceGanged) {
 
+        /**
+         * init 地区选择器
+         */
+        var prov = null, city = null;
         var choice = new ChoiceGanged({
             target: '#provCityAreaStreet-choice',
             width: 400,
             tabs: [
-                // ** 配置tabs项的时候，请严格按照顺序来
                 {
-                    name: '省份',  // tab 显示的名字
-                    // 必须实现这个 获取数据的 函数  且  return 一个包含数组的对象， 对象中定义 id 和name 对应的属性名
+                    name: '省份',
                     getItems: function (obj) {
                         $.ajax({
-                            url:"${base}/common/getProv" ,
-                            // data: {id:id},
+                            url: "${base}/common/getProv",
                             type: 'POST',
-                            dataType:'JSON',
-                            success:function( result ){
-                                if(result.code == 200){
+                            dataType: 'JSON',
+                            success: function (result) {
+                                if (result.code == 200) {
                                     choice.setCurData({
                                         showField: 'name',
                                         data: result.data
@@ -107,20 +141,18 @@
                         });
                     },
                     callback: function (obj) {
-                        $('#hidden_province').val(obj.code);
-                        $('#hidden_province_name').val(obj.name);
-
+                        prov = obj;
                     }
                 },
                 {
                     name: '城市',
                     getItems: function (obj) {
                         $.ajax({
-                            url:"${base}/common/getCity/" + obj.code ,
+                            url: "${base}/common/getCity/" + obj.code,
                             type: 'POST',
-                            dataType:'JSON',
-                            success:function( result ){
-                                if(result.code == 200){
+                            dataType: 'JSON',
+                            success: function (result) {
+                                if (result.code == 200) {
                                     choice.setCurData({
                                         showField: 'name',
                                         data: result.data
@@ -130,19 +162,18 @@
                         });
                     },
                     callback: function (obj) {
-                        $('#hidden_city').val(obj.code);
-                        $('#hidden_city_name').val(obj.name);
+                        city = obj;
                     }
                 },
                 {
                     name: '区县',
                     getItems: function (obj) {
                         $.ajax({
-                            url:"${base}/common/getArea/" + obj.code ,
+                            url: "${base}/common/getArea/" + obj.code,
                             type: 'POST',
-                            dataType:'JSON',
-                            success:function( result ){
-                                if(result.code == 200){
+                            dataType: 'JSON',
+                            success: function (result) {
+                                if (result.code == 200) {
                                     choice.setCurData({
                                         showField: 'name',
                                         data: result.data
@@ -152,14 +183,39 @@
                         });
                     },
                     callback: function (obj) {
+                        $('#hidden_province').val(prov.code);
+                        $('#hidden_city').val(city.code);
                         $('#hidden_area').val(obj.code);
-                        var provName = $('#hidden_province_name').val();
-                        var cityName = $('#hidden_city_name').val();
-                        $('#provCityAreaStreet-choice').val(provName + ' ' + cityName + ' ' + obj.name);
+                        $('#provCityAreaStreet-choice').val(prov.name + ' ' + city.name + ' ' + obj.name);
+
+                        loadSelectStreet(obj.code);
                         choice.close();
                     }
                 }
             ]
         });
+
+        /**
+         * load 街道 select数据
+         */
+        var loadSelectStreet = function (areaId) {
+            if (areaId) {
+                $.ajax({
+                    url: "${base}/common/getStreet/" + areaId,
+                    type: 'POST',
+                    dataType: 'JSON',
+                    success: function (result) {
+                        if (result.code == 200) {
+                            var optionHtml = '<option value="">请选择</option>';
+                            for (var i = 0; i < result.data.length; i++) {
+                                optionHtml += '<option value="'+result.data[i].code+'">'+result.data[i].name+'</option>';
+                            }
+                            $('#select_street').html(optionHtml);
+                        }
+                    }
+                });
+            }
+        };
+
     });
 </script>

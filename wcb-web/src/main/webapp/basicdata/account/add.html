@@ -19,9 +19,24 @@
 </@layout>
 
 <script>
-    require(['base', 'wcb-manage-util', 'bs-bootbox'], function (Base, ManageUtil, bootbox) {
+    require(['base', 'wcb-manage-util', 'bs-bootbox', 'validate'], function (Base, ManageUtil, bootbox) {
         $('[data-rel=tooltip]').tooltip({container:'body'});
 
-
+        $('#accountForm').validate({
+            errorElement: 'div',
+            errorClass: 'help-block',
+            focusInvalid: false,
+            ignore: "",
+            rules: {
+                'account.name':{
+                    required: true
+                }
+            },
+            messages: {
+                'account.name': {
+                    required: "请输入户主姓名"
+                }
+            }
+        });
     });
 </script>

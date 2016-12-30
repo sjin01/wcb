@@ -51,6 +51,10 @@ requirejs.config({
         'sjin-choice-ganged':'components/sjin-choice-ganged',
         'sjin-ui': 'components/sjin-ui',
 
+        'jquery-validate-min':'validate/jquery.validate.min',
+        'jquery-validate-message':'validate/messages_zh',
+        'validate':'validate/wcb-validate',
+
         // 依赖load css file (一般组件用这个来做，整个页面的 css 还是不要这么做为好，页面容易乱弹)
         'cssMin':'css.min'
 	},
