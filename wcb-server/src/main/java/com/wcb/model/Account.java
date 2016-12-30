@@ -17,7 +17,12 @@ public class Account extends BaseAccount<Account> {
 	 * 分页
 	 */
 	public Page<Account> paginate(int pageNumber, int pageSize) {
-		return paginate(pageNumber, pageSize, "select * " , " from t_account order by id desc");
+		return paginate(pageNumber, pageSize, " select t.*, concat(p.name, c.name, a.name) as areaName " ,
+				" from t_account t " +
+						" left join t_prov_city_area_street p on p.code = t.province " +
+						" left join t_prov_city_area_street c on c.code = t.city " +
+						" left join t_prov_city_area_street a on a.code = t.area " +
+						" order by id desc ");
 	}
 
 	/**
