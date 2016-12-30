@@ -6,6 +6,9 @@ import com.wcb.base.BaseController;
 import com.wcb.constant.SysConstant;
 import com.wcb.interceptor.manage.ManageLoginInterceptor;
 import com.wcb.model.Account;
+import com.wcb.model.AccountEquipment;
+
+import java.util.Date;
 
 /**
  * 用户登记
@@ -30,8 +33,18 @@ public class AccountController extends BaseController {
     }
 
     public void save(){
+        // 账户 表
         Account account = getModel(Account.class);
+        account.setSignindate(new Date());
         account.save();
+
+        // 账户 设备关系表
+        AccountEquipment ae = new AccountEquipment();
+        ae.setAccountid(account.getId());
+        ae.setEquipmentid(getParaToInt("equipmentid"));
+        ae.setCreatedate(new Date());
+        ae.save();
+
         redirect("/basicdata/account");
     }
 }

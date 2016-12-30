@@ -52,4 +52,8 @@ public class EquipmentController extends BaseController {
         Equipment.dao.deleteList(idsStr);
         redirect("/basicdata/equipment?cPage=" + getPara("cPage"));
     }
+
+    public void getEquipment (){
+        renderJson(getSuccessfulResultMap(Equipment.dao.getEquipmentAll()));
+    }
 }

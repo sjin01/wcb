@@ -30,12 +30,26 @@
             rules: {
                 'account.name':{
                     required: true
-                }
+                },
+                'account.tel':{ required: true },
+                'account.card':{ required: true },
+                // 'provCityAreaStreetChoice':{ required: true },
+                'account.street':{ required: true },
+                'account.communityname':{ required: true }
+                /*'account.ridgepole':{ required: true },
+                'account.household':{ required: true }*/
             },
             messages: {
                 'account.name': {
                     required: "请输入户主姓名"
-                }
+                },
+                'account.tel':{ required: "请输入联系电话" },
+                'account.card':{ required: "请输入卡号" },
+                // 'provCityAreaStreetChoice':{ required: "请选择地区" },
+                'account.street':{ required: "请选择街道" },
+                'account.communityname':{ required: "请输入详细地址" }
+                /*'account.ridgepole':{ required: "请输入详细地址" },
+                'account.household':{ required: "请输入详细地址" }*/
             }
         });
     });

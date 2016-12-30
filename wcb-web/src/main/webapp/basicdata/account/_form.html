@@ -33,7 +33,9 @@
         <label class="col-sm-3 control-label no-padding-right"> 设备 </label>
         <div class="col-sm-9">
             <div class="clearfix">
-                <input type="text" name="equipmentid" placeholder="请选择设备" class="col-sm-5" value="${(equipmentid)!}" />
+                <select name="equipmentid" id="select_equipment" class="col-sm-5 form-control">
+                    <option value="">请选择设备</option>
+                </select>
             </div>
         </div>
     </div>
@@ -45,7 +47,7 @@
                 <input type="hidden" id="hidden_province" name="account.province"/>
                 <input type="hidden" id="hidden_city" name="account.city"/>
                 <input type="hidden" id="hidden_area" name="account.area"/>
-                <input type="text" id="provCityAreaStreet-choice" name="" placeholder="请选择" class="col-sm-5" value="" readonly="readonly" />
+                <input type="text" id="provCityAreaStreet-choice" name="provCityAreaStreetChoice" placeholder="请选择" class="col-sm-5" value="" readonly="readonly" />
             </div>
         </div>
     </div>
@@ -217,5 +219,24 @@
             }
         };
 
+        /**
+         * load 设备 select数据
+         */
+        (function (){
+            $.ajax({
+                url: "${base}/basicdata/equipment/getEquipment",
+                type: 'POST',
+                dataType: 'JSON',
+                success: function (result) {
+                    if (result.code == 200) {
+                        var optionHtml = '<option value="">请选择</option>';
+                        for (var i = 0; i < result.data.length; i++) {
+                            optionHtml += '<option value="'+result.data[i].id+'">'+result.data[i].name+'</option>';
+                        }
+                        $('#select_equipment').html(optionHtml);
+                    }
+                }
+            });
+        })()
     });
 </script>
