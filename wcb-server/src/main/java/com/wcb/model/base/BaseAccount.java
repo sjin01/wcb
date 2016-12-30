@@ -33,6 +33,14 @@ public abstract class BaseAccount<M extends BaseAccount<M>> extends Model<M> imp
 		return get("name");
 	}
 
+	public void setTel(java.lang.String tel) {
+		set("tel", tel);
+	}
+
+	public java.lang.String getTel() {
+		return get("tel");
+	}
+
 	public void setAddr(java.lang.String addr) {
 		set("addr", addr);
 	}
@@ -129,12 +137,12 @@ public abstract class BaseAccount<M extends BaseAccount<M>> extends Model<M> imp
 		return get("distid");
 	}
 
-	public void setSigninDate(java.util.Date signinDate) {
-		set("signinDate", signinDate);
+	public void setSignindate(java.util.Date signindate) {
+		set("signindate", signindate);
 	}
 
-	public java.util.Date getSigninDate() {
-		return get("signinDate");
+	public java.util.Date getSignindate() {
+		return get("signindate");
 	}
 
 	public void setStatus(java.lang.Integer status) {

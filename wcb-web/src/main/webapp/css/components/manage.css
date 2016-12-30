@@ -1,4 +1,10 @@
+.bg-white{
+    background-color: white!important;
 
+}
+.bg-white input[readonly]{
+    background-color: white!important;
+}
 .mt20{ margin-top: 20px;}
 .ml10{ margin-left: 10px;}
 .mr5{margin-right: 5px;}
