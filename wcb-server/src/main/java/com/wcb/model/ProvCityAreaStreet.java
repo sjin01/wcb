@@ -17,6 +17,15 @@ public class ProvCityAreaStreet extends BaseProvCityAreaStreet<ProvCityAreaStree
 	private final Integer AREA_LEVEL = 3;
 	private final Integer STREET_LEVEL = 4;
 
+	public ProvCityAreaStreet getByCode(String code) {
+		List<ProvCityAreaStreet> list = dao.find(" select * from t_prov_city_area_street where code = ? ", code);
+		if (list != null && !list.isEmpty()) {
+			return list.get(0);
+		} else {
+			return null;
+		}
+	}
+
 	/**
 	 * 获得所有省份
 	 * @return

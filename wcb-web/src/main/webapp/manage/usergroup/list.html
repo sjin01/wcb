@@ -105,7 +105,7 @@
                 return false;
             }
 
-            ManageUtil.myConfirm("你确定哈把他删噶？" , function (){
+            ManageUtil.myConfirm("你确定要删除选中的记录？" , function (){
                 var ids = '';
                 $('.item:checkbox').filter(":checked").each(function (){
                     ids += $(this).val() + ',';

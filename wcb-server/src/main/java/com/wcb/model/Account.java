@@ -1,6 +1,8 @@
 package com.wcb.model;
 
+import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Page;
+import com.mysql.jdbc.StringUtils;
 import com.wcb.model.base.BaseAccount;
 
 /**
@@ -16,5 +18,30 @@ public class Account extends BaseAccount<Account> {
 	 */
 	public Page<Account> paginate(int pageNumber, int pageSize) {
 		return paginate(pageNumber, pageSize, "select * " , " from t_account order by id desc");
+	}
+
+	/**
+	 * 批量删除 sql
+	 * @param ids
+	 */
+	public void deleteList(String ids){
+		if(!StringUtils.isNullOrEmpty(ids)){
+			StringBuilder sqlsb = new StringBuilder();
+			sqlsb.append("delete from t_account where id in ( ");
+			sqlsb.append(ids);
+			sqlsb.append(" -1) ");
+			Db.update(sqlsb.toString());
+		}
+	}
+
+	/**
+	 * 地区展示 字段
+	 */
+	private String provCityAreaStreetChoice;
+	public String getProvCityAreaStreetChoice() {
+		return provCityAreaStreetChoice;
+	}
+	public void setProvCityAreaStreetChoice(String provCityAreaStreetChoice) {
+		this.provCityAreaStreetChoice = provCityAreaStreetChoice;
 	}
 }

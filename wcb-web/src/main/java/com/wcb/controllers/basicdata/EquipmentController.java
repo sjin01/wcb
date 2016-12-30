@@ -53,6 +53,9 @@ public class EquipmentController extends BaseController {
         redirect("/basicdata/equipment?cPage=" + getPara("cPage"));
     }
 
+    /**
+     * 获取 设备list ，常用于 select options
+     */
     public void getEquipment (){
         renderJson(getSuccessfulResultMap(Equipment.dao.getEquipmentAll()));
     }

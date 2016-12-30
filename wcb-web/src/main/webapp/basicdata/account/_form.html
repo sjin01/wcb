@@ -44,10 +44,10 @@
         <label class="col-sm-3 control-label no-padding-right wcb-required"> 地区 </label>
         <div class="col-sm-9">
             <div class="clearfix">
-                <input type="hidden" id="hidden_province" name="account.province"/>
-                <input type="hidden" id="hidden_city" name="account.city"/>
-                <input type="hidden" id="hidden_area" name="account.area"/>
-                <input type="text" id="provCityAreaStreet-choice" name="provCityAreaStreetChoice" placeholder="请选择" class="col-sm-5" value="" readonly="readonly" />
+                <input type="hidden" id="hidden_province" name="account.province" value="${(account.province)!}"/>
+                <input type="hidden" id="hidden_city" name="account.city" value="${(account.city)!}"/>
+                <input type="hidden" id="hidden_area" name="account.area" value="${(account.area)!}"/>
+                <input type="text" id="provCityAreaStreet-choice" name="provCityAreaStreetChoice" placeholder="请选择" class="col-sm-5" value="${(account.provCityAreaStreetChoice)!}" readonly="readonly" />
             </div>
         </div>
     </div>
@@ -73,16 +73,6 @@
                 <label class="col-sm-1 control-label text-left">栋</label>
                 <input type="text" name="account.household" placeholder="" class="col-sm-2" value="${(account.household)!}" />
                 <label class="col-sm-1 control-label text-left">户</label>
-            </div>
-        </div>
-    </div>
-
-    <div class="form-group">
-        <label class="col-sm-3 control-label no-padding-right"></label>
-        <div class="col-sm-9">
-            <#--<input type="text" name="account.addr" placeholder="" class="col-sm-5" value="${(account.addr)!}" />-->
-            <div class="col-sm-5 no-padding clearfix">
-                <textarea class="form-control " name="account.addr" id="textarea_addr"></textarea>
             </div>
         </div>
     </div>
@@ -200,7 +190,7 @@
         /**
          * load 街道 select数据
          */
-        var loadSelectStreet = function (areaId) {
+        var loadSelectStreet = function (areaId, streetId) {
             if (areaId) {
                 $.ajax({
                     url: "${base}/common/getStreet/" + areaId,
@@ -213,6 +203,10 @@
                                 optionHtml += '<option value="'+result.data[i].code+'">'+result.data[i].name+'</option>';
                             }
                             $('#select_street').html(optionHtml);
+
+                            if(streetId){
+                                $('#select_street').val(streetId);
+                            }
                         }
                     }
                 });
@@ -237,6 +231,11 @@
                     }
                 }
             });
-        })()
+        })();
+
+
+        var areaId = "${account.area}";
+        var streetId = "${account.street}";
+        if(areaId) loadSelectStreet(areaId, streetId);
     });
 </script>

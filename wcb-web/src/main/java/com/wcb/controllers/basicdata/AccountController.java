@@ -7,6 +7,7 @@ import com.wcb.constant.SysConstant;
 import com.wcb.interceptor.manage.ManageLoginInterceptor;
 import com.wcb.model.Account;
 import com.wcb.model.AccountEquipment;
+import com.wcb.model.ProvCityAreaStreet;
 
 import java.util.Date;
 
@@ -17,25 +18,36 @@ import java.util.Date;
 @Before(ManageLoginInterceptor.class)
 public class AccountController extends BaseController {
 
-    public void index () {
+    public void index() {
         String cPage = getPara("cPage");
         setAttr("pageData", Account.dao.paginate(StringUtils.isNullOrEmpty(cPage) ? 1 : Integer.valueOf(cPage), SysConstant.MANAGE_PAGESIZE));
         render("list.html");
     }
 
-    public void add(){
+    public void add() {
         render("add.html");
     }
-    public void edit(){
-        Integer id = getParaToInt("id");
-        setAttr("account", Account.dao.findById(id));
-        render("_edit.html");
+
+    public void edit() {
+        Integer id = getParaToInt();
+        Account a = Account.dao.findById(id);
+
+        if (a.getProvince() != null && a.getCity() != null && a.getArea() != null) {
+            ProvCityAreaStreet prov = ProvCityAreaStreet.dao.getByCode(String.valueOf(a.getProvince()));
+            ProvCityAreaStreet city = ProvCityAreaStreet.dao.getByCode(String.valueOf(a.getCity()));
+            ProvCityAreaStreet area = ProvCityAreaStreet.dao.getByCode(String.valueOf(a.getArea()));
+            a.setProvCityAreaStreetChoice(prov.getName() + " " + city.getName() + " " + area.getName());
+        }
+
+        setAttr("account", a);
+        render("edit.html");
     }
 
-    public void save(){
+    public void save() {
         // 账户 表
         Account account = getModel(Account.class);
         account.setSignindate(new Date());
+        account.setAddr(account.getCommunityname() + account.getRidgepole() + "栋" + account.getHousehold() + "户");
         account.save();
 
         // 账户 设备关系表
@@ -46,5 +58,24 @@ public class AccountController extends BaseController {
         ae.save();
 
         redirect("/basicdata/account");
+    }
+
+    public void update() {
+        Account account = getModel(Account.class);
+        account.setAddr(account.getCommunityname() + account.getRidgepole() + "栋" + account.getHousehold() + "户");
+        account.update();
+
+        redirect("/basicdata/account");
+    }
+
+    public void delete() {
+        Account.dao.deleteById(getParaToInt("id"));
+        redirect("/basicdata/account?cPage=" + getPara("cPage"));
+    }
+
+    public void deleteList() {
+        String idsStr = getPara("ids");
+        Account.dao.deleteList(idsStr);
+        redirect("/basicdata/account?cPage=" + getPara("cPage"));
     }
 }
