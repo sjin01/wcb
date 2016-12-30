@@ -153,4 +153,12 @@ public abstract class BaseAccount<M extends BaseAccount<M>> extends Model<M> imp
 		return get("status");
 	}
 
+	public void setNote(java.lang.String note) {
+		set("note", note);
+	}
+
+	public java.lang.String getNote() {
+		return get("note");
+	}
+
 }
