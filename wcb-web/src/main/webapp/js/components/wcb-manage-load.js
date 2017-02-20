@@ -20,10 +20,26 @@ define(['jquery'], function ($) {
         $mainDiv.load(path, data, fn);
     }
 
+    function submit(url, data, fn) {
+        $.ajax({
+            url: url,
+            data: data,
+            type: 'POST',
+            dataType: 'HTML',
+            success: function (result) {
+                if (result) {
+                    $mainDiv.html(result);
+                }
+                if(fn) fn();
+            }
+        });
+    }
+
     return {
         loadBreadcrumbs: loadBreadcrumbs,
         loadSidebar: loadSidebar,
-        loadPage: loadPage
+        loadPage: loadPage,
+        submit: submit
     };
 
 });

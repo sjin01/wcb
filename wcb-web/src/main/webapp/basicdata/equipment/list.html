@@ -1,6 +1,3 @@
-<#include "/common/_layout.html"/>
-<@layout>
-
 
 <div class="page-header">
     <h1>
@@ -100,10 +97,9 @@
     </div>
 </div>
 
-</@layout>
 
 <script>
-    require(['base', 'wcb-manage-util', 'bs-bootbox'], function (Base, ManageUtil, bootbox) {
+    require(['base', 'wcb-manage-util', 'bs-bootbox', 'wcb-manage-load'], function (Base, ManageUtil, bootbox, WcbLoad) {
         $('[data-rel=tooltip]').tooltip({container:'body'});
 
         let loadForm = function (id){
@@ -131,7 +127,7 @@
                                 }
                             },
                             callback: function(result) {
-                                if(result) $('#equipmentForm').submit();
+                                if (result) WcbLoad.submit($('#equipmentForm').attr('action'), $('#equipmentForm').serialize()); // $('#equipmentForm').submit();
                             }
                         });
                     }
@@ -151,13 +147,15 @@
                     ids += $(this).val() + ',';
                 });
 
-                location.href = '${base}/basicdata/equipment/deleteList?ids=' + ids + '&cPage=' + '${pageData.pageNumber}';
+                WcbLoad.loadPage('${base}/basicdata/equipment/deleteList', {'ids':ids, 'cPage':'${pageData.pageNumber}'});
+                <#--location.href = '${base}/basicdata/equipment/deleteList?ids=' + ids + '&cPage=' + '${pageData.pageNumber}';-->
             })
         };
 
         let deleteOne = function (id, cPage){
-            ManageUtil.myConfirm("你确定删除？" ,function (){
-                location.href = '${base}/basicdata/equipment/delete?id=' + id + '&cPage=' + cPage;
+            ManageUtil.myConfirm("你确定删除？", function () {
+                WcbLoad.loadPage('${base}/basicdata/equipment/delete', {'id': id, 'cPage': cPage});
+                <#--location.href = '${base}/basicdata/equipment/delete?id=' + id + '&cPage=' + cPage;-->
             })
         };
 

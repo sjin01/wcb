@@ -47,7 +47,7 @@
                 'account.household':{ required: "请输入详细地址" }*/
             },
             submitHandler: function (form) {
-                WcbManageLoad.loadPage('${base}/basicdata/account/save', $(form).serialise());
+                WcbManageLoad.submit('${base}/basicdata/account/save', $(form).serialize());
             }
         });
     });

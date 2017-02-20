@@ -47,7 +47,7 @@
             },
             submitHandler: function (form) {
 //                console.log($(form).serialize());
-                WcbManageLoad.loadPage('${base}/basicdata/account/update', $(form).serialize(), function (){
+                WcbManageLoad.submit('${base}/basicdata/account/update', $(form).serialize(), function (){
                     $('.tooltip').remove();
                 });
             }
