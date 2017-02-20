@@ -234,8 +234,8 @@
         })();
 
 
-        var areaId = "${account.area}";
-        var streetId = "${account.street}";
+        var areaId = "${(account.area)!}";
+        var streetId = "${(account.street)!}";
         if(areaId) loadSelectStreet(areaId, streetId);
     });
 </script>

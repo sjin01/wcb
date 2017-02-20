@@ -6,7 +6,7 @@
 define(['jquery', 'bs-fuelux-tree'], function ($) {
 
     // 定义 Tree 如何根据 pid 查询数据  ,在下面 initOrgTree 中初始化， 但其中data方法 实际是在 ace_tree 中调的
-    let DataSourceTree= function (options){
+    var DataSourceTree= function (options){
         this.url = options.url;
         this.deliverid = options.deliverid;
         this.delivertype = options.delivertype;
@@ -48,7 +48,7 @@ define(['jquery', 'bs-fuelux-tree'], function ($) {
      * @param fn_nodeClick 点击任何一个节点的事件方法
      * @returns {*|jQuery}
      */
-    let initFuncTree = function (elementId , url , multiSelect , fn_nodeClick ,deliverid ,delivertype){
+    var initFuncTree = function (elementId , url , multiSelect , fn_nodeClick ,deliverid ,delivertype){
         $( '#'+ elementId ).ace_tree({
             dataSource: new DataSourceTree({url: url ,deliverid:deliverid ,delivertype:delivertype }) ,
             multiSelect: multiSelect,

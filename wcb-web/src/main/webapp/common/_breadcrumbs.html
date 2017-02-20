@@ -18,7 +18,12 @@
         </#if>-->
 
         <#list nodeList as item>
-            <li><span style="color: rgb(76, 143, 189);">${(item.name)!}</span></li>
+
+            <#if item_has_next && item.pid!=0>
+                <li><a href="${base}${(item.path)!}">${(item.name)!}</a></li>
+            <#else >
+                <li><span style="color: rgb(76, 143, 189);">${(item.name)!}</span></li>
+            </#if>
         </#list>
 
     </ul><!-- /.breadcrumb -->
