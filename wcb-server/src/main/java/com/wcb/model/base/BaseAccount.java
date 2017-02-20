@@ -33,14 +33,6 @@ public abstract class BaseAccount<M extends BaseAccount<M>> extends Model<M> imp
 		return get("name");
 	}
 
-	public void setTel(java.lang.String tel) {
-		set("tel", tel);
-	}
-
-	public java.lang.String getTel() {
-		return get("tel");
-	}
-
 	public void setAddr(java.lang.String addr) {
 		set("addr", addr);
 	}
@@ -151,6 +143,14 @@ public abstract class BaseAccount<M extends BaseAccount<M>> extends Model<M> imp
 
 	public java.lang.Integer getStatus() {
 		return get("status");
+	}
+
+	public void setTel(java.lang.String tel) {
+		set("tel", tel);
+	}
+
+	public java.lang.String getTel() {
+		return get("tel");
 	}
 
 	public void setNote(java.lang.String note) {

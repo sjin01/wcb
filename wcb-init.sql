@@ -58,6 +58,7 @@ create table t_account
    signindate           datetime,
    status               tinyint(4),
    note                 varchar(512),
+   tel                 varchar(32),
    primary key (id)
 );
 

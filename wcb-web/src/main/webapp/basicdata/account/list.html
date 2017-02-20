@@ -1,5 +1,4 @@
-<#include "/common/_layout.html"/>
-<@layout>
+
 
 
 <div class="page-header">
@@ -98,17 +97,21 @@
     </div>
 </div>
 
-</@layout>
+
 
 <script>
-    require(['base', 'wcb-manage-util', 'bs-bootbox'], function (Base, ManageUtil, bootbox) {
+    require(['base', 'wcb-manage-util', 'bs-bootbox', 'wcb-manage-load'], function (Base, ManageUtil, bootbox, WcbManageLoad) {
         $('[data-rel=tooltip]').tooltip({container:'body'});
 
         let loadForm = function (id) {
             if (id) {
-                location.href = '${base}/basicdata/account/edit/' + id;
+                WcbManageLoad.loadPage('${base}/basicdata/account/edit/' + id, null, function (){
+                    $('.tooltip').remove();
+                })
             } else {
-                location.href = '${base}/basicdata/account/add';
+                WcbManageLoad.loadPage('${base}/basicdata/account/add', null, function (){
+                    $('.tooltip').remove();
+                })
             }
         };
 
@@ -124,13 +127,15 @@
                     ids += $(this).val() + ',';
                 });
 
-                location.href = '${base}/basicdata/account/deleteList?ids=' + ids + '&cPage=' + '${pageData.pageNumber}';
+                // location.href = '${base}/basicdata/account/deleteList?ids=' + ids + '&cPage=' + '${pageData.pageNumber}';
+                WcbManageLoad.loadPage('${base}/basicdata/account/deleteList', {'ids':ids, 'cPage':'${pageData.pageNumber}'});
             })
         };
 
         let deleteOne = function (id, cPage){
             ManageUtil.myConfirm("你确定删除？" ,function (){
-                location.href = '${base}/basicdata/account/delete?id=' + id + '&cPage=' + cPage;
+                // location.href = '${base}/basicdata/account/delete?id=' + id + '&cPage=' + cPage;
+                WcbManageLoad.loadPage('${base}/basicdata/account/delete', {'id':id, 'cPage':cPage});
             })
         };
 

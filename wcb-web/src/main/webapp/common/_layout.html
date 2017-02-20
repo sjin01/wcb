@@ -66,7 +66,7 @@
 
             <#include "/common/_settings.html">
 
-            <div class="page-content-area">
+            <div class="page-content-area" id="main-content">
                 <#nested>
             </div>
         </div>
@@ -110,9 +110,12 @@
 </html>
 
 <script type="text/javascript">
-    require(['base'], function () {
-        $('#breadcrumbs').load('${base}/common/breadcrumbs?pathname='+window.location.pathname);
-        $('#sidebar').load('${base}/common/nav?pathname='+window.location.pathname);
+    require(['base', 'wcb-manage-load'], function (Base, WcbManageLoad) {
+        <#--$('#breadcrumbs').load('${base}/common/breadcrumbs?pathname='+window.location.pathname);-->
+        <#--$('#sidebar').load('${base}/common/nav?pathname='+window.location.pathname);-->
+
+        WcbManageLoad.loadBreadcrumbs('${base}', window.location.pathname);
+        WcbManageLoad.loadSidebar('${base}', window.location.pathname);
 
         // init ace 全屏展示/ 展开收起等点击事件
         ace.widget_boxes($);
