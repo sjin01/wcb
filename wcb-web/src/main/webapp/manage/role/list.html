@@ -1,5 +1,3 @@
-<#include "/common/_layout.html"/>
-<@layout>
 <div class="page-header">
     <h1>
         角色管理
@@ -90,7 +88,6 @@
         </div>
     </div>
 </div>
-</@layout>
 
 <script>
     require(['base', 'wcb-manage-util', 'bs-bootbox'], function (Base, ManageUtil, bootbox) {
@@ -117,7 +114,8 @@
                                 }
                             },
                             callback: function(result) {
-                                if(result) $('#roleForm').submit();
+                                if(result) ManageUtil.submit($('#roleForm').attr('action'), $('#roleForm').serialize());
+
                             }
                         });
                     }
@@ -128,6 +126,37 @@
         $('#btn-loadAdd').on('click', function (){
             loadAdd();
         });
+
+        // 行内点击一个 删除
+        $('.row-del-btn').on('click', function (){
+            var id = $(this).attr('data-id');
+            var cPage = $(this).attr('data-cPage');
+            deleteOne(id, cPage);
+        });
+        // 批量删除
+        $('#btn-deleteList').on('click', function (){
+            deleteList();
+        });
+        let deleteOne = function (id, cPage){
+            ManageUtil.myConfirm("你确定删除？", function () {
+                ManageUtil.loadPage('${base}/manage/role/delete', {'id': id, 'cPage': cPage});
+            })
+        };
+        let deleteList = function (){
+            if( $('.item:checkbox').filter(":checked").length < 1 ){
+                ManageUtil.myConfirm("至少选择一条记录！");
+                return false;
+            }
+
+            ManageUtil.myConfirm("你确定要删除选中的记录？" , function (){
+                var ids = '';
+                $('.item:checkbox').filter(":checked").each(function (){
+                    ids += $(this).val() + ',';
+                });
+
+                ManageUtil.loadPage('${base}/manage/role/deleteList', {'ids':ids, 'cPage':'${roleData.pageNumber}'});
+            })
+        };
     });
 
 </script>

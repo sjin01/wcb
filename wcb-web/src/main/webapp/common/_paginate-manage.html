@@ -66,6 +66,15 @@
         </div>
     </div>
 
+    <script>
+        require(['base', 'wcb-manage-util'], function (Base, ManageUtil) {
+            $('.dataTables_paginate a').on('click.paginate', function (){
+                ManageUtil.loadPage($(this).attr('href'));
+                return false;
+            })
+        });
+    </script>
+
 </div>
 </#if>
 

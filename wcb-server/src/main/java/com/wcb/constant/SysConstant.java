@@ -14,7 +14,7 @@ public class SysConstant  {
     public static final String SESSIONKEY_MANAGE_MESSAGE = "message";
 
     /** 后台管理分页 页显示数据大小*/
-    public static final Integer MANAGE_PAGESIZE = 20;
+    public static final Integer MANAGE_PAGESIZE = 10;
 
 
 }

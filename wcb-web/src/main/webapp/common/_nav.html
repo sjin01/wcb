@@ -25,7 +25,7 @@
                 <#list navObj.sonList as son>
                     <li <#if nodeList??&&nodeList[1].id?? && son.id == nodeList[1].id> class="active"
                                                                                        <#else>class="" </#if>>
-                        <a href="#" data-href="${base}${son.path!}"><i class="menu-icon fa fa-caret-right"></i>${son.name!}</a>
+                        <a href="javascript:void(0);" data-href="${base}${son.path!}"><i class="menu-icon fa fa-caret-right"></i>${son.name!}</a>
                         <b class="arrow"></b>
                     </li>
                 </#list>
@@ -42,15 +42,14 @@
 </div>
 
 <script type="text/javascript">
-    require(['base', 'wcb-manage-load'], function (Base, WcbManageLoad) {
+    require(['base', 'wcb-manage-util'], function (Base, ManageUtil) {
         // 初始化ace 左边目录
         ace.handle_side_menu($);
 
         $('.submenu a').on('click.menu', function (){
-            console.log(1);
             var url = $(this).attr('data-href');
-            WcbManageLoad.loadPage(url);
-            WcbManageLoad.loadBreadcrumbs('${base}', url);
+            ManageUtil.loadPage(url);
+            ManageUtil.loadBreadcrumbs('${base}', url);
 
             $('.submenu li').removeClass('active');
             $(this).parent().addClass('active');

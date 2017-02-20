@@ -14,7 +14,7 @@
 </div>
 
 <script>
-    require(['base', 'wcb-manage-util', 'bs-bootbox', 'wcb-manage-load', 'validate'], function (Base, ManageUtil, bootbox, WcbManageLoad) {
+    require(['base', 'wcb-manage-util', 'bs-bootbox', 'validate'], function (Base, ManageUtil, bootbox) {
 
         $('#accountForm').validate({
             errorElement: 'div',
@@ -47,9 +47,7 @@
             },
             submitHandler: function (form) {
 //                console.log($(form).serialize());
-                WcbManageLoad.submit('${base}/basicdata/account/update', $(form).serialize(), function (){
-                    $('.tooltip').remove();
-                });
+                ManageUtil.submit('${base}/basicdata/account/update', $(form).serialize());
             }
         });
     });

@@ -47,7 +47,6 @@ requirejs.config({
 
         // wcb components
         'wcb-manage-util':'components/wcb-manage-util',
-        'wcb-manage-load':'components/wcb-manage-load',
         'func-tree':'components/func_fueluxtree',
         'sjin-choice-ganged':'components/sjin-choice-ganged',
         'sjin-ui': 'components/sjin-ui',

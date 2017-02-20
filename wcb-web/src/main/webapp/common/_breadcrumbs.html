@@ -17,14 +17,16 @@
             <li> <span style="color: rgb(76, 143, 189);">${(funcc.name)!}</span> </li>
         </#if>-->
 
-        <#list nodeList as item>
+        <#if nodeList?? >
+            <#list nodeList as item>
 
-            <#if item_has_next && item.pid!=0>
-                <li><a href="${base}${(item.path)!}">${(item.name)!}</a></li>
-            <#else >
-                <li><span style="color: rgb(76, 143, 189);">${(item.name)!}</span></li>
-            </#if>
-        </#list>
+                <#if item_has_next && item.pid!=0>
+                    <li><a href="${base}${(item.path)!}">${(item.name)!}</a></li>
+                <#else >
+                    <li><span style="color: rgb(76, 143, 189);">${(item.name)!}</span></li>
+                </#if>
+            </#list>
+        </#if>
 
     </ul><!-- /.breadcrumb -->
 <#--</div>-->

@@ -14,7 +14,7 @@
 </div>
 
 <script>
-    require(['base', 'wcb-manage-util', 'bs-bootbox', 'wcb-manage-load', 'validate'], function (Base, ManageUtil, bootbox, WcbManageLoad) {
+    require(['base', 'wcb-manage-util', 'bs-bootbox', 'validate'], function (Base, ManageUtil, bootbox) {
         $('[data-rel=tooltip]').tooltip({container:'body'});
 
         $('#accountForm').validate({
@@ -47,7 +47,7 @@
                 'account.household':{ required: "请输入详细地址" }*/
             },
             submitHandler: function (form) {
-                WcbManageLoad.submit('${base}/basicdata/account/save', $(form).serialize());
+                ManageUtil.submit('${base}/basicdata/account/save', $(form).serialize());
             }
         });
     });

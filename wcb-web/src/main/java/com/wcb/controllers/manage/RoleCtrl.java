@@ -27,4 +27,14 @@ public class RoleCtrl extends BaseController {
         role.save();
         redirect("/manage/role");
     }
+
+    public void delete() {
+        Role.dao.deleteById(getParaToInt("id"));
+        redirect("/manage/role?cPage=" + getPara("cPage"));
+    }
+    public void deleteList(){
+        String idsStr = getPara("ids");
+        Role.dao.deleteList(idsStr);
+        redirect("/manage/role?cPage=" + getPara("cPage"));
+    }
 }

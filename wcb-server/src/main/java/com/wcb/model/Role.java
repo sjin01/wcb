@@ -1,6 +1,8 @@
 package com.wcb.model;
 
+import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Page;
+import com.mysql.jdbc.StringUtils;
 import com.wcb.model.base.BaseRole;
 
 /**
@@ -13,5 +15,15 @@ public class Role extends BaseRole<Role> {
 
 	public Page<Role> paginate(int pageNumber, int pageSize) {
 		return paginate(pageNumber, pageSize, "select * " , " from t_sys_role order by sort ");
+	}
+
+	public void deleteList(String ids){
+		if(!StringUtils.isNullOrEmpty(ids)){
+			StringBuilder sqlsb = new StringBuilder();
+			sqlsb.append("delete from t_sys_role where id in ( ");
+			sqlsb.append(ids);
+			sqlsb.append(" -1) ");
+			Db.update(sqlsb.toString());
+		}
 	}
 }

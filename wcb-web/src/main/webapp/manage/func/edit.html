@@ -99,7 +99,7 @@
                 success:function( result ){
                     if(result.code == 200){
                         // 成功
-                        location.href = '${base}/manage/func';
+                        ManageUtil.loadPage('${base}/manage/func');
                     }else{
                         // 失败
                         $('#func_form_errorStr').html(result);
@@ -115,7 +115,7 @@
                 return false;
             }*/
             ManageUtil.myConfirm("你确定要删除该节点？删除之后难以复原，请谨慎操作！",function (){
-                location.href='${base}/manage/func/delete?id='+tree.selectedItems()[0].id;
+                ManageUtil.loadPage('${base}/manage/func/delete', {'id':tree.selectedItems()[0].id})
             });
         });
     });
