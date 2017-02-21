@@ -1,29 +1,28 @@
-<#include "/common/_layout.html"/>
-<@layout>
+
 <div class="page-header">
     <h1>
-        用户组管理
+        设备管理
         <small>
             <i class="ace-icon fa fa-angle-double-right"></i>
-            People with type things.  <#--人与类聚物以群分-->
+            对水表进行管理
         </small>
     </h1>
 </div>
+
 <div class="row">
     <div class="col-xs-12">
 
         <div class="widget-box transparent ui-sortable-handle">
 
             <div class="widget-header">
-                <h5 class="widget-title"> 用户组列表 </h5>
+                <h5 class="widget-title"> 设备列表 </h5>
 
                 <div class="widget-toolbar">
 
                     <div class="action-buttons inline">
-                        <a href="javascript:void(0);" id="btn-loadAdd" data-rel="tooltip" data-original-title="添加用户组">
+                        <a href="javascript:void(0);" id="btn-loadAdd" data-rel="tooltip" data-original-title="添加设备">
                             <i class="fa fa-plus-circle"></i>
                         </a>
-
                         <a class="red" href="javascript:void(0);" id="btn-deleteList" title="" data-rel="tooltip" data-original-title="批量删除">
                             <i class="ace-icon fa fa-trash-o"></i>
                         </a>
@@ -47,14 +46,16 @@
                                     <span class="lbl"></span>
                                 </label>
                             </th>
-                            <th width="20%">用户组</th>
-                            <th width="15%">状态</th>
-                            <th width="30%">操作</th>
+                            <th width="20%">设备名</th>
+                            <th width="15%">型号</th>
+                            <th width="10%">品牌</th>
+                            <th width="10%">出厂编号</th>
+                            <th width="10%">操作</th>
                         </tr>
                         </thead>
 
                         <tbody>
-                            <#list usergroupdata.list as ss>
+                            <#list pageData.list as ss>
                             <tr>
                                 <td class="center">
                                     <label class="position-relative">
@@ -62,15 +63,19 @@
                                         <span class="lbl"></span>
                                     </label>
                                 </td>
-                                <td><a href="#">${ss.name!}</a></td>
-                                <td>
-                                    <#if ss.status==true>正常
-                                    <#elseif ss.status==false>禁用
-                                    </#if>
-                                </td>
+                                <td>${ss.name!}</td>
+                                <td>${ss.model!}</td>
+                                <td>${ss.manufacturers!}</td>
+                                <td>${ss.code!}</td>
+
                                 <td>
                                     <div class="action-buttons">
-                                        <a class="red row-del-btn" href="javascript:void(0)" title="" data-id="${ss.id!}" data-cPage="${usergroupdata.pageNumber}"
+                                        <a class="blue row-edit-btn" href="javascript:void(0)" title="" data-id="${ss.id!}" data-cPage="${pageData.pageNumber}"
+                                           data-rel="tooltip" data-original-title="编辑">
+                                            <i class="ace-icon fa fa-pencil bigger-120"></i>
+                                        </a>
+
+                                        <a class="red row-del-btn" href="javascript:void(0)" title="" data-id="${ss.id!}" data-cPage="${pageData.pageNumber}"
                                            data-rel="tooltip" data-original-title="删除">
                                             <i class="ace-icon fa fa-trash-o bigger-120"></i>
                                         </a>
@@ -83,21 +88,52 @@
                         </tbody>
                     </table>
 
-                    <#include "/common/_paginate-manage.html" />
-                    <@paginate currentPage = usergroupdata.pageNumber totalPage = usergroupdata.totalPage actionUrl = "${base}/manage/usergroup?cPage=" />
+                    <#include "/views/common/_paginate-manage.html" />
+                    <@paginate currentPage = pageData.pageNumber totalPage = pageData.totalPage actionUrl = "${base}/basicdata/equipment?cPage=" />
                 </div>
             </div>
         </div>
+
     </div>
 </div>
-</@layout>
+
 
 <script>
     require(['base', 'wcb-manage-util', 'bs-bootbox'], function (Base, ManageUtil, bootbox) {
-
         $('[data-rel=tooltip]').tooltip({container:'body'});
 
+        let loadForm = function (id){
+            let titleType = id? '编辑':'添加';
+            let urlType = id? 'edit':'add';
 
+            $.ajax({
+                url:"${base}/basicdata/equipment/"+urlType ,
+                data: {id:id},
+                type:'POST',
+                dataType:'HTML',
+                success:function( result ){
+                    if(result){
+                        bootbox.confirm({
+                            title : titleType+'设备',
+                            message: result,
+                            buttons: {
+                                confirm: {
+                                    label: "保存",
+                                    className: "btn-primary btn-xs"
+                                },
+                                cancel: {
+                                    label: "取消",
+                                    className: "btn-xs"
+                                }
+                            },
+                            callback: function(result) {
+                                if (result) ManageUtil.submit($('#equipmentForm').attr('action'), $('#equipmentForm').serialize()); // $('#equipmentForm').submit();
+                            }
+                        });
+                    }
+                }
+            });
+        };
 
         let deleteList = function (){
             if( $('.item:checkbox').filter(":checked").length < 1 ){
@@ -111,72 +147,40 @@
                     ids += $(this).val() + ',';
                 });
 
-                $.ajax({
-                    url:"${base}/manage/usergroup/deleteList" ,
-                    type:'POST',
-                    data: {'ids':ids } ,
-                    dataType:'json',
-                    success:function( result ){
-                        if(result.code == 200){
-                            location.href = '${base}/manage/usergroup?cPage=${usergroupdata.pageNumber}';
-                        }
-                    }
-                });
+                ManageUtil.loadPage('${base}/basicdata/equipment/deleteList', {'ids':ids, 'cPage':'${pageData.pageNumber}'});
+                <#--location.href = '${base}/basicdata/equipment/deleteList?ids=' + ids + '&cPage=' + '${pageData.pageNumber}';-->
             })
         };
 
         let deleteOne = function (id, cPage){
-            ManageUtil.myConfirm("你确定删除？" ,function (){
-                location.href = '${base}/manage/usergroup/delete?id=' + id + '&cPage=' + cPage;
+            ManageUtil.myConfirm("你确定删除？", function () {
+                ManageUtil.loadPage('${base}/basicdata/equipment/delete', {'id': id, 'cPage': cPage});
+                <#--location.href = '${base}/basicdata/equipment/delete?id=' + id + '&cPage=' + cPage;-->
             })
         };
 
-        let loadAdd = function (){
-            $.ajax({
-                url:"${base}/manage/usergroup/add" ,
-                type:'POST',
-                dataType:'HTML',
-                success:function( result ){
-                    if(result){
-                        bootbox.confirm({
-                            title : '添加用户组',
-                            message: result,
-                            buttons: {
-                                confirm: {
-                                    label: "保存",
-                                    className: "btn-primary btn-xs"
-                                },
-                                cancel: {
-                                    label: "取消",
-                                    className: "btn-xs"
-                                }
-                            },
-                            callback: function(result) {
-                                if(result) $('#usergroupForm').submit();
-                            }
-                        });
-                    }
-                }
-            });
-        };
+        // 批量删除
+        $('#btn-deleteList').on('click', function (){
+            deleteList();
+        });
 
-        {
-            $('#btn-deleteList').on('click', function (){
-                deleteList();
-            });
+        // 行内点击一个 删除
+        $('.row-del-btn').on('click', function (){
+            var id = $(this).attr('data-id');
+            var cPage = $(this).attr('data-cPage');
+            deleteOne(id, cPage);
+        });
 
-            $('#btn-loadAdd').on('click', function (){
-                loadAdd();
-            });
+        // 加载 add modal
+        $('#btn-loadAdd').on('click', function (){
+            loadForm();
+        });
 
-            $('.row-del-btn').on('click', function (){
-                var id = $(this).attr('data-id');
-                var cPage = $(this).attr('data-cPage');
-                deleteOne(id, cPage);
-            });
+        // 行内点击一个 编辑
+        $('.row-edit-btn').on('click', function (){
+            var id = $(this).attr('data-id');
+            loadForm(id);
+        });
 
-
-        }
     });
-
 </script>

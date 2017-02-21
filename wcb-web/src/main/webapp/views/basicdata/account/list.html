@@ -1,10 +1,12 @@
 
+
+
 <div class="page-header">
     <h1>
-        设备管理
+        用户登记
         <small>
             <i class="ace-icon fa fa-angle-double-right"></i>
-            对水表进行管理
+            都有哪些用户在用水
         </small>
     </h1>
 </div>
@@ -15,12 +17,12 @@
         <div class="widget-box transparent ui-sortable-handle">
 
             <div class="widget-header">
-                <h5 class="widget-title"> 设备列表 </h5>
+                <h5 class="widget-title"> 用户列表 </h5>
 
                 <div class="widget-toolbar">
 
                     <div class="action-buttons inline">
-                        <a href="javascript:void(0);" id="btn-loadAdd" data-rel="tooltip" data-original-title="添加设备">
+                        <a href="javascript:void(0);" id="btn-loadAdd" data-rel="tooltip" data-original-title="登记新用户">
                             <i class="fa fa-plus-circle"></i>
                         </a>
                         <a class="red" href="javascript:void(0);" id="btn-deleteList" title="" data-rel="tooltip" data-original-title="批量删除">
@@ -46,36 +48,34 @@
                                     <span class="lbl"></span>
                                 </label>
                             </th>
-                            <th width="20%">设备名</th>
-                            <th width="15%">型号</th>
-                            <th width="10%">品牌</th>
-                            <th width="10%">出厂编号</th>
+                            <th width="20%">户主姓名</th>
+                            <th width="">街道</th>
+                            <th width="">地址</th>
                             <th width="10%">操作</th>
                         </tr>
                         </thead>
 
                         <tbody>
-                            <#list pageData.list as ss>
+                            <#list pageData.list as item>
                             <tr>
                                 <td class="center">
                                     <label class="position-relative">
-                                        <input type="checkbox" class="ace item" value="${ss.id!}">
+                                        <input type="checkbox" class="ace item" value="${item.id!}">
                                         <span class="lbl"></span>
                                     </label>
                                 </td>
-                                <td>${ss.name!}</td>
-                                <td>${ss.model!}</td>
-                                <td>${ss.manufacturers!}</td>
-                                <td>${ss.code!}</td>
+                                <td>${item.name!}</td>
+                                <td>${item.areaName!}</td>
+                                <td>${item.addr!}</td>
 
                                 <td>
                                     <div class="action-buttons">
-                                        <a class="blue row-edit-btn" href="javascript:void(0)" title="" data-id="${ss.id!}" data-cPage="${pageData.pageNumber}"
+                                        <a class="blue row-edit-btn" href="javascript:void(0)" title="" data-id="${item.id!}" data-cPage="${pageData.pageNumber}"
                                            data-rel="tooltip" data-original-title="编辑">
                                             <i class="ace-icon fa fa-pencil bigger-120"></i>
                                         </a>
 
-                                        <a class="red row-del-btn" href="javascript:void(0)" title="" data-id="${ss.id!}" data-cPage="${pageData.pageNumber}"
+                                        <a class="red row-del-btn" href="javascript:void(0)" title="" data-id="${item.id!}" data-cPage="${pageData.pageNumber}"
                                            data-rel="tooltip" data-original-title="删除">
                                             <i class="ace-icon fa fa-trash-o bigger-120"></i>
                                         </a>
@@ -88,8 +88,8 @@
                         </tbody>
                     </table>
 
-                    <#include "/common/_paginate-manage.html" />
-                    <@paginate currentPage = pageData.pageNumber totalPage = pageData.totalPage actionUrl = "${base}/basicdata/equipment?cPage=" />
+                    <#include "/views/common/_paginate-manage.html" />
+                    <@paginate currentPage = pageData.pageNumber totalPage = pageData.totalPage actionUrl = "${base}/basicdata/account?cPage=" />
                 </div>
             </div>
         </div>
@@ -98,41 +98,17 @@
 </div>
 
 
+
 <script>
     require(['base', 'wcb-manage-util', 'bs-bootbox'], function (Base, ManageUtil, bootbox) {
         $('[data-rel=tooltip]').tooltip({container:'body'});
 
-        let loadForm = function (id){
-            let titleType = id? '编辑':'添加';
-            let urlType = id? 'edit':'add';
-
-            $.ajax({
-                url:"${base}/basicdata/equipment/"+urlType ,
-                data: {id:id},
-                type:'POST',
-                dataType:'HTML',
-                success:function( result ){
-                    if(result){
-                        bootbox.confirm({
-                            title : titleType+'设备',
-                            message: result,
-                            buttons: {
-                                confirm: {
-                                    label: "保存",
-                                    className: "btn-primary btn-xs"
-                                },
-                                cancel: {
-                                    label: "取消",
-                                    className: "btn-xs"
-                                }
-                            },
-                            callback: function(result) {
-                                if (result) ManageUtil.submit($('#equipmentForm').attr('action'), $('#equipmentForm').serialize()); // $('#equipmentForm').submit();
-                            }
-                        });
-                    }
-                }
-            });
+        let loadForm = function (id) {
+            if (id) {
+                ManageUtil.loadPage('${base}/basicdata/account/edit/' + id);
+            } else {
+                ManageUtil.loadPage('${base}/basicdata/account/add');
+            }
         };
 
         let deleteList = function (){
@@ -147,15 +123,15 @@
                     ids += $(this).val() + ',';
                 });
 
-                ManageUtil.loadPage('${base}/basicdata/equipment/deleteList', {'ids':ids, 'cPage':'${pageData.pageNumber}'});
-                <#--location.href = '${base}/basicdata/equipment/deleteList?ids=' + ids + '&cPage=' + '${pageData.pageNumber}';-->
+                // location.href = '${base}/basicdata/account/deleteList?ids=' + ids + '&cPage=' + '${pageData.pageNumber}';
+                ManageUtil.loadPage('${base}/basicdata/account/deleteList', {'ids':ids, 'cPage':'${pageData.pageNumber}'});
             })
         };
 
         let deleteOne = function (id, cPage){
-            ManageUtil.myConfirm("你确定删除？", function () {
-                ManageUtil.loadPage('${base}/basicdata/equipment/delete', {'id': id, 'cPage': cPage});
-                <#--location.href = '${base}/basicdata/equipment/delete?id=' + id + '&cPage=' + cPage;-->
+            ManageUtil.myConfirm("你确定删除？" ,function (){
+                // location.href = '${base}/basicdata/account/delete?id=' + id + '&cPage=' + cPage;
+                ManageUtil.loadPage('${base}/basicdata/account/delete', {'id':id, 'cPage':cPage});
             })
         };
 

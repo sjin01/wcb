@@ -1,6 +1,7 @@
 package com.wcb.config;
 
 import com.jfinal.config.*;
+import com.jfinal.core.Controller;
 import com.jfinal.core.JFinal;
 import com.jfinal.render.FreeMarkerRender;
 import com.jfinal.render.ViewType;
@@ -15,6 +16,8 @@ import com.wcb.controllers.manage.*;
 import freemarker.template.TemplateModelException;
 
 import javax.servlet.ServletContext;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Description:  API引导式配置
@@ -40,24 +43,25 @@ public class WcbConfig extends BaseConfig {
     @Override
     public void configRoute(Routes routes) {
         super.configRoute(routes);
+
         // 前台
-        routes.add("/", IndexController.class);
-        routes.add("/common", CommonController.class);
-        routes.add("/login", LoginController.class);
+        routes.add("/", IndexController.class, "/views/");
+        routes.add("/common", CommonController.class, "/views/common");
+        routes.add("/login", LoginController.class, "/views/login");
 
         // 系统管理
-        routes.add("/manage/main", ManageIndexController.class);
-        routes.add("/manage/user", UsersController.class);
-        routes.add("/manage/role", RoleCtrl.class);
-        routes.add("/manage/func", FuncController.class);
+        routes.add("/manage/main", ManageIndexController.class, "/views/manage/main");
+        routes.add("/manage/user", UsersController.class, "/views/manage/user");
+        routes.add("/manage/role", RoleCtrl.class, "/views/manage/role");
+        routes.add("/manage/func", FuncController.class, "/views/manage/func");
 
         // 基础数据
-        routes.add("/basicdata/equipment", EquipmentController.class);
-        routes.add("/basicdata/account", AccountController.class);
+        routes.add("/basicdata/equipment", EquipmentController.class, "/views/basicdata/equipment");
+        routes.add("/basicdata/account", AccountController.class, "/views/basicdata/account");
 
         // 暂时没用上的
-        routes.add("/manage/dict", DictController.class);
-        routes.add("/manage/usergroup" ,UserGroupController.class);
+        routes.add("/manage/dict", DictController.class, "/views/manage/dict");
+        routes.add("/manage/usergroup" ,UserGroupController.class, "/views/manage/usergroup");
     }
 
     /**
