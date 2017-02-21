@@ -16,5 +16,5 @@ public class SysConstant  {
     /** 后台管理分页 页显示数据大小*/
     public static final Integer MANAGE_PAGESIZE = 10;
 
-
+    public static final String CHARGE_STANDARD_FOR_WATER = "cs_water";
 }

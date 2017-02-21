@@ -1,13 +1,12 @@
 package com.wcb.config;
 
 import com.jfinal.config.*;
-import com.jfinal.core.Controller;
 import com.jfinal.core.JFinal;
 import com.jfinal.render.FreeMarkerRender;
 import com.jfinal.render.ViewType;
 import com.wcb.base.BaseConfig;
-
 import com.wcb.controllers.basicdata.AccountController;
+import com.wcb.controllers.basicdata.ChargeStandard;
 import com.wcb.controllers.basicdata.EquipmentController;
 import com.wcb.controllers.common.CommonController;
 import com.wcb.controllers.index.IndexController;
@@ -16,8 +15,6 @@ import com.wcb.controllers.manage.*;
 import freemarker.template.TemplateModelException;
 
 import javax.servlet.ServletContext;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Description:  API引导式配置
@@ -58,6 +55,8 @@ public class WcbConfig extends BaseConfig {
         // 基础数据
         routes.add("/basicdata/equipment", EquipmentController.class, "/views/basicdata/equipment");
         routes.add("/basicdata/account", AccountController.class, "/views/basicdata/account");
+        routes.add("/basicdata/chargeStandard", ChargeStandard.class, "/views/basicdata/chargeStandard");
+
 
         // 暂时没用上的
         routes.add("/manage/dict", DictController.class, "/views/manage/dict");

@@ -4,6 +4,7 @@ import com.jfinal.aop.Before;
 import com.mysql.jdbc.StringUtils;
 import com.wcb.base.BaseController;
 import com.wcb.constant.SysConstant;
+import com.wcb.enums.StatusEnum;
 import com.wcb.interceptor.manage.ManageLoginInterceptor;
 import com.wcb.model.Account;
 import com.wcb.model.AccountEquipment;
@@ -51,11 +52,15 @@ public class AccountController extends BaseController {
         account.save();
 
         // 账户 设备关系表
-        AccountEquipment ae = new AccountEquipment();
-        ae.setAccountid(account.getId());
-        ae.setEquipmentid(getParaToInt("equipmentid"));
-        ae.setCreatedate(new Date());
-        ae.save();
+        Integer equipmentid = getParaToInt("equipmentid");
+        if (equipmentid != null) {
+            AccountEquipment ae = new AccountEquipment();
+            ae.setAccountid(account.getId());
+            ae.setEquipmentid(equipmentid);
+            ae.setCreatedate(new Date());
+            ae.setStatus(StatusEnum.NORMAL.getFalg());
+            ae.save();
+        }
 
         redirect("/basicdata/account");
     }
@@ -64,6 +69,20 @@ public class AccountController extends BaseController {
         Account account = getModel(Account.class);
         account.setAddr(account.getCommunityname() + account.getRidgepole() + "栋" + account.getHousehold() + "户");
         account.update();
+
+        // 账户 设备关系表
+        Integer equipmentid = getParaToInt("equipmentid");
+        if (equipmentid != null) {
+            AccountEquipment ae = AccountEquipment.dao.getAccountEquipment(account.getId(), equipmentid);
+            if(ae == null){
+                ae = new AccountEquipment();
+                ae.setAccountid(account.getId());
+                ae.setEquipmentid(equipmentid);
+                ae.setCreatedate(new Date());
+                ae.setStatus(StatusEnum.NORMAL.getFalg());
+                ae.save();
+            }
+        }
 
         redirect("/basicdata/account");
     }

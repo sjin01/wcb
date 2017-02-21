@@ -1,0 +1,77 @@
+<div class="page-header">
+    <h1>
+        收费标准
+        <small>
+            <i class="ace-icon fa fa-angle-double-right"></i>
+            维护收费标准,用于缴费计算
+        </small>
+    </h1>
+</div>
+
+<div class="row">
+    <div class="col-xs-12">
+        <form class="form-horizontal">
+            <fieldset class="solid">
+                <div class="form-group">
+                    <label class="col-sm-3 control-label no-padding-right wcb-required"> 水费标准: </label>
+                    <div class="col-sm-9">
+                        <div class="clearfix">
+                            <span id="waterStandard_show" class="edit-hidden col-sm-5 line-height-30 text-right">${waterStandard!}</span>
+                            <input type="text" class="edit-show col-sm-5 text-right" name="waterStandard" id="waterStandard" style="display: none" value="${waterStandard!}">
+
+                            <span class="help-inline col-sm-5 line-height-30">
+                                <span class="">元/吨</span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="clearfix form-actions edit-hidden">
+                    <div class="col-md-offset-3 col-md-9">
+                        <button class="btn btn-info" type="button" id="btn-edit">
+                            <i class="ace-icon fa fa-check bigger-110"></i>
+                            编辑
+                        </button>
+                    </div>
+                </div>
+
+                <div class="clearfix form-actions edit-show" style="display: none;">
+                    <div class="col-md-offset-3 col-md-9">
+                        <button class="btn btn-info" type="button" id="btn-save">
+                            <i class="ace-icon fa fa-check bigger-110"></i>
+                            保存
+                        </button>
+                        &nbsp; &nbsp; &nbsp;
+                        <button class="btn" type="button" id="btn-return">
+                            <i class="ace-icon fa fa-undo bigger-110"></i>
+                            返回
+                        </button>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+</div>
+
+
+<script>
+    require(['base', 'wcb-manage-util', 'bs-bootbox'], function (Base, ManageUtil, bootbox) {
+        $('#btn-edit').on('click', function () {
+            $('.edit-hidden').hide();
+            $('.edit-show').show();
+        });
+        $('#btn-return').on('click', function () {
+            $('.edit-hidden').show();
+            $('.edit-show').hide();
+        });
+
+        $('#btn-save').on('click', function () {
+            var waterStandard = $('#waterStandard').val();
+            if (!waterStandard) {
+                ManageUtil.myConfirm("请输入收费标准!");
+                return false;
+            }
+            ManageUtil.submit('${base}/basicdata/chargeStandard/save', {'waterStandard': waterStandard});
+        });
+    });
+</script>

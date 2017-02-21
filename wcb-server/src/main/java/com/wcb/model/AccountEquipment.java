@@ -1,5 +1,6 @@
 package com.wcb.model;
 
+import com.jfinal.plugin.activerecord.Db;
 import com.wcb.model.base.BaseAccountEquipment;
 
 /**
@@ -8,5 +9,13 @@ import com.wcb.model.base.BaseAccountEquipment;
  */
 @SuppressWarnings("serial")
 public class AccountEquipment extends BaseAccountEquipment<AccountEquipment> {
-	public static final AccountEquipment dao = new AccountEquipment();
+    public static final AccountEquipment dao = new AccountEquipment();
+
+    public AccountEquipment getAccountEquipment(Integer accountid, Integer equipmentid) {
+        return dao.findFirst("select * from t_account_equipment where accountid = ? and equipmentid = ? and status = 1 ", accountid, equipmentid);
+    }
+
+    public void invalidAccountEquipmentByAccountId(Integer accountid) {
+        Db.update(" update t_account_equipment set status = 0 where accountid = ? ", accountid);
+    }
 }
