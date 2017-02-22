@@ -12,7 +12,7 @@ public class AccountEquipment extends BaseAccountEquipment<AccountEquipment> {
     public static final AccountEquipment dao = new AccountEquipment();
 
     public AccountEquipment getAccountEquipment(Integer accountid, Integer equipmentid) {
-        return dao.findFirst("select * from t_account_equipment where accountid = ? and equipmentid = ? and status = 1 ", accountid, equipmentid);
+        return findFirst("select * from t_account_equipment where accountid = ? and equipmentid = ? and status = 1 ", accountid, equipmentid);
     }
 
     public void invalidAccountEquipmentByAccountId(Integer accountid) {

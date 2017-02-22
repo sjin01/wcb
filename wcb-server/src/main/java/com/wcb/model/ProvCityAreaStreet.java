@@ -18,7 +18,7 @@ public class ProvCityAreaStreet extends BaseProvCityAreaStreet<ProvCityAreaStree
 	private final Integer STREET_LEVEL = 4;
 
 	public ProvCityAreaStreet getByCode(String code) {
-		List<ProvCityAreaStreet> list = dao.find(" select * from t_prov_city_area_street where code = ? ", code);
+		List<ProvCityAreaStreet> list = find(" select * from t_prov_city_area_street where code = ? ", code);
 		if (list != null && !list.isEmpty()) {
 			return list.get(0);
 		} else {
@@ -31,7 +31,7 @@ public class ProvCityAreaStreet extends BaseProvCityAreaStreet<ProvCityAreaStree
 	 * @return
 	 */
 	public List<ProvCityAreaStreet> getProv() {
-		return dao.find(" select * from t_prov_city_area_street where level = ? ", PROV_LEVEL);
+		return find(" select * from t_prov_city_area_street where level = ? ", PROV_LEVEL);
 	}
 
 	/**
@@ -72,9 +72,9 @@ public class ProvCityAreaStreet extends BaseProvCityAreaStreet<ProvCityAreaStree
 
 	private List<ProvCityAreaStreet> getItemByPid (Integer pid, Integer level){
 		if (level != null) {
-			return dao.find(" select * from t_prov_city_area_street where parentId = ? and level = ? ", pid, level);
+			return find(" select * from t_prov_city_area_street where parentId = ? and level = ? ", pid, level);
 		} else {
-			return dao.find(" select * from t_prov_city_area_street where parentId = ?", pid);
+			return find(" select * from t_prov_city_area_street where parentId = ?", pid);
 		}
 	}
 }

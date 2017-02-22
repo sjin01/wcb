@@ -20,4 +20,13 @@ public class PayCtrl extends BaseController {
         render("account/list.html");
     }
 
+    public void main() {
+        /*Integer accountId = getParaToInt("accountid");
+        if(accountId != null ){
+            setAttr("account", Account.dao.getAccount(accountId));
+        }*/
+        setAttr("account", getModel(Account.class));
+        render("main.html");
+    }
+
 }

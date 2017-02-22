@@ -30,6 +30,6 @@ public class Equipment extends BaseEquipment<Equipment> {
 	}
 
 	public List<Equipment> getEquipmentAll (){
-		return dao.find(" select * from t_equipment ");
+		return find(" select * from t_equipment ");
 	}
 }

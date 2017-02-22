@@ -17,7 +17,7 @@ public class Dict extends BaseDict<Dict> {
     }
 
     public Double getChargeStandardForWater() {
-        Dict dict = dao.findFirst("select * from t_sys_dict where type = ? ", SysConstant.CHARGE_STANDARD_FOR_WATER);
+        Dict dict = findFirst("select * from t_sys_dict where type = ? ", SysConstant.CHARGE_STANDARD_FOR_WATER);
         if (dict != null) {
             return Double.valueOf(dict.getName());
         } else {
@@ -26,7 +26,7 @@ public class Dict extends BaseDict<Dict> {
     }
 
     public void setChargeStandardForWater(String val) {
-        Dict dict = dao.findFirst("select * from t_sys_dict where type = ? ", SysConstant.CHARGE_STANDARD_FOR_WATER);
+        Dict dict = findFirst("select * from t_sys_dict where type = ? ", SysConstant.CHARGE_STANDARD_FOR_WATER);
         if (dict != null) {
             dict.setName(val);
             dict.update();

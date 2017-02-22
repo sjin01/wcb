@@ -25,7 +25,7 @@ public class User extends BaseUser<User> {
 
 		if(StringUtils.isNullOrEmpty(username) || StringUtils.isNullOrEmpty(password)) return null;
 
-		List<User> list = dao.find("select * from t_sys_user where username ='" + username + "' and password ='" + password+"' ");
+		List<User> list = find("select * from t_sys_user where username ='" + username + "' and password ='" + password+"' ");
 		if(list == null || list.isEmpty()){
 			return null;
 		}else{
@@ -36,7 +36,7 @@ public class User extends BaseUser<User> {
 	/**用户名是否 不存在**/
 	public Boolean usernameNotExist (String username) {
 		if(!StringUtils.isNullOrEmpty(username)){
-			List<User> list = dao.find("select * from t_sys_user where username ='" + username + "' ");
+			List<User> list = find("select * from t_sys_user where username ='" + username + "' ");
 			if(list == null || list.isEmpty()){
 				return true;
 			}else{

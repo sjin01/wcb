@@ -30,7 +30,7 @@ public class RecordSurvey extends BaseRecordSurvey<RecordSurvey> {
      * @return
      */
     public RecordSurvey getSurveyByAccountIdForFirst(Integer accountid) {
-        return dao.findFirst(" select * from t_record_survey where accountid = ? order by readdate desc ", accountid);
+        return findFirst(" select * from t_record_survey where accountid = ? order by readdate desc ", accountid);
     }
 
     /**

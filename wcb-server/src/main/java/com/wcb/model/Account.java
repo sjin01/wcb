@@ -26,6 +26,17 @@ public class Account extends BaseAccount<Account> {
 	}
 
 	/**
+	 * get Account
+     */
+	public Account getAccount (Integer id){
+		return findFirst(" select t.*, concat(p.name, c.name, a.name) as areaName  from t_account t " +
+				" left join t_prov_city_area_street p on p.code = t.province " +
+				" left join t_prov_city_area_street c on c.code = t.city " +
+				" left join t_prov_city_area_street a on a.code = t.area " +
+				" where id = ? order by id desc", id);
+	}
+
+	/**
 	 * 批量删除 sql
 	 * @param ids
 	 */

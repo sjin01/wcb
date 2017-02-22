@@ -56,7 +56,7 @@ public class Func extends BaseFunc<Func> {
 	 * 根据 path 查找一个对象
 	 */
 	public Func getFuncByPath (String path){
-		List<Func> list = dao.find("select * from t_sys_func where path = ? ", path);
+		List<Func> list = find("select * from t_sys_func where path = ? ", path);
 		if(list!=null && !list.isEmpty()) return list.get(0);
 		return null;
 	}
