@@ -17,10 +17,9 @@ public class RecordSurvey extends BaseRecordSurvey<RecordSurvey> {
     /**
      * 分页
      */
-    public Page<RecordSurvey> paginate(int pageNumber, int pageSize) {
+    public Page<RecordSurvey> paginate(int pageNumber, int pageSize, Integer accountid) {
         return paginate(pageNumber, pageSize, " select t.* ",
-                " from t_record_survey t " +
-                        " order by readdate desc ");
+                " from t_record_survey t where accountid = " + accountid + " order by readdate desc ");
     }
 
     /**

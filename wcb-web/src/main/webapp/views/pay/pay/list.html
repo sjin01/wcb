@@ -1,0 +1,50 @@
+
+
+<table class="table table-hover">
+    <thead>
+    <tr>
+    <#--<th class="center"  width="10%">
+        <label class="position-relative">
+            <input type="checkbox" class="ace">
+            <span class="lbl"></span>
+        </label>
+    </th>-->
+        <th width="20%">缴费时间</th>
+        <th width="">应缴金额</th>
+        <th width="">实缴金额</th>
+        <th width="">状态</th>
+    <#--<th width="10%">操作</th>-->
+    </tr>
+    </thead>
+
+    <tbody>
+    <#list pageData.list as item>
+    <tr>
+    <#--<td class="center">
+        <label class="position-relative">
+            <input type="checkbox" class="ace item" value="${item.id!}">
+            <span class="lbl"></span>
+        </label>
+    </td>-->
+        <td>${item.paydate!}</td>
+        <td>${item.theorymoney!}</td>
+        <td>${item.money!}</td>
+        <td>${item.status!}</td>
+    </tr>
+    </#list>
+
+    </tbody>
+</table>
+
+<#include "/views/common/_paginate-manage.html" />
+<@paginate currentPage = pageData.pageNumber totalPage = pageData.totalPage
+actionUrl = "${base}/pay/payList?accountid=${accountid!}&cPage="
+loadTarget="#payList_page_content" />
+
+
+<#--
+<script>
+    require(['base', 'wcb-manage-util', 'bs-bootbox'], function (Base, ManageUtil, Bootbox) {
+
+    });
+</script>-->

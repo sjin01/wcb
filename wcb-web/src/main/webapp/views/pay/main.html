@@ -1,6 +1,6 @@
 <div class="page-header">
     <h1>
-        ${(account.name)!}
+    ${(account.name)!}
         <small>
             <i class="ace-icon fa fa-angle-double-right"></i>
             缴费
@@ -52,7 +52,48 @@
     </div>
 </div>
 
+<div class="row">
+    <div class="col-xs-12">
+        <div class="tabbable">
+            <ul class="nav nav-tabs padding-12 ">
+                <li class="active">
+                    <a data-toggle="tab" href="#surveyList">抄表记录</a>
+                </li>
+                <li class="">
+                    <a data-toggle="tab" href="#payList" id="tab_add">缴费记录</a>
+                </li>
+            </ul>
+            <div class="tab-content no-border">
+
+                <div id="surveyList" class="tab-pane active">
+                    <div class="widget-box transparent ui-sortable-handle">
+                        <div class="widget-header">
+                            <h5 class="widget-title"></h5>
+                        </div>
+                        <div class="widget-body">
+                            <div class="widget-main" id="surveyList_page_content"></div>
+                        </div>
+                    </div>
+                </div>
+                <div id="payList" class="tab-pane">
+                    <div class="widget-box transparent ui-sortable-handle">
+                        <div class="widget-header">
+                            <h5 class="widget-title"></h5>
+                        </div>
+                        <div class="widget-body">
+                            <div class="widget-main" id="payList_page_content"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script>
     require(['base', 'wcb-manage-util', 'bs-bootbox'], function (Base, ManageUtil, Bootbox) {
+        var accountId = '${(account.id)!}';
+        ManageUtil.loadPage('${base}/pay/surveyList', {accountid:accountId}, null, '#surveyList_page_content');
+        ManageUtil.loadPage('${base}/pay/payList', {accountid:accountId}, null, '#payList_page_content');
     });
 </script>

@@ -6,6 +6,8 @@ import com.wcb.base.BaseController;
 import com.wcb.constant.SysConstant;
 import com.wcb.interceptor.manage.ManageLoginInterceptor;
 import com.wcb.model.Account;
+import com.wcb.model.RecordPay;
+import com.wcb.model.RecordSurvey;
 
 /**
  * 用户 缴费
@@ -14,7 +16,7 @@ import com.wcb.model.Account;
 @Before(ManageLoginInterceptor.class)
 public class PayCtrl extends BaseController {
 
-    public void index (){
+    public void index() {
         redirect("/pay/accountList");
     }
 
@@ -26,10 +28,44 @@ public class PayCtrl extends BaseController {
 
     public void main() {
         Integer accountId = getParaToInt("accountid");
-        if(accountId != null ){
+        if (accountId != null) {
             setAttr("account", Account.dao.getAccount(accountId));
         }
         render("main.html");
+    }
+
+    public void payList() {
+        String cPage = getPara("cPage");
+        Integer accountId = getParaToInt("accountid");
+        setAttr("accountid", accountId);
+        if (accountId != null) {
+//            setAttr("account", Account.dao.getAccount(accountId));
+            setAttr("pageData",
+                    RecordPay.dao.paginate(
+                            StringUtils.isNullOrEmpty(cPage) ? 1 : Integer.valueOf(cPage),
+                            SysConstant.MANAGE_PAGESIZE,
+                            accountId
+                    )
+            );
+        }
+        render("pay/list.html");
+    }
+
+    public void surveyList (){
+        String cPage = getPara("cPage");
+        Integer accountId = getParaToInt("accountid");
+        setAttr("accountid", accountId);
+        if (accountId != null) {
+//            setAttr("account", Account.dao.getAccount(accountId));
+            setAttr("pageData",
+                    RecordSurvey.dao.paginate(
+                            StringUtils.isNullOrEmpty(cPage) ? 1 : Integer.valueOf(cPage),
+                            SysConstant.MANAGE_PAGESIZE,
+                            accountId
+                    )
+            );
+        }
+        render("survey/list.html");
     }
 
 }

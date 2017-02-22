@@ -249,8 +249,9 @@ define(['jquery', 'bs-bootbox', 'css!/css/components/manage.css'], function ($, 
         $sidebar.load(basePath + '/common/nav?pathname=' + path);
     }
 
-    function loadPage(path, data, fn) {
-        $mainDiv.load(path, data, function (response, status, xhr) {
+    function loadPage(path, data, fn, target) {
+        var $loadTarget = (target) ? $(target) : $mainDiv;
+        $loadTarget.load(path, data, function (response, status, xhr) {
             $('div.tooltip').remove();
             $('[data-rel=tooltip]').tooltip({container:'body'});
             if (fn) fn(response, status, xhr);
@@ -258,7 +259,8 @@ define(['jquery', 'bs-bootbox', 'css!/css/components/manage.css'], function ($, 
 
     }
 
-    function submit(url, data, fn) {
+    function submit(url, data, fn, target) {
+        var $loadTarget = (target) ? $(target) : $mainDiv;
         $.ajax({
             url: url,
             data: data,
@@ -266,7 +268,7 @@ define(['jquery', 'bs-bootbox', 'css!/css/components/manage.css'], function ($, 
             dataType: 'HTML',
             success: function (result) {
                 if (result) {
-                    $mainDiv.html(result);
+                    $loadTarget.html(result);
                     $('div.tooltip').remove();
                     $('[data-rel=tooltip]').tooltip({container:'body'});
                 }

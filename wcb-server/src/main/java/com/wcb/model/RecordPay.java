@@ -18,10 +18,9 @@ public class RecordPay extends BaseRecordPay<RecordPay> {
     /**
      * 分页
      */
-    public Page<RecordPay> paginate(int pageNumber, int pageSize) {
+    public Page<RecordPay> paginate(int pageNumber, int pageSize, Integer accountid) {
         return paginate(pageNumber, pageSize, " select t.* ",
-                " from t_record_pay t " +
-                        " order by paydate desc ");
+                " from t_record_pay t where accountid = " + accountid + " order by paydate desc ");
     }
 
     /**

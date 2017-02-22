@@ -1,4 +1,4 @@
-<#macro paginate currentPage totalPage actionUrl urlParas="">
+<#macro paginate currentPage totalPage actionUrl urlParas="" loadTarget="">
 	<#if (totalPage <= 0) || (currentPage > totalPage)><#return></#if>
 	<#local startPage = currentPage - 4>
 	<#if (startPage < 1)><#local startPage = 1></#if>
@@ -69,7 +69,12 @@
     <script>
         require(['base', 'wcb-manage-util'], function (Base, ManageUtil) {
             $('.dataTables_paginate a').on('click.paginate', function (){
-                ManageUtil.loadPage($(this).attr('href'));
+                var loadTarget = '${loadTarget!}';
+                if(loadTarget){
+                    ManageUtil.loadPage($(this).attr('href'), null, null, loadTarget);
+                }else{
+                    ManageUtil.loadPage($(this).attr('href'));
+                }
                 return false;
             })
         });
