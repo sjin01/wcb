@@ -21,6 +21,9 @@ public class PayServiceImpl extends BaseServiceImpl implements PayService {
             throw new Exception();
         }
 
+        rp.setMoney(rp.getMoney() * 100);
+        rp.setTheorymoney(rp.getTheorymoney() * 100);
+
         if (rp.getMoney() > rp.getTheorymoney()) {
             // 有余额
             rp.setStatus(PayStatusEnum.BALANCE.getCode());
