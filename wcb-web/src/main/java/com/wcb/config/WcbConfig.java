@@ -5,13 +5,10 @@ import com.jfinal.core.JFinal;
 import com.jfinal.render.FreeMarkerRender;
 import com.jfinal.render.ViewType;
 import com.wcb.base.BaseConfig;
-import com.wcb.controllers.basicdata.AccountController;
-import com.wcb.controllers.basicdata.ChargeStandard;
-import com.wcb.controllers.basicdata.EquipmentController;
-import com.wcb.controllers.common.CommonController;
-import com.wcb.controllers.index.IndexController;
-import com.wcb.controllers.login.LoginController;
-import com.wcb.controllers.manage.*;
+import com.wcb.config.routes.BasicdataRoutes;
+import com.wcb.config.routes.CommonRoutes;
+import com.wcb.config.routes.ManageRoutes;
+import com.wcb.config.routes.PayRoutes;
 import freemarker.template.TemplateModelException;
 
 import javax.servlet.ServletContext;
@@ -41,26 +38,35 @@ public class WcbConfig extends BaseConfig {
     public void configRoute(Routes routes) {
         super.configRoute(routes);
 
-        // 前台
+        routes.add(new CommonRoutes());
+        routes.add(new ManageRoutes());
+        routes.add(new BasicdataRoutes());
+        routes.add(new PayRoutes());
+
+        /*
+        // 前台 和 公共的
         routes.add("/", IndexController.class, "/views/");
         routes.add("/common", CommonController.class, "/views/common");
         routes.add("/login", LoginController.class, "/views/login");
 
         // 系统管理
-        routes.add("/manage/main", ManageIndexController.class, "/views/manage/main");
-        routes.add("/manage/user", UsersController.class, "/views/manage/user");
-        routes.add("/manage/role", RoleCtrl.class, "/views/manage/role");
-        routes.add("/manage/func", FuncController.class, "/views/manage/func");
+        routes.add("/manage/main", ManageIndexController.class, "/views/manage/main");  // 后台工作台
+        routes.add("/manage/user", UsersController.class, "/views/manage/user");                // 用户管理
+        routes.add("/manage/role", RoleCtrl.class, "/views/manage/role");                           // 角色管理
+        routes.add("/manage/func", FuncController.class, "/views/manage/func");                 // 菜单管理
 
         // 基础数据
-        routes.add("/basicdata/equipment", EquipmentController.class, "/views/basicdata/equipment");
-        routes.add("/basicdata/account", AccountController.class, "/views/basicdata/account");
-        routes.add("/basicdata/chargeStandard", ChargeStandard.class, "/views/basicdata/chargeStandard");
+        routes.add("/basicdata/equipment", EquipmentController.class, "/views/basicdata/equipment");    // 设备管理
+        routes.add("/basicdata/account", AccountController.class, "/views/basicdata/account");              // 账户管理
+        routes.add("/basicdata/chargeStandard", ChargeStandard.class, "/views/basicdata/chargeStandard");   // 收费标准维护
 
+        // 缴费管理
+        routes.add("/pay", PayCtrl.class, "/views/pay");
 
         // 暂时没用上的
         routes.add("/manage/dict", DictController.class, "/views/manage/dict");
         routes.add("/manage/usergroup" ,UserGroupController.class, "/views/manage/usergroup");
+        */
     }
 
     /**
