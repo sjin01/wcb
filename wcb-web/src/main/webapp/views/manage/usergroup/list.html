@@ -95,10 +95,6 @@
 <script>
     require(['base', 'wcb-manage-util', 'bs-bootbox'], function (Base, ManageUtil, bootbox) {
 
-        $('[data-rel=tooltip]').tooltip({container:'body'});
-
-
-
         let deleteList = function (){
             if( $('.item:checkbox').filter(":checked").length < 1 ){
                 ManageUtil.myConfirm("至少选择一条记录！");

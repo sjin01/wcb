@@ -251,7 +251,8 @@ define(['jquery', 'bs-bootbox', 'css!/css/components/manage.css'], function ($, 
 
     function loadPage(path, data, fn) {
         $mainDiv.load(path, data, function (response, status, xhr) {
-            $('.tooltip').remove();
+            $('div.tooltip').remove();
+            $('[data-rel=tooltip]').tooltip({container:'body'});
             if (fn) fn(response, status, xhr);
         });
 
@@ -266,6 +267,8 @@ define(['jquery', 'bs-bootbox', 'css!/css/components/manage.css'], function ($, 
             success: function (result) {
                 if (result) {
                     $mainDiv.html(result);
+                    $('div.tooltip').remove();
+                    $('[data-rel=tooltip]').tooltip({container:'body'});
                 }
                 if (fn) fn();
             }

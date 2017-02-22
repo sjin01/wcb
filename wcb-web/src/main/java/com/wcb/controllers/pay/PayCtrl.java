@@ -14,6 +14,10 @@ import com.wcb.model.Account;
 @Before(ManageLoginInterceptor.class)
 public class PayCtrl extends BaseController {
 
+    public void index (){
+        redirect("/pay/accountList");
+    }
+
     public void accountList() {
         String cPage = getPara("cPage");
         setAttr("pageData", Account.dao.paginate(StringUtils.isNullOrEmpty(cPage) ? 1 : Integer.valueOf(cPage), SysConstant.MANAGE_PAGESIZE));
@@ -21,11 +25,10 @@ public class PayCtrl extends BaseController {
     }
 
     public void main() {
-        /*Integer accountId = getParaToInt("accountid");
+        Integer accountId = getParaToInt("accountid");
         if(accountId != null ){
             setAttr("account", Account.dao.getAccount(accountId));
-        }*/
-        setAttr("account", getModel(Account.class));
+        }
         render("main.html");
     }
 

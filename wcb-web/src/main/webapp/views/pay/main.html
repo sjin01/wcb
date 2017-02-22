@@ -10,7 +10,45 @@
 
 <div class="row">
     <div class="col-xs-12">
+        <div class="profile-user-info">
+            <div class="profile-info-row">
+                <div class="profile-info-name"> 卡号 </div>
+                <div class="profile-info-value">
+                    <span>${(account.card)!}</span>
+                </div>
+            </div>
 
+            <div class="profile-info-row">
+                <div class="profile-info-name"> 地区 </div>
+                <div class="profile-info-value">
+                    <i class="fa fa-map-marker light-orange bigger-110"></i>
+                    <span>${(account.provinceName)!}</span>
+                    <span>${(account.cityName)!}</span>
+                    <span>${(account.areaName)!}</span>
+                </div>
+            </div>
+
+            <div class="profile-info-row">
+                <div class="profile-info-name"> 街道 </div>
+                <div class="profile-info-value">
+                    <span>${(account.streetName)!}</span>
+                </div>
+            </div>
+
+            <div class="profile-info-row">
+                <div class="profile-info-name"> 详细地址 </div>
+                <div class="profile-info-value">
+                    <span>${(account.addr)!}</span>
+                </div>
+            </div>
+
+            <div class="profile-info-row">
+                <div class="profile-info-name"> 联系电话 </div>
+                <div class="profile-info-value">
+                    <span>${(account.tel)!}</span>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
