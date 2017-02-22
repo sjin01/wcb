@@ -68,7 +68,12 @@
                 <div id="surveyList" class="tab-pane active">
                     <div class="widget-box transparent ui-sortable-handle">
                         <div class="widget-header">
-                            <h5 class="widget-title"></h5>
+                            <h5 class="widget-title">抄表记录</h5>
+                            <div class="widget-toolbar">
+                                <div class="action-buttons inline">
+                                    <button class="btn btn-xs btn-primary" id="btn-add-survey">录入抄表</button>
+                                </div>
+                            </div>
                         </div>
                         <div class="widget-body">
                             <div class="widget-main" id="surveyList_page_content"></div>
@@ -78,7 +83,12 @@
                 <div id="payList" class="tab-pane">
                     <div class="widget-box transparent ui-sortable-handle">
                         <div class="widget-header">
-                            <h5 class="widget-title"></h5>
+                            <h5 class="widget-title">缴费记录</h5>
+                            <div class="widget-toolbar">
+                                <div class="action-buttons inline">
+                                    <button class="btn btn-xs btn-primary" id="btn-add-pay">缴费</button>
+                                </div>
+                            </div>
                         </div>
                         <div class="widget-body">
                             <div class="widget-main" id="payList_page_content"></div>
@@ -93,7 +103,76 @@
 <script>
     require(['base', 'wcb-manage-util', 'bs-bootbox'], function (Base, ManageUtil, Bootbox) {
         var accountId = '${(account.id)!}';
-        ManageUtil.loadPage('${base}/pay/surveyList', {accountid:accountId}, null, '#surveyList_page_content');
-        ManageUtil.loadPage('${base}/pay/payList', {accountid:accountId}, null, '#payList_page_content');
+        var surveyTarget = '#surveyList_page_content';
+        var payTarget = '#payList_page_content';
+        ManageUtil.loadPage('${base}/pay/surveyList', {accountid:accountId}, null, surveyTarget);
+        ManageUtil.loadPage('${base}/pay/payList', {accountid:accountId}, null, payTarget);
+
+        var loadAddSurvey = function (){
+            $.ajax({
+                url:"${base}/pay/getAddModal" ,
+                data: {type:1, accountid:accountId},
+                type:'POST',
+                dataType:'HTML',
+                success:function( result ){
+                    if(result){
+                        Bootbox.confirm({
+                            title : '录入抄表数据',
+                            message: result,
+                            buttons: {
+                                confirm: {
+                                    label: "保存",
+                                    className: "btn-primary btn-xs"
+                                },
+                                cancel: {
+                                    label: "取消",
+                                    className: "btn-xs"
+                                }
+                            },
+                            callback: function(result) {
+                                if(result) ManageUtil.submit($('#surveyForm').attr('action'), $('#surveyForm').serialize(), null, surveyTarget);
+                            }
+                        });
+                    }
+                }
+            });
+        };
+        var loadAddPay = function (){
+            $.ajax({
+                url:"${base}/pay/getAddModal" ,
+                data: {type:2, accountid:accountId},
+                type:'POST',
+                dataType:'HTML',
+                success:function( result ){
+                    if(result){
+                        Bootbox.confirm({
+                            title : '缴费',
+                            message: result,
+                            buttons: {
+                                confirm: {
+                                    label: "保存",
+                                    className: "btn-primary btn-xs"
+                                },
+                                cancel: {
+                                    label: "取消",
+                                    className: "btn-xs"
+                                }
+                            },
+                            callback: function(result) {
+                                if(result) ManageUtil.submit($('#payForm').attr('action'), $('#payForm').serialize(), null, payTarget);
+                            }
+                        });
+                    }
+                }
+            });
+        };
+
+        $('#btn-add-survey').on('click', function (){
+            loadAddSurvey();
+        });
+
+        $('#btn-add-pay').on('click', function (){
+            loadAddPay();
+        });
     });
 </script>

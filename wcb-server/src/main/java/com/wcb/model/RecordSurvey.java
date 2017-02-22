@@ -42,4 +42,13 @@ public class RecordSurvey extends BaseRecordSurvey<RecordSurvey> {
         return Db.queryDouble(" select SUM(money) as summoney from t_record_survey where accountid = ? ", accountid);
     }
 
+    private String moneyView;
+
+    public String getMoneyView() {
+        return getMoney()/100 + "";
+    }
+
+    public void setMoneyView(String moneyView) {
+        this.moneyView = moneyView;
+    }
 }

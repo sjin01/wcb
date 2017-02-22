@@ -1,0 +1,20 @@
+<fieldset class="solid">
+
+    <input type="hidden" name="pay.accountid" value="${accountid!}">
+    <input type="hidden" name="pay.theorymoney" value="${theorymoney!}">
+
+    <div class="form-group">
+        <label class="col-sm-3 control-label no-padding-right"> 应缴金额 <span class="red">*</span> </label>
+        <div class="col-sm-9">
+            <span class="col-sm-5" >${theorymoney!}</span>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-sm-3 control-label no-padding-right"> 缴费金额 <span class="red">*</span> </label>
+        <div class="col-sm-9">
+            <input type="text" class="input-sm col-xs-5" name="pay.money" />
+        </div>
+    </div>
+
+</fieldset>
