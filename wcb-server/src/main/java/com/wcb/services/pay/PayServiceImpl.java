@@ -15,10 +15,6 @@ public class PayServiceImpl extends BaseServiceImpl implements PayService {
 
     /**
      * 保存 支付 记录
-     *
-     * @param rp
-     * @return
-     * @throws Exception
      */
     public RecordPay savePay(RecordPay rp) throws Exception {
         if (rp == null || rp.getMoney() == null || rp.getTheorymoney() == null || rp.getAccountid() == null) {
@@ -45,10 +41,6 @@ public class PayServiceImpl extends BaseServiceImpl implements PayService {
 
     /**
      * 保存抄表记录
-     *
-     * @param rs
-     * @return
-     * @throws Exception
      */
     public RecordSurvey saveSurvey(RecordSurvey rs) throws Exception {
         if (rs == null || rs.getAccountid() == null || rs.getType() == null || rs.getValue() == null || rs.getReaddate() == null) {
@@ -68,8 +60,6 @@ public class PayServiceImpl extends BaseServiceImpl implements PayService {
 
     /**
      * 获取 账户总 产生的费用
-     * @param accountid
-     * @return
      */
     public Double getSurveySumMoney(Integer accountid) {
         return RecordSurvey.dao.getSumMoney(accountid);
@@ -77,8 +67,6 @@ public class PayServiceImpl extends BaseServiceImpl implements PayService {
 
     /**
      * 获取 账户总 缴纳的 金额总和
-     * @param accountid
-     * @return
      */
     public Double getPaySumMoney(Integer accountid) {
         return RecordPay.dao.getSumMoney(accountid);
