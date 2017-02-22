@@ -16,5 +16,8 @@ public class SysConstant  {
     /** 后台管理分页 页显示数据大小*/
     public static final Integer MANAGE_PAGESIZE = 10;
 
+    /**
+     * 收费标准--水费,  在数据字典中的 type  值存在name 字段中
+     */
     public static final String CHARGE_STANDARD_FOR_WATER = "cs_water";
 }

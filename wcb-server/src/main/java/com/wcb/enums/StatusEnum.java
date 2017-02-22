@@ -18,6 +18,23 @@ public enum StatusEnum {
         this.falg = falg;
     }
 
+    public String getNameByCode(Integer code) {
+        for (StatusEnum item : StatusEnum.values()) {
+            if (item.getCode() == code) {
+                return item.getName();
+            }
+        }
+        return null;
+    }
+    public String getNameByFlag(Boolean falg) {
+        for (StatusEnum item : StatusEnum.values()) {
+            if (item.getFalg() == falg) {
+                return item.getName();
+            }
+        }
+        return null;
+    }
+
     public Integer getCode() {
         return code;
     }

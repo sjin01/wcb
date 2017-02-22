@@ -49,11 +49,11 @@ public abstract class BaseRecordPay<M extends BaseRecordPay<M>> extends Model<M>
 		return get("surveyid");
 	}
 
-	public void setStatus(java.lang.Boolean status) {
+	public void setStatus(java.lang.Integer status) {
 		set("status", status);
 	}
 
-	public java.lang.Boolean getStatus() {
+	public java.lang.Integer getStatus() {
 		return get("status");
 	}
 
@@ -63,6 +63,14 @@ public abstract class BaseRecordPay<M extends BaseRecordPay<M>> extends Model<M>
 
 	public java.lang.Integer getBalance() {
 		return get("balance");
+	}
+
+	public void setTheorymoney(java.lang.Integer theorymoney) {
+		set("theorymoney", theorymoney);
+	}
+
+	public java.lang.Integer getTheorymoney() {
+		return get("theorymoney");
 	}
 
 }

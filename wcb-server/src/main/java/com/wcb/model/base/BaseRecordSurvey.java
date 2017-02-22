@@ -65,4 +65,20 @@ public abstract class BaseRecordSurvey<M extends BaseRecordSurvey<M>> extends Mo
 		return get("createdate");
 	}
 
+	public void setUsevalue(java.lang.Double usevalue) {
+		set("usevalue", usevalue);
+	}
+
+	public java.lang.Double getUsevalue() {
+		return get("usevalue");
+	}
+
+	public void setMoney(java.lang.Integer money) {
+		set("money", money);
+	}
+
+	public java.lang.Integer getMoney() {
+		return get("money");
+	}
+
 }

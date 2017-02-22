@@ -18,6 +18,15 @@ public enum UserTypeEnum {
         this.message = message;
     }
 
+    public String getNameByCode(Integer code) {
+        for (UserTypeEnum item : UserTypeEnum.values()) {
+            if (item.getCode() == code) {
+                return item.getMessage();
+            }
+        }
+        return null;
+    }
+
     public Integer getCode() {
         return code;
     }

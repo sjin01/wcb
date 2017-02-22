@@ -144,9 +144,10 @@ create table t_record_pay
    id                   int(11) not null auto_increment,
    accountid            int(11),
    paydate              datetime,
+   theorymoney        int(11) comment '单位转换成分；直接用整数存储',
    money                int(11) comment '单位转换成分；直接用整数存储',
    surveyid             int(11) comment '针对哪条读数来缴费的',
-   status               tinyint(1) comment '1缴清；2欠费；3预存',
+   status                 int(1) comment '1缴清；2欠费；3预存',
    balance              int(11) comment '欠费或者预存的金额',
    primary key (id)
 );
@@ -161,6 +162,8 @@ create table t_record_survey
    equipmentid          int(11) comment '记录账户设备使用情况表当前的id',
    type                 tinyint(4) comment '0更换设备自动写入；1平台录入；2移动端现场勘测；',
    value                double,
+   usevalue         double,
+   money                int(11) comment '单位转换成分；直接用整数存储',
    readdate             datetime,
    createdate           datetime comment '一般用程序自动写入',
    primary key (id)

@@ -26,6 +26,15 @@ public enum ResponseCodeEnum {
         this.message = message;
     }
 
+	public String getNameByCode(Integer code) {
+		for (ResponseCodeEnum item : ResponseCodeEnum.values()) {
+			if (item.getCode() == code) {
+				return item.getMessage();
+			}
+		}
+		return null;
+	}
+
 	public int getCode() {
 		return code;
 	}
