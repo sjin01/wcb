@@ -5,6 +5,7 @@ import com.wcb.enums.PayStatusEnum;
 import com.wcb.model.Dict;
 import com.wcb.model.RecordPay;
 import com.wcb.model.RecordSurvey;
+import com.wcb.vo.pay.PayVo;
 
 import java.util.Date;
 
@@ -62,16 +63,49 @@ public class PayServiceImpl extends BaseServiceImpl implements PayService {
     }
 
     /**
-     * 获取 账户总 产生的费用
+     * 获取 账户总 产生的费用 单位:元
      */
     public Double getSurveySumMoney(Integer accountid) {
-        return RecordSurvey.dao.getSumMoney(accountid);
+        Integer fen = RecordSurvey.dao.getSumMoney(accountid);
+        if (fen != null) {
+            return (double) (fen / 100);
+        } else {
+            return 0.0;
+        }
     }
 
     /**
-     * 获取 账户总 缴纳的 金额总和
+     * 获取 账户总 缴纳的 金额总和  单位:元
      */
     public Double getPaySumMoney(Integer accountid) {
-        return RecordPay.dao.getSumMoney(accountid);
+        Integer fen = RecordPay.dao.getSumMoney(accountid);
+        if (fen != null) {
+            return (double) (fen / 100);
+        } else {
+            return 0.0;
+        }
+    }
+
+    /**
+     * 获取 缴费情况 展示对象
+     */
+    @Override
+    public PayVo getPayVo(Integer accountId) {
+        Integer sumSurveyMoneyFen = RecordSurvey.dao.getSumMoney(accountId); // 总产生费用
+        Integer sumPayMoneyFen = RecordPay.dao.getSumMoney(accountId);   // 总缴纳费用
+        Integer owe = sumSurveyMoneyFen - sumPayMoneyFen;   // 欠费
+        PayVo vo = new PayVo();
+        if (owe > 0) {
+            vo.setStatus(PayStatusEnum.OWE.getCode());
+            vo.setOweMoney((double) (owe / 100));
+        } else if (owe < 0) {
+            vo.setStatus(PayStatusEnum.BALANCE.getCode());
+            vo.setOweMoney((double) (Math.abs(owe) / 100));
+        } else {
+            vo.setStatus(PayStatusEnum.FINISH.getCode());
+        }
+        vo.setSumSurveyMoney((double) (sumSurveyMoneyFen / 100));
+        vo.setSumPayMoney((double) (sumPayMoneyFen / 100));
+        return vo;
     }
 }

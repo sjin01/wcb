@@ -3,6 +3,7 @@ package com.wcb.services.pay;
 import com.wcb.base.BaseService;
 import com.wcb.model.RecordPay;
 import com.wcb.model.RecordSurvey;
+import com.wcb.vo.pay.PayVo;
 
 /**
  * Created by sjin on 17/2/22.
@@ -43,4 +44,11 @@ public interface PayService extends BaseService {
      * @return
      */
     Double getPaySumMoney(Integer accountid);
+
+    /**
+     * 获取 缴费情况 展示对象
+     * @param accountId
+     * @return
+     */
+    PayVo getPayVo (Integer accountId);
 }

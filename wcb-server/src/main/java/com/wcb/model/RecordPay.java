@@ -2,6 +2,7 @@ package com.wcb.model;
 
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Page;
+import com.jfinal.plugin.activerecord.Record;
 import com.wcb.enums.PayStatusEnum;
 import com.wcb.model.base.BaseRecordPay;
 
@@ -24,12 +25,15 @@ public class RecordPay extends BaseRecordPay<RecordPay> {
     }
 
     /**
-     * 获取 账户总 缴纳的 金额总和
-     *
+     * 获取 账户总 缴纳的 金额总和   单位:分
      * @param accountid
      * @return
      */
-    public Double getSumMoney(Integer accountid) {
-        return Db.queryDouble(" select SUM(money) as summoney from t_record_pay where accountid = ? ", accountid);
+    public Integer getSumMoney(Integer accountid) {
+        Record obj = Db.findFirst(" select SUM(money) as summoney from t_record_pay where accountid = ? ", accountid);
+        if (obj != null) {
+            return Integer.valueOf(String.valueOf(obj.get("summoney")));
+        }
+        return null;
     }
 }

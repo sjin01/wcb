@@ -2,6 +2,7 @@ package com.wcb.model;
 
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Page;
+import com.jfinal.plugin.activerecord.Record;
 import com.wcb.model.base.BaseRecordSurvey;
 
 import java.util.Date;
@@ -33,19 +34,22 @@ public class RecordSurvey extends BaseRecordSurvey<RecordSurvey> {
     }
 
     /**
-     * 获取 账户总 产生的费用
-     *
+     * 获取 账户总 产生的费用   单位:分
      * @param accountid
      * @return
      */
-    public Double getSumMoney(Integer accountid) {
-        return Db.queryDouble(" select SUM(money) as summoney from t_record_survey where accountid = ? ", accountid);
+    public Integer getSumMoney(Integer accountid) {
+        Record obj = Db.findFirst(" select SUM(money) as summoney from t_record_survey where accountid = ? ", accountid);
+        if (obj != null) {
+            return Integer.valueOf(String.valueOf(obj.get("summoney")));
+        }
+        return null;
     }
 
     private String moneyView;
 
     public String getMoneyView() {
-        return getMoney()/100 + "";
+        return getMoney() / 100 + "";
     }
 
     public void setMoneyView(String moneyView) {

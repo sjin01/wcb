@@ -33,18 +33,7 @@ public class PayCtrl extends BaseController {
         Integer accountId = getParaToInt("accountid");
         if (accountId != null) {
             setAttr("account", Account.dao.getAccount(accountId));
-            Double sumSurveyMoney = PayService.serivce.getSurveySumMoney(accountId);
-            Double sumPayMoney = PayService.serivce.getPaySumMoney(accountId);
-            Double owe = sumSurveyMoney - sumPayMoney;   // 欠费
-            if (owe > 0) {
-                setAttr("status", PayStatusEnum.OWE.getCode());
-                setAttr("oweMoney", owe / 100);
-            } else if (owe < 0) {
-                setAttr("status", PayStatusEnum.BALANCE.getCode());
-                setAttr("balanceMoney", Math.abs(owe) / 100);
-            } else {
-                setAttr("status", PayStatusEnum.FINISH.getCode());
-            }
+            setAttr("payVo", PayService.serivce.getPayVo(accountId));
         }
         render("main.html");
     }
