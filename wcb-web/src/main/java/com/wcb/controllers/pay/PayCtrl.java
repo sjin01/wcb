@@ -11,6 +11,7 @@ import com.wcb.model.Account;
 import com.wcb.model.RecordPay;
 import com.wcb.model.RecordSurvey;
 import com.wcb.services.pay.PayService;
+import com.wcb.vo.pay.PayVo;
 
 /**
  * 用户 缴费
@@ -33,9 +34,16 @@ public class PayCtrl extends BaseController {
         Integer accountId = getParaToInt("accountid");
         if (accountId != null) {
             setAttr("account", Account.dao.getAccount(accountId));
-            setAttr("payVo", PayService.serivce.getPayVo(accountId));
         }
         render("main.html");
+    }
+
+    public void payInfo() {
+        Integer accountId = getParaToInt("accountid");
+        if (accountId != null) {
+            setAttr("payVo", PayService.serivce.getPayVo(accountId));
+        }
+        render("account/_pay-info.html");
     }
 
     public void payList() {
@@ -74,12 +82,14 @@ public class PayCtrl extends BaseController {
     public void getAddModal() {
         // type : 1 survey add , 2 pay add
         Integer type = getParaToInt("type");
-        setAttr("accountid", getParaToInt("accountid"));
+        Integer accountId = getParaToInt("accountid");
+        setAttr("accountid", accountId);
 
         if (type == 1) {
             render("survey/_add.html");
         } else if (type == 2) {
-            setAttr("theorymoney", getParaToInt("theorymoney"));
+            PayVo vo = PayService.serivce.getPayVo(accountId);
+            setAttr("theorymoney", vo.getOweMoney());
             render("pay/_add.html");
         }
     }

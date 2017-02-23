@@ -1,0 +1,9 @@
+<#if payVo.status == 3>
+<span class="label label-info arrowed-right">余额:</span>
+<span class="label label-info arrowed-in">${(payVo.balanceMoney)!}元</span>
+<#elseif payVo.status == 2>
+<span class="label label-danger arrowed-right">欠费:</span>
+<span class="label label-danger arrowed-in">${(payVo.oweMoney)!}元</span>
+<#elseif payVo.status == 1>
+<span class="label label-success arrowed-right pay-finish">缴清</span>
+</#if>

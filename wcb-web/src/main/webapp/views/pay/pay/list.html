@@ -27,9 +27,17 @@
         </label>
     </td>-->
         <td>${item.paydate!}</td>
-        <td>${item.theorymoney!}</td>
-        <td>${item.money!}</td>
-        <td>${item.status!}</td>
+        <td>${item.theorymoneyView!}元</td>
+        <td>${item.moneyView!}元</td>
+        <td>
+            <#if item.status == 3>
+                <span class="badge badge-info">${(item.statusView)!}</span>
+            <#elseif item.status == 2>
+                <span class="badge badge-danger">${(item.statusView)!}</span>
+            <#elseif item.status == 1>
+                <span class="badge badge-success">${(item.statusView)!}</span>
+            </#if>
+        </td>
     </tr>
     </#list>
 

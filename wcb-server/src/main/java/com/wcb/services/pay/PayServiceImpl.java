@@ -100,7 +100,7 @@ public class PayServiceImpl extends BaseServiceImpl implements PayService {
             vo.setOweMoney((double) (owe / 100));
         } else if (owe < 0) {
             vo.setStatus(PayStatusEnum.BALANCE.getCode());
-            vo.setOweMoney((double) (Math.abs(owe) / 100));
+            vo.setBalanceMoney((double) (Math.abs(owe) / 100));
         } else {
             vo.setStatus(PayStatusEnum.FINISH.getCode());
         }

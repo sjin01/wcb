@@ -26,6 +26,7 @@ public class RecordPay extends BaseRecordPay<RecordPay> {
 
     /**
      * 获取 账户总 缴纳的 金额总和   单位:分
+     *
      * @param accountid
      * @return
      */
@@ -35,5 +36,41 @@ public class RecordPay extends BaseRecordPay<RecordPay> {
             return Integer.valueOf(String.valueOf(obj.get("summoney")));
         }
         return 0;
+    }
+
+    private String moneyView;
+    private String theorymoneyView;
+    private String statusView;
+
+    public String getMoneyView() {
+        return getMoney() / 100 + "";
+    }
+
+    public void setMoneyView(String moneyView) {
+        this.moneyView = moneyView;
+    }
+
+    public String getTheorymoneyView() {
+        return getTheorymoney() / 100 + "";
+    }
+
+    public void setTheorymoneyView(String theorymoneyView) {
+        this.theorymoneyView = theorymoneyView;
+    }
+
+    public String getStatusView() {
+        Integer status = getStatus();
+        if (PayStatusEnum.OWE.getCode().equals(status)) {
+            return "仍欠费" + (double) (getBalance() / 100) + "元";
+        } else if (PayStatusEnum.BALANCE.getCode().equals(status)) {
+            return "预存" + (double) (getBalance() / 100) + "元";
+        } else if (PayStatusEnum.FINISH.getCode().equals(status)) {
+            return "缴清";
+        }
+        return "";
+    }
+
+    public void setStatusView(String statusView) {
+        this.statusView = statusView;
     }
 }
