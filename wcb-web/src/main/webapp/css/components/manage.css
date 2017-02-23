@@ -5,9 +5,12 @@
 .bg-white input[readonly]{
     background-color: white!important;
 }
+.mt10{ margin-top: 10px}
 .mt20{ margin-top: 20px;}
 .ml10{ margin-left: 10px;}
 .mr5{margin-right: 5px;}
+.mb20{margin-bottom: 20px}
+.mb30{margin-bottom: 30px}
 
 .pt20{ padding-top: 20px;}
 
@@ -16,7 +19,9 @@
 /* dl 下面的内容 padding-top 20px */
 .dl-pt20 dt,.dl-pt20 dd{padding-top: 20px;}
 
-
+.pay-finish {
+    padding: .2em 3em .3em;
+}
 
 button, button:active, button:hover{
     outline: none!important;

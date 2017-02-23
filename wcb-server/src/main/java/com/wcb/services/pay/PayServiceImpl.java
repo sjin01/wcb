@@ -67,7 +67,7 @@ public class PayServiceImpl extends BaseServiceImpl implements PayService {
      */
     public Double getSurveySumMoney(Integer accountid) {
         Integer fen = RecordSurvey.dao.getSumMoney(accountid);
-        if (fen != null) {
+        if (fen != 0) {
             return (double) (fen / 100);
         } else {
             return 0.0;
@@ -79,7 +79,7 @@ public class PayServiceImpl extends BaseServiceImpl implements PayService {
      */
     public Double getPaySumMoney(Integer accountid) {
         Integer fen = RecordPay.dao.getSumMoney(accountid);
-        if (fen != null) {
+        if (fen != 0) {
             return (double) (fen / 100);
         } else {
             return 0.0;

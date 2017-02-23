@@ -40,10 +40,10 @@ public class RecordSurvey extends BaseRecordSurvey<RecordSurvey> {
      */
     public Integer getSumMoney(Integer accountid) {
         Record obj = Db.findFirst(" select SUM(money) as summoney from t_record_survey where accountid = ? ", accountid);
-        if (obj != null) {
+        if (obj != null && obj.get("summoney") != null) {
             return Integer.valueOf(String.valueOf(obj.get("summoney")));
         }
-        return null;
+        return 0;
     }
 
     private String moneyView;
