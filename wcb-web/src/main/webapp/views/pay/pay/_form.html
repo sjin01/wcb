@@ -6,14 +6,19 @@
     <div class="form-group">
         <label class="col-sm-3 control-label no-padding-right"> 应缴金额 <span class="red">*</span> </label>
         <div class="col-sm-9">
-            <span class="col-sm-5" >${theorymoney!}</span>
+            <span class="col-sm-5 line-height-30">${theorymoney!}元</span>
         </div>
     </div>
 
     <div class="form-group">
         <label class="col-sm-3 control-label no-padding-right"> 缴费金额 <span class="red">*</span> </label>
         <div class="col-sm-9">
-            <input type="text" class="input-sm col-xs-5" name="pay.money" />
+            <div class="clearfix">
+                <input type="text" class="input-sm col-xs-5" name="pay.money"/>
+                <span class="help-inline col-sm-5 line-height-30">
+                    <span class="">元</span>
+                </span>
+            </div>
         </div>
     </div>
 

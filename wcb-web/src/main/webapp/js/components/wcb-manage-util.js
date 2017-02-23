@@ -277,6 +277,36 @@ define(['jquery', 'bs-bootbox', 'css!/css/components/manage.css'], function ($, 
         });
     }
 
+    function loadModalForm(url, data, title, fn) {
+        $.ajax({
+            url: url,
+            data: data,
+            type: 'POST',
+            dataType: 'HTML',
+            success: function (resultHtml) {
+                if (resultHtml) {
+                    BSBootBox.confirm({
+                        title: title,
+                        message: resultHtml,
+                        buttons: {
+                            confirm: {
+                                label: "保存",
+                                className: "btn-primary btn-xs"
+                            },
+                            cancel: {
+                                label: "取消",
+                                className: "btn-xs"
+                            }
+                        },
+                        callback: function (result) {
+                            if (result) return fn();
+                        }
+                    });
+                }
+            }
+        });
+    }
+
     return {
         myConfirm: myConfirm,
         myConfirmTwo: myConfirmTwo,
@@ -290,8 +320,10 @@ define(['jquery', 'bs-bootbox', 'css!/css/components/manage.css'], function ($, 
 
         loadBreadcrumbs: loadBreadcrumbs,
         loadSidebar: loadSidebar,
+
         loadPage: loadPage,
-        submit: submit
+        submit: submit,
+        loadModalForm:loadModalForm
     }
 });
 

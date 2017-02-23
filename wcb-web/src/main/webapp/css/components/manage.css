@@ -54,3 +54,8 @@ button, button:active, button:hover{
 .line-height-30{
     line-height: 30px;
 }
+
+
+.modal-body .help-block{
+    margin-bottom: 0;
+}

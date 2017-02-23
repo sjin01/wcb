@@ -1,5 +1,9 @@
 define(['jquery', 'jquery-validate-min', 'jquery-validate-message'], function ($, UI) {
     $.validator.setDefaults({
+        errorElement: 'div',
+        errorClass: 'help-block',
+        focusInvalid: false,
+        ignore: "",
         highlight: function (e) {
             $(e).closest('.form-group').removeClass('has-info').addClass('has-error');
         },

@@ -107,7 +107,7 @@
 </div>
 
 <script>
-    require(['base', 'wcb-manage-util', 'bs-bootbox'], function (Base, ManageUtil, Bootbox) {
+    require(['base', 'wcb-manage-util', 'bs-bootbox', 'validate'], function (Base, ManageUtil, Bootbox) {
         var accountId = '${(account.id)!}';
         var surveyTarget = '#surveyList_page_content';
         var payTarget = '#payList_page_content';
@@ -119,67 +119,74 @@
         };
         loadPayInfo();
 
-        var loadAddSurvey = function (){
-            $.ajax({
-                url:"${base}/pay/getAddModal" ,
-                data: {type:1, accountid:accountId},
-                type:'POST',
-                dataType:'HTML',
-                success:function( result ){
-                    if(result){
-                        Bootbox.confirm({
-                            title : '录入抄表数据',
-                            message: result,
-                            buttons: {
-                                confirm: {
-                                    label: "保存",
-                                    className: "btn-primary btn-xs"
-                                },
-                                cancel: {
-                                    label: "取消",
-                                    className: "btn-xs"
+        var loadAddSurvey = function () {
+            ManageUtil.loadModalForm('${base}/pay/getAddModal', {type: 1, accountid: accountId}, '录入抄表数据', function () {
+                var $form = $('#surveyForm');
+                $form.validate({
+                    rules: {
+                        'survey.readdate': {required: true, dateISO:true,
+                            remote: {   // 远程验证 是否比最近一次抄表时间 大
+                                type: "POST",
+                                url: "${base}/pay/validateSurveyReaddate",
+                                data: {
+                                    accountid: accountId,
+                                    sReaddate: function () { return $form.find('input[name="survey.readdate"]').val() }
                                 }
-                            },
-                            callback: function (result) {
-                                if (result)
-                                    ManageUtil.submit($('#surveyForm').attr('action'), $('#surveyForm').serialize(), function () {
-                                        loadPayInfo();
-                                    }, surveyTarget);
                             }
-                        });
+                        },
+                        'survey.value': {required: true, number:true, min:0,
+                            remote: {   // 远程验证 是否比最近一次 读数 大
+                                type: "POST",
+                                url: "${base}/pay/validateSurveyValue",
+                                data: {
+                                    accountid: accountId,
+                                    sValue: function () { return $form.find('input[name="survey.value"]').val() }
+                                }
+                            }
+                        }
+                    },
+                    messages: {
+                        'survey.readdate': {required: '请输入读表时间', dateISO:'请输入正确的日期格式', remote:'必须大于最近一次抄表时间'},
+                        'survey.value': {required: '请输入读表数据', number:'请输入正确的读数', min:'负数?表有问题吧?', remote:'读数比上一次还少了?表有问题吧?'}
                     }
+                });
+                if ($form.valid()) {
+                    // 提交 surveyForm
+                    ManageUtil.submit($form.attr('action'), $form.serialize(), function () {
+                        loadPayInfo();
+                    }, surveyTarget);
+                } else {
+                    return false;
                 }
             });
         };
-        var loadAddPay = function (){
-            $.ajax({
-                url:"${base}/pay/getAddModal" ,
-                data: {type:2, accountid:accountId},
-                type:'POST',
-                dataType:'HTML',
-                success:function( result ){
-                    if(result){
-                        Bootbox.confirm({
-                            title : '缴费',
-                            message: result,
-                            buttons: {
-                                confirm: {
-                                    label: "保存",
-                                    className: "btn-primary btn-xs"
-                                },
-                                cancel: {
-                                    label: "取消",
-                                    className: "btn-xs"
+        var loadAddPay = function () {
+            ManageUtil.loadModalForm('${base}/pay/getAddModal', {type: 2, accountid: accountId}, '缴费', function () {
+                var $form = $('#payForm');
+                $form.validate({
+                    rules: {
+                        'pay.money': {
+                            required: true,
+                            remote: { // 通过java 转Double 验证 金额是否合法, 是否大于0等
+                                type: "POST",
+                                url: "${base}/pay/validatePayMoney",
+                                data: {
+                                    money: function () { return $form.find('input[name="pay.money"]').val() }
                                 }
-                            },
-                            callback: function (result) {
-                                if (result)
-                                    ManageUtil.submit($('#payForm').attr('action'), $('#payForm').serialize(), function () {
-                                        loadPayInfo();
-                                    }, payTarget);
                             }
-                        });
+                        }
+                    },
+                    messages: {
+                        'pay.money': {required: '请输入金额', remote:'请输入正确的金额'}
                     }
+                });
+                if ($form.valid()) {
+                    // 提交 payForm
+                    ManageUtil.submit($form.attr('action'), $form.serialize(), function () {
+                        loadPayInfo();
+                    }, payTarget);
+                } else {
+                    return false;
                 }
             });
         };

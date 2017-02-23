@@ -16,10 +16,6 @@
 <script>
     require(['base', 'wcb-manage-util', 'bs-bootbox', 'validate'], function (Base, ManageUtil, bootbox) {
         $('#accountForm').validate({
-            errorElement: 'div',
-            errorClass: 'help-block',
-            focusInvalid: false,
-            ignore: "",
             rules: {
                 'account.name':{
                     required: true

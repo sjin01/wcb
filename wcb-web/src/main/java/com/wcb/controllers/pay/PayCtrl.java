@@ -4,7 +4,6 @@ import com.jfinal.aop.Before;
 import com.mysql.jdbc.StringUtils;
 import com.wcb.base.BaseController;
 import com.wcb.constant.SysConstant;
-import com.wcb.enums.PayStatusEnum;
 import com.wcb.enums.SurveyTypeEnum;
 import com.wcb.interceptor.manage.ManageLoginInterceptor;
 import com.wcb.model.Account;
@@ -12,6 +11,10 @@ import com.wcb.model.RecordPay;
 import com.wcb.model.RecordSurvey;
 import com.wcb.services.pay.PayService;
 import com.wcb.vo.pay.PayVo;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * 用户 缴费
@@ -114,6 +117,57 @@ public class PayCtrl extends BaseController {
             e.printStackTrace();
         } finally {
             redirect("/pay/payList?accountid=" + pay.getAccountid());
+        }
+    }
+
+    public void validatePayMoney (){
+        String moneyStr = getPara("money");
+        try{
+            Double money = Double.valueOf(moneyStr);
+            if(money >0){
+                renderJson(true);
+            }else{
+                renderJson(false);
+            }
+        } catch (Exception e){
+            e.printStackTrace();
+            renderJson(false);
+        }
+    }
+
+    public void validateSurveyReaddate (){
+        String sReaddate = getPara("sReaddate");
+        Integer accountId = getParaToInt("accountid");
+        try{
+            DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+            Date readdate = df.parse(sReaddate);
+
+            RecordSurvey rs =RecordSurvey.dao.getSurveyByAccountIdForFirst(accountId);
+            if(readdate.getTime() > rs.getReaddate().getTime()){
+                renderJson(true);
+            }else{
+                renderJson(false);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+            renderJson(false);
+        }
+    }
+
+    public void validateSurveyValue() {
+        String value = getPara("sValue");
+        Integer accountId = getParaToInt("accountid");
+        try {
+            Double valueDouble = Double.valueOf(value);
+            RecordSurvey rs = RecordSurvey.dao.getSurveyByAccountIdForFirst(accountId);
+            if (valueDouble > rs.getValue()) {
+                renderJson(true);
+            } else {
+                renderJson(false);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            renderJson(false);
         }
     }
 }

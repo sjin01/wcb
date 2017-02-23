@@ -26,6 +26,7 @@ requirejs.config({
         'bs-moment': '/plugin/ace/js/date-time/moment.min',
         'bs-daterangepicker': '/plugin/ace/js/date-time/daterangepicker.min',
         'bs-datetimepicker': '/plugin/ace/js/date-time/bootstrap-datetimepicker.min',
+        // 'bs-datepicker-zh-CN':'/plugin/ace/js/date-time/locales/bootstrap-datepicker.zh-CN',
 
         // color picker
         'bs-colorpicker': '/plugin/ace/js/bootstrap-colorpicker.min',
@@ -72,11 +73,12 @@ requirejs.config({
         'jquery-ui-touch-punch':{deps:['jquery']},
         'jquery-chosen':{deps:['jquery']},
         'bs-fuelux-spinner':{deps:['jquery']},
-        'bs-datepicker':{deps:['jquery']},
+        'bs-datepicker':{deps:['jquery', 'jquery-ui-custom', 'jquery-ui']},
         'bs-timepicker':{deps:['jquery']},
         'bs-moment':{deps:['jquery']},
         'bs-daterangepicker':{deps:['jquery']},
         'bs-datetimepicker':{deps:['jquery']},
+        // 'bs-datepicker-zh-CN':{deps:['jquery','bs-datepicker', 'bs-timepicker', 'bs-daterangepicker', 'bs-daterangepicker', 'bs-moment']},
         'bs-colorpicker':{deps:['jquery']},
         'jquery-knob':{deps:['jquery']},
         'jquery-autosize':{deps:['jquery']},
