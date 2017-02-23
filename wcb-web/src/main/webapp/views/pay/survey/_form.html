@@ -6,8 +6,7 @@
         <label class="col-sm-3 control-label no-padding-right"> 读表时间 <span class="red">*</span> </label>
         <div class="col-sm-9">
             <div class="col-sm-5 input-group">
-                <input type="text" name="survey.readdate" placeholder="读表时间" class="date-picker input-sm"
-                       data-date-format="yyyy-mm-dd"/>
+                <input type="text" name="survey.readdate" placeholder="读表时间" class="date-picker input-sm"/>
                 <span class="input-group-addon"><i class="fa fa-calendar bigger-110"></i></span>
             </div>
         </div>
@@ -37,7 +36,6 @@
         .next().on(ace.click_event, function () {
             $(this).prev().focus();
         });
-        console.log(date);
     });
 
 
