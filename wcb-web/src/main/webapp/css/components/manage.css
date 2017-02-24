@@ -59,3 +59,14 @@ button, button:active, button:hover{
 .modal-body .help-block{
     margin-bottom: 0;
 }
+
+input::-webkit-input-placeholder, textarea::-webkit-input-placeholder,
+input:-moz-placeholder, textarea:-moz-placeholder,
+input::-moz-placeholder, textarea::-moz-placeholder,
+input:-ms-input-placeholder, textarea:-ms-input-placeholder{
+    color: #CCC;
+}
+/*for ace*/
+.form-control::-moz-placeholder{color:#CCC;opacity:1}
+.form-control:-ms-input-placeholder{color:#CCC}
+.form-control::-webkit-input-placeholder{color:#CCC}

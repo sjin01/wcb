@@ -25,9 +25,9 @@ public class Account extends BaseAccount<Account> {
         sb.append(" left join t_prov_city_area_street a on a.code = t.area ");
         if (!StringUtils.isNullOrEmpty(searchStr)) {
             sb.append(" where ( ");
-            sb.append(" name like '%" + searchStr + "%' ");
-            sb.append(" or card like '%" + searchStr + "%' ");
-            sb.append(" or tel like '%" + searchStr + "%' ");
+            sb.append(" t.name like '%" + searchStr + "%' ");
+            sb.append(" or t.card like '%" + searchStr + "%' ");
+            sb.append(" or t.tel like '%" + searchStr + "%' ");
             sb.append(" ) ");
         }
         sb.append(" order by id desc ");

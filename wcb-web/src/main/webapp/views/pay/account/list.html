@@ -15,6 +15,17 @@
 
             <div class="widget-header">
                 <h5 class="widget-title"> 用户列表 </h5>
+                <div class="input-group col-xs-4 mb20 mt10">
+                    <input type="text" class="form-control search-query" placeholder="输入姓名或者卡号或者电话号码进行查询"
+                           id="search-account-input" value="${search!}">
+                    <span class="input-group-btn">
+                        <button type="button"
+                                class="btn btn-info btn-white" id="btn-search">
+                            <span class="ace-icon fa fa-search icon-on-right bigger-110"></span>
+                            查询
+                        </button>
+                    </span>
+                </div>
             </div>
             <div class="widget-body">
                 <div class="widget-main" id="table_div">
@@ -67,7 +78,7 @@
                     </table>
 
                     <#include "/views/common/_paginate-manage.html" />
-                    <@paginate currentPage = pageData.pageNumber totalPage = pageData.totalPage actionUrl = "${base}/pay/accountList?cPage=" />
+                    <@paginate currentPage = pageData.pageNumber totalPage = pageData.totalPage actionUrl = "${base}/pay/accountList?search=${search!}&cPage=" />
                 </div>
             </div>
         </div>
@@ -82,5 +93,10 @@
             var id = $(this).attr('data-id');
             ManageUtil.loadPage('${base}/pay/main', {accountid:id});
         });
+
+        $('#btn-search').on('click', function (){
+            var searchStr = $('#search-account-input').val();
+            if(searchStr) ManageUtil.loadPage('${base}/pay/accountList', {search:searchStr});
+        })
     });
 </script>
