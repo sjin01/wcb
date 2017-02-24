@@ -92,7 +92,7 @@ public class PayCtrl extends BaseController {
             render("survey/_add.html");
         } else if (type == 2) {
             PayVo vo = PayService.serivce.getPayVo(accountId);
-            setAttr("theorymoney", vo.getOweMoney());
+            setAttr("theorymoney", vo.getOweMoney() == null ? 0 : vo.getOweMoney());
             render("pay/_add.html");
         }
     }
@@ -120,35 +120,35 @@ public class PayCtrl extends BaseController {
         }
     }
 
-    public void validatePayMoney (){
+    public void validatePayMoney() {
         String moneyStr = getPara("money");
-        try{
+        try {
             Double money = Double.valueOf(moneyStr);
-            if(money >0){
+            if (money > 0) {
                 renderJson(true);
-            }else{
+            } else {
                 renderJson(false);
             }
-        } catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             renderJson(false);
         }
     }
 
-    public void validateSurveyReaddate (){
+    public void validateSurveyReaddate() {
         String sReaddate = getPara("sReaddate");
         Integer accountId = getParaToInt("accountid");
-        try{
+        try {
             DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
             Date readdate = df.parse(sReaddate);
 
-            RecordSurvey rs =RecordSurvey.dao.getSurveyByAccountIdForFirst(accountId);
-            if(readdate.getTime() > rs.getReaddate().getTime()){
+            RecordSurvey rs = RecordSurvey.dao.getSurveyByAccountIdForFirst(accountId);
+            if (rs == null || (readdate.getTime() > rs.getReaddate().getTime())) {
                 renderJson(true);
-            }else{
+            } else {
                 renderJson(false);
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             renderJson(false);
         }
@@ -160,7 +160,7 @@ public class PayCtrl extends BaseController {
         try {
             Double valueDouble = Double.valueOf(value);
             RecordSurvey rs = RecordSurvey.dao.getSurveyByAccountIdForFirst(accountId);
-            if (valueDouble > rs.getValue()) {
+            if (rs == null || (valueDouble > rs.getValue())) {
                 renderJson(true);
             } else {
                 renderJson(false);

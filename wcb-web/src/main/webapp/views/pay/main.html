@@ -120,7 +120,7 @@
         loadPayInfo();
 
         var loadAddSurvey = function () {
-            ManageUtil.loadModalForm('${base}/pay/getAddModal', {type: 1, accountid: accountId}, '录入抄表数据', function () {
+            ManageUtil.loadModalForm('${base}/pay/getAddModal', {type: 1, accountid: accountId}, '录入抄表数据', function (modal) {
                 var $form = $('#surveyForm');
                 $form.validate({
                     rules: {
@@ -148,20 +148,20 @@
                     messages: {
                         'survey.readdate': {required: '请输入读表时间', dateISO:'请输入正确的日期格式', remote:'必须大于最近一次抄表时间'},
                         'survey.value': {required: '请输入读表数据', number:'请输入正确的读数', min:'负数?表有问题吧?', remote:'读数比上一次还少了?表有问题吧?'}
+                    },
+                    submitHandler: function (form) {
+                        ManageUtil.submit($(form).attr('action'), $(form).serialize(), function () {
+                            loadPayInfo();
+                            modal.modal("hide");
+                        }, surveyTarget);
                     }
                 });
-                if ($form.valid()) {
-                    // 提交 surveyForm
-                    ManageUtil.submit($form.attr('action'), $form.serialize(), function () {
-                        loadPayInfo();
-                    }, surveyTarget);
-                } else {
-                    return false;
-                }
+                $form.submit();
+                return false;
             });
         };
         var loadAddPay = function () {
-            ManageUtil.loadModalForm('${base}/pay/getAddModal', {type: 2, accountid: accountId}, '缴费', function () {
+            ManageUtil.loadModalForm('${base}/pay/getAddModal', {type: 2, accountid: accountId}, '缴费', function (modal) {
                 var $form = $('#payForm');
                 $form.validate({
                     rules: {
@@ -178,16 +178,16 @@
                     },
                     messages: {
                         'pay.money': {required: '请输入金额', remote:'请输入正确的金额'}
+                    },
+                    submitHandler: function (form) {
+                        ManageUtil.submit($(form).attr('action'), $(form).serialize(), function () {
+                            loadPayInfo();
+                            modal.modal("hide");
+                        }, payTarget);
                     }
                 });
-                if ($form.valid()) {
-                    // 提交 payForm
-                    ManageUtil.submit($form.attr('action'), $form.serialize(), function () {
-                        loadPayInfo();
-                    }, payTarget);
-                } else {
-                    return false;
-                }
+                $form.submit();
+                return false;
             });
         };
 

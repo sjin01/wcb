@@ -285,7 +285,7 @@ define(['jquery', 'bs-bootbox', 'css!/css/components/manage.css'], function ($, 
             dataType: 'HTML',
             success: function (resultHtml) {
                 if (resultHtml) {
-                    BSBootBox.confirm({
+                    var modal = BSBootBox.confirm({
                         title: title,
                         message: resultHtml,
                         buttons: {
@@ -299,7 +299,7 @@ define(['jquery', 'bs-bootbox', 'css!/css/components/manage.css'], function ($, 
                             }
                         },
                         callback: function (result) {
-                            if (result) return fn();
+                            if (result) return fn(modal);
                         }
                     });
                 }
