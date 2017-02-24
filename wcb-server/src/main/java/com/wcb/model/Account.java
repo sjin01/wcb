@@ -11,55 +11,65 @@ import com.wcb.model.base.BaseAccount;
  */
 @SuppressWarnings("serial")
 public class Account extends BaseAccount<Account> {
-	public static final Account dao = new Account();
+    public static final Account dao = new Account();
 
-	/**
-	 * 分页
-	 */
-	public Page<Account> paginate(int pageNumber, int pageSize) {
-		return paginate(pageNumber, pageSize, " select t.*, concat(p.name, c.name, a.name) as areaName " ,
-				" from t_account t " +
-						" left join t_prov_city_area_street p on p.code = t.province " +
-						" left join t_prov_city_area_street c on c.code = t.city " +
-						" left join t_prov_city_area_street a on a.code = t.area " +
-						" order by id desc ");
-	}
-
-	/**
-	 * get Account
+    /**
+     * 分页
      */
-	public Account getAccount (Integer id){
-		return findFirst(" select t.*, p.name as provinceName, c.name as cityName, a.name as areaName, s.name as streetName " +
-				" from t_account t " +
-				" left join t_prov_city_area_street p on p.code = t.province " +
-				" left join t_prov_city_area_street c on c.code = t.city " +
-				" left join t_prov_city_area_street a on a.code = t.area " +
-				" left join t_prov_city_area_street s on s.code = t.street " +
-				" where t.id = ? order by id desc", id);
-	}
+    public Page<Account> paginate(int pageNumber, int pageSize, String searchStr) {
+        String selectSql = " select t.*, concat(p.name, c.name, a.name) as areaName ";
+        StringBuffer sb = new StringBuffer();
+        sb.append(" from t_account t ");
+        sb.append(" left join t_prov_city_area_street p on p.code = t.province ");
+        sb.append(" left join t_prov_city_area_street c on c.code = t.city ");
+        sb.append(" left join t_prov_city_area_street a on a.code = t.area ");
+        if (!StringUtils.isNullOrEmpty(searchStr)) {
+            sb.append(" where ( ");
+            sb.append(" name like '%" + searchStr + "%' ");
+            sb.append(" or card like '%" + searchStr + "%' ");
+            sb.append(" or tel like '%" + searchStr + "%' ");
+            sb.append(" ) ");
+        }
+        sb.append(" order by id desc ");
+        return paginate(pageNumber, pageSize, selectSql, sb.toString());
+    }
 
-	/**
-	 * 批量删除 sql
-	 * @param ids
-	 */
-	public void deleteList(String ids){
-		if(!StringUtils.isNullOrEmpty(ids)){
-			StringBuilder sqlsb = new StringBuilder();
-			sqlsb.append("delete from t_account where id in ( ");
-			sqlsb.append(ids);
-			sqlsb.append(" -1) ");
-			Db.update(sqlsb.toString());
-		}
-	}
+    /**
+     * get Account
+     */
+    public Account getAccount(Integer id) {
+        StringBuffer sb = new StringBuffer();
+        sb.append(" select t.*, p.name as provinceName, c.name as cityName, a.name as areaName, s.name as streetName ");
+        sb.append(" from t_account t ");
+        sb.append(" left join t_prov_city_area_street p on p.code = t.province ");
+        sb.append(" left join t_prov_city_area_street c on c.code = t.city ");
+        sb.append(" left join t_prov_city_area_street a on a.code = t.area ");
+        sb.append(" left join t_prov_city_area_street s on s.code = t.street ");
+        sb.append(" where t.id = ? order by id desc ");
+        return findFirst(sb.toString(), id);
+    }
 
-	/**
-	 * 地区展示 字段
-	 */
-	private String provCityAreaStreetChoice;
-	public String getProvCityAreaStreetChoice() {
-		return provCityAreaStreetChoice;
-	}
-	public void setProvCityAreaStreetChoice(String provCityAreaStreetChoice) {
-		this.provCityAreaStreetChoice = provCityAreaStreetChoice;
-	}
+    /**
+     * 批量删除 sql
+     */
+    public void deleteList(String ids) {
+        if (!StringUtils.isNullOrEmpty(ids)) {
+            StringBuilder sqlsb = new StringBuilder();
+            sqlsb.append("delete from t_account where id in ( ");
+            sqlsb.append(ids);
+            sqlsb.append(" -1) ");
+            Db.update(sqlsb.toString());
+        }
+    }
+
+    /**
+     * 地区展示 字段
+     */
+    private String provCityAreaStreetChoice;
+    public String getProvCityAreaStreetChoice() {
+        return provCityAreaStreetChoice;
+    }
+    public void setProvCityAreaStreetChoice(String provCityAreaStreetChoice) {
+        this.provCityAreaStreetChoice = provCityAreaStreetChoice;
+    }
 }

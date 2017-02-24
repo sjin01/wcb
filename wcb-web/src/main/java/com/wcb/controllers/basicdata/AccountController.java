@@ -21,7 +21,7 @@ public class AccountController extends BaseController {
 
     public void index() {
         String cPage = getPara("cPage");
-        setAttr("pageData", Account.dao.paginate(StringUtils.isNullOrEmpty(cPage) ? 1 : Integer.valueOf(cPage), SysConstant.MANAGE_PAGESIZE));
+        setAttr("pageData", Account.dao.paginate(StringUtils.isNullOrEmpty(cPage) ? 1 : Integer.valueOf(cPage), SysConstant.MANAGE_PAGESIZE, null));
         render("list.html");
     }
 

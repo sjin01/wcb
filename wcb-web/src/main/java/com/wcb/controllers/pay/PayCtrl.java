@@ -29,7 +29,8 @@ public class PayCtrl extends BaseController {
 
     public void accountList() {
         String cPage = getPara("cPage");
-        setAttr("pageData", Account.dao.paginate(StringUtils.isNullOrEmpty(cPage) ? 1 : Integer.valueOf(cPage), SysConstant.MANAGE_PAGESIZE));
+        String searchStr = getPara("search");
+        setAttr("pageData", Account.dao.paginate(StringUtils.isNullOrEmpty(cPage) ? 1 : Integer.valueOf(cPage), SysConstant.MANAGE_PAGESIZE, searchStr));
         render("account/list.html");
     }
 
